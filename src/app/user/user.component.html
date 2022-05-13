@@ -1,0 +1,68 @@
+<div class="intro-section">
+    <div class="left-side">
+        <div class="control">
+            <input type="search" placeholder="Type to Search" id="search" autocomplete="on" (change)="search(term.value)" #term>
+            <button type="button" class="button" id="search_button" (click)="getData()" (click)="clearSearch()">Clear Search</button>
+            <h3>User's Information</h3>
+            <!-- <p>{{ error }}</p>
+            <p>{{ addUserForm.value | json }}</p>
+            <p>{{ addUserForm.status }}</p> -->
+            <!-- <p>{{ name.value }}</p> -->
+            <!-- <p>ss {{ term.value }}</p> -->
+
+            <!-- <label for="id" class="txt">ID</label>
+            <input type="text" name="id" id="id" formControlName="fcId"/> -->
+            <form class="inputs" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
+                <label for="Name" class="txt">Name</label>
+                <input type="text" placeholder="Full Name" name="name" id="name" formControlName="fcName" />
+                <label for="Age" class="txt">Age</label>
+                <input type="number" placeholder="Age" name="age" id="age" formControlName="fcAge" />
+                <label for="email" class="txt">Email</label>
+                <input type="email" placeholder="Email" name="email" id="email" formControlName="fcEmail" />
+                <label for="password" class="txt">Password</label>
+                <input type="password" placeholder="*********" name="password" id="password" formControlName="fcPassword" />
+                <div class="group-button">
+                    <div class="upper-button">
+                        <button type="button" class="button mar" (click)="addUser()" [disabled]="!addUserForm.valid">
+                            Add User
+                        </button>
+                        <button type="button" class="button" (click)="editUser()">
+                            Edit
+                        </button>
+                    </div>
+                    <div class="lower-button">
+                        <button type="button" class="button mar" (click)="resetDB()">
+                            Reset
+                        </button>
+                        <button type="button" class="button" (click)="deleteUser()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br /><br />
+    <div id="overflow">
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users, index as i">
+                    <td> {{ i + 1 }} </td>
+                    <td (click)="rowSelected(user)">{{ user.id }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

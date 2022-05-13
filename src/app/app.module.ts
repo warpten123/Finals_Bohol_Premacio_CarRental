@@ -16,6 +16,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { PERSISTENCE } from '@angular/fire/compat/auth';
+import { UserComponent } from './user/user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { PERSISTENCE } from '@angular/fire/compat/auth';
     RegisterComponent,
     DefaultLayoutComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
