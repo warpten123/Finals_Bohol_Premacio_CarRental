@@ -98,6 +98,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "CarRentalBoholPremacio:build:production",
+            "firebaseProject": "car-rental-final-project",
+            "firebaseHostingSite": "car-rental-final-project"
+          }
         }
       }
     }

@@ -1,9 +1,17 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+const DB_CREDENTIALS = require("../../my-key.json");
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: DB_CREDENTIALS.apiKey,
+    authDomain: DB_CREDENTIALS.authDomain,
+    databaseURL: DB_CREDENTIALS.databaseURL,
+    projectId: DB_CREDENTIALS.projectId,
+    storageBucket: DB_CREDENTIALS.storageBucket,
+    messagingSenderId: DB_CREDENTIALS.messagingSenderId
+  }
 };
 
 /*

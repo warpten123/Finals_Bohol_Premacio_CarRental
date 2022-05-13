@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "car-rental-final-project": {
+      "hosting": {
+        "CarRentalBoholPremacio": [
+          "car-rental-final-project"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "car-rental-final-project"
+  }
+}
