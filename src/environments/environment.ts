@@ -11,7 +11,8 @@ export const environment = {
     projectId: DB_CREDENTIALS.projectId,
     storageBucket: DB_CREDENTIALS.storageBucket,
     messagingSenderId: DB_CREDENTIALS.messagingSenderId
-  }
+  },
+  API_URL:"http://localhost:3000"
 };
 
 /*
