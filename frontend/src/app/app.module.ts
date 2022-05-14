@@ -19,6 +19,10 @@ import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
 import { RegisterComponent } from './screens/register/register.component';
 import { AuthGuard } from './shared/auth-guard.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [
@@ -32,17 +36,21 @@ import { AuthGuard } from './shared/auth-guard.service';
     UserComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' },AuthGuard],
+  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
