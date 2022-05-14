@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 import { Helper } from '../models/helper';
 import { User } from '../models/user.model';
 import { ApiService } from '../shared/api.service';
@@ -279,7 +279,7 @@ export class UserComponent implements OnInit {
   }
 
   private toArray(result: any): any[] {
-    var list = [];
+    var list: string[] = [];
     for (var items in result) {
       list.push(result[items]);
     }
