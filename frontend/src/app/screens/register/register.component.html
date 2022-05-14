@@ -1,9 +1,7 @@
-<section>
+<!-- <section>
     <div class="form-container">
         <h1 class="shadows">Registration Form</h1>
-        <!-- <p>{{ error }}</p>
-        <p>{{ registerForm.value | json }}</p> -->
-        <!-- <p>{{ registerForm.status }}</p> -->
+
         <form class="inputs" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="control">
                 <label for="Name" class="txt shadows">Name</label>
@@ -35,4 +33,85 @@
         </form>
         <p><a href="#" class="shadows">Forget password ?</a></p>
     </div>
-</section>
+</section> -->
+<html lang = "en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title> PreBol Car Rental! </title>
+        <link rel = "stylesheet" href = "register.component.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <input type="checkbox" id="flip">
+            <div class="cover">
+                <div class="front">
+                    <img src="assets/right.jpg" alt="">
+                    <div class="text">
+                        <span class="text-1">Rent a car!</span>
+                        <span class="text-2">Start your journey today!</span>
+                    </div>
+                </div>
+                <div class="back">
+                    <img class="backImg" src="assets/left.jpeg" alt="">
+                    <div class="text">
+                        <!-- <span class="text-1">Join us now!</span>
+                        <span class="text-2">Yea right!</span> -->
+                    </div>
+                </div>
+            </div>
+            <form action = "#">
+               <div class="form-content">
+                <div class="login-form">
+                    <div class="header">PreBol Car Rental</div>
+                    <div class="title">LogIn</div>
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fa fa-envelope"></i>
+                            <input type="text" placeholder="Enter your Email" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" placeholder="Enter your Password" required>
+                        </div>
+                        <div class="text"><a href="#">Hey! I'm an Admin!</a></div>
+                        <div class="button input-box">
+                        
+                            <input type="submit" value="Submit">
+                        </div>
+                        <div class="text sign-up-text">Want to join us? <label for ="flip">Sign Up Now! </label></div>
+                    </div>
+                </div>
+
+                <div class="signup-form">
+                    <div class="title">Sign Up</div>
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fa fa-user"></i>
+                            <input type="text" placeholder="Username" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-user"></i>
+                            <input type="password" placeholder="Age" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-envelope"></i>
+                            <input type="text" placeholder="Email Address" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                       
+                        <div class="button input-box">
+                          
+                            <input type="submit" value="Submit">
+                        </div>
+                        <div class="text sign-up-text">Have an account already? <label for ="flip">Log In</label></div>
+                    </div>
+                </div>
+               </div>
+            </form>
+        </div>
+    </body>

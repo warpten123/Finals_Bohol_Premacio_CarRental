@@ -1,5 +1,5 @@
 {
-  "name": "car_rental_backend",
+  "name": "backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -24,7 +24,6 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
-    "firebase-admin": "^10.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

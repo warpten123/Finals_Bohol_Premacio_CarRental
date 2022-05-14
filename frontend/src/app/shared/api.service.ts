@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private api: HttpClient, private auth: AngularFireAuth) {}
 
-  async post(url: string, body: any): Promise<any> {
+  async post(url: string, body: any): Promise<  any> {
     try {
       var token: string = await this.getAuthToken();
       return await this.api
