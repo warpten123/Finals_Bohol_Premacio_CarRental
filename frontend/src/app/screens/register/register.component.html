@@ -43,7 +43,9 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        
+        <!-- <p>{{ error }}</p>
+        <p>{{ registerForm.value | json }}</p> -->
+        <!-- <p>{{ registerForm.status }}</p>  -->
         <div class="container">
             <input type="checkbox" id="flip">
             <div class="cover">
@@ -66,7 +68,7 @@
                <div class="form-content">
                 <div class="login-form">
                     <div class="header">PreBol Car Rental</div>
-                    <div class="title">LogIn</div>
+                    <div class="title">Log In</div>
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fa fa-envelope"></i>
@@ -97,7 +99,7 @@
                         </div>
                         <div class="input-box">
                             <i class="fa fa-user"></i>
-                            <input type="text" placeholder="Age"  id="age" formControlName="fcAge" required>
+                            <input type="number" placeholder="Age"  id="age" formControlName="fcAge" required>
                         </div>
                         <div class="input-box">
                             <i class="fa fa-envelope"></i>
@@ -114,7 +116,7 @@
                        
                         <div class="button input-box">
                           
-                            <input type="submit" value="Submit" >
+                            <input type="submit" value="Submit" [disabled]="!registerForm.valid">
                         </div>
                         <div class="text sign-up-text">Have an account already? <label for ="flip">Log In</label></div>
                     </div>

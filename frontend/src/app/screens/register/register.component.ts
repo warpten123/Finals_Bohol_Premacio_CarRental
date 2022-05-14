@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
     fcName: new FormControl('', Validators.required),
-    fcAge: new FormControl('',[
+    fcAge: new FormControl(0,[
         Validators.required,
         Validators.min(18), 
         Validators.max(65)
@@ -69,7 +69,7 @@ export class RegisterComponent implements OnInit {
     }
     if (!this.registerForm.valid) {
       {
-        this.error = 'No fields must be empty';
+        this.error = 'Check your inputs!';
         alert(this.error);
         return;
       }
@@ -88,11 +88,11 @@ export class RegisterComponent implements OnInit {
         password: this.registerForm.value.fcPassword,
       };
       console.log(payload);
-      alert('Hellow')
+      alert('Thank you for choosing us <3')
       // this.register();
       this.auth.register(payload).then(data=>{
         if(!data.success) this.error = data.data;
-        else this.nav("home");
+        else this.nav("login");
       });
     }
   }
