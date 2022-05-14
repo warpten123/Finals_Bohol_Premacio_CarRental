@@ -11,14 +11,18 @@ import { Router } from '@angular/router';
 export class AuthService {
   public user?: User | null;
   public userObs?: Subscription;
-
-  constructor(private api: ApiService, private auth: AngularFireAuth, private router: Router) {
-    console.log(`I am instance ${Date.now()}`);
-    this.userObs = this.auth.user.subscribe((user) => {
-      console.log(`User: ${user}`);
-      if (user == null || user == undefined) return;
+  constructor(
+    private api: ApiService,
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) {
+    console.log('I am instance' + `${Date.now()}`);
+    this.userObs = this.afAuth.user.subscribe((data) => {
+      console.log('data');
+      console.log(data);
+      if (data == undefined || data == null) return;
       if (!this.authenticated) {
-        this.api.get(`/user/${user?.uid}`).then((result) => {
+        this.api.get(`/user/${data?.uid}`).then((result) => {
           var output: CRUDReturn = {
             success: result.success,
             data: result.data,
@@ -39,13 +43,12 @@ export class AuthService {
     return this.user != undefined && this.user != null;
   }
 
-
   async login(email: string, password: string): Promise<any> {
     try {
       //log in to firebase auth
       var resultOfLogin: any;
       try {
-        resultOfLogin = await this.auth.signInWithEmailAndPassword(
+        resultOfLogin = await this.afAuth.signInWithEmailAndPassword(
           email,
           password
         );
@@ -81,7 +84,7 @@ export class AuthService {
       var resultOfLogin: any;
       //sign in the frontend if registration is successful;
       try {
-        resultOfLogin = await this.auth.signInWithEmailAndPassword(
+        resultOfLogin = await this.afAuth.signInWithEmailAndPassword(
           payload.email,
           payload.password
         );
@@ -99,41 +102,8 @@ export class AuthService {
   }
 
   logout() {
-    this.auth.signOut().then(() => {
+    this.afAuth.signOut().then(() => {
       this.user = null;
     });
   }
-
-  // async login(email: string, password: string): Promise<CRUDReturn> {
-  //   try {
-  //     var result: any = await this.api.post('/user/login', { email, password });
-  //     var output: CRUDReturn = { success: result.success, data: result.data };
-  //     if (output.success === true) {
-  //       this.user = User.fromJson(output.data.id, output.data);
-  //     }
-  //     return output;
-  //   } catch (error) {
-  //     if (error instanceof Error)
-  //       return { success: false, data: error.message };
-  //     else return { success: false, data: 'unknown login error' };
-  //   }
-  // }
-
-  // async register(payload: {
-  //   name: string;
-  //   age: number;
-  //   email: string;
-  //   password: string;
-  // }): Promise<CRUDReturn> {
-  //   var result: any = await this.api.post('/user/register', payload);
-  //   var output: CRUDReturn = { success: result.success, data: result.data };
-  //   if (output.success === true) {
-  //     this.user = User.fromJson(output.data.id, output.data);
-  //   }
-  //   return output;
-  // }
-
-  // logout() {
-  //   this.user = null;
-  // }
 }

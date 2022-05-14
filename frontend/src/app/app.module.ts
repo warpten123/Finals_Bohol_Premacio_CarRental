@@ -12,12 +12,13 @@ import { DefaultLayoutComponent } from './layout/default-layout/default-layout.c
 import { FooterComponent } from './layout/footer/footer.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
-import { PERSISTENCE } from '@angular/fire/compat/auth';
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { UserComponent } from './user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
 import { RegisterComponent } from './screens/register/register.component';
+import { AuthGuard } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -36,11 +37,12 @@ import { RegisterComponent } from './screens/register/register.component';
     SharedModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
+    AngularFireAuthModule,
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }],
+  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' },AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

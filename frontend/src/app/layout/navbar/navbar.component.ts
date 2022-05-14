@@ -13,9 +13,9 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
-    if (!this.auth.authenticated) {
-      this.nav('login');
-      this.userName = 'User Portal System';
+    // if (!this.auth.authenticated) {
+    //   this.nav('login');
+    //   this.userName = 'User Portal System';
     //   this.signOut= 'SignOut';
     // }
     // else{
@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     //   this.signOut= 'SignOut';
     // this.userName = User.userService();
     // console.log('nav ' + this.userName)
-    }
+    // }
   }
   userName: string="";
   signOut: string ="";
