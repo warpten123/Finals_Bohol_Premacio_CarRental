@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({

@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/shared/auth.service';
-import { environment } from 'src/environments/environment';
+import { AuthService } from 'app/shared/auth.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-register',
