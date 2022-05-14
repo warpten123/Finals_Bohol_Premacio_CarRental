@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
     fcName: new FormControl('', Validators.required),
-    fcAge: new FormControl(0, [
+    fcAge: new FormControl('',[
         Validators.required,
         Validators.min(18), 
         Validators.max(65)

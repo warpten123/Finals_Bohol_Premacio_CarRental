@@ -43,11 +43,12 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        
         <div class="container">
             <input type="checkbox" id="flip">
             <div class="cover">
                 <div class="front">
-                    <img src="assets/right.jpg" alt="">
+                    <img src="assets/right.jpg" alt="Car Image">
                     <div class="text">
                         <span class="text-1">Rent a car!</span>
                         <span class="text-2">Start your journey today!</span>
@@ -61,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <form action = "#">
+            <form class="inputs" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                <div class="form-content">
                 <div class="login-form">
                     <div class="header">PreBol Car Rental</div>
@@ -80,38 +81,46 @@
                         
                             <input type="submit" value="Submit">
                         </div>
+                    
                         <div class="text sign-up-text">Want to join us? <label for ="flip">Sign Up Now! </label></div>
                     </div>
+                    
                 </div>
-
+             
+             
                 <div class="signup-form">
                     <div class="title">Sign Up</div>
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fa fa-user"></i>
-                            <input type="text" placeholder="Username" required>
+                            <input type="text" placeholder="Username" id="name" formControlName="fcName" required>
                         </div>
                         <div class="input-box">
                             <i class="fa fa-user"></i>
-                            <input type="password" placeholder="Age" required>
+                            <input type="text" placeholder="Age"  id="age" formControlName="fcAge" required>
                         </div>
                         <div class="input-box">
                             <i class="fa fa-envelope"></i>
-                            <input type="text" placeholder="Email Address" required>
+                            <input type="text" placeholder="Email Address"  id="email" autocomplete="on" formControlName="fcEmail" required>
                         </div>
                         <div class="input-box">
                             <i class="fa fa-lock"></i>
-                            <input type="password" placeholder="Password" required>
+                            <input type="password" placeholder="Password" id="password1" formControlName="fcPassword" pattern='^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$' minlength="5" maxlength="20" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" placeholder="Confirm Password" id="password" formControlName="fcPassword2" required>
                         </div>
                        
                         <div class="button input-box">
                           
-                            <input type="submit" value="Submit">
+                            <input type="submit" value="Submit" >
                         </div>
                         <div class="text sign-up-text">Have an account already? <label for ="flip">Log In</label></div>
                     </div>
                 </div>
                </div>
-            </form>
+           
+        </form>
         </div>
     </body>
