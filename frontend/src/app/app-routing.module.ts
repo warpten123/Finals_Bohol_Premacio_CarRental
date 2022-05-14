@@ -8,7 +8,7 @@ import { AuthGuard } from './shared/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'login',
     component: DefaultLayoutComponent,
     children: [
       {
@@ -21,7 +21,8 @@ const routes: Routes = [
       },
       {
         path: '',
-        component: DefaultLayoutComponent,
+        canActivate:[AuthGuard],
+        component: HomeComponent,
       },
       {
         path: 'home',
@@ -29,7 +30,7 @@ const routes: Routes = [
         component: HomeComponent,
       },
     ],
-  },
+  }
 ];
 
 @NgModule({
