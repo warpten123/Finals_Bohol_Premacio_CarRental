@@ -4,7 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/api.service';
 import { User } from '../../../../src/app/models/user.model';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from '../../../../src/app/shared/auth.service';
 
 
 @Component({
