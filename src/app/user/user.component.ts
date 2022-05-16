@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { User } from '../models/user.model';
 import { Helper } from '../models/helper';
+import { User } from '../models/user.model';
 import { ApiService } from '../shared/api.service';
 
 @Component({

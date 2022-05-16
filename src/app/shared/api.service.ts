@@ -10,44 +10,45 @@ export class ApiService {
 
   constructor(private api: HttpClient, private auth: AngularFireAuth) {}
 
-  async post(url:string, body: any): Promise<any> {
+  async post(url: string, body: any): Promise<any> {
     try {
-      // return await this.api.post(environment.API_URL + url, body).toPromise();
-      var token:string = await this.getAuthToken();
-      return await this.api.post(environment.API_URL + url, body, {
-        headers: new HttpHeaders({
-          authportal: token
-        }),
-      }).toPromise();
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-  }
-  async get(url: string): Promise<any> {
-    try {
-      // return await this.api.get(environment.API_URL+url).toPromise();
-      var token:string = await this.getAuthToken();
-      return await this.api.get(environment.API_URL + url, {
-        headers: new HttpHeaders({
-          authportal: token
-        }),
-      }).toPromise();
-
+      var token: string = await this.getAuthToken();
+      return await this.api
+        .post(environment.API_URL + url, body, {
+          headers: new HttpHeaders({
+            authportal: token,
+          }),
+        })
+        .toPromise();
     } catch (e) {
       console.log(e);
       return null;
     }
   }
-  async patch(url: string, body?:any): Promise<any> {
+  async get(url: string): Promise<any> {
     try {
-      // return await this.api.patch(environment.API_URL+url,body).toPromise();
-      var token:string = await this.getAuthToken();
-      return await this.api.patch(environment.API_URL + url, body, {
-        headers: new HttpHeaders({
-          authportal: token
-        }),
-      }).toPromise();
+      var token: string = await this.getAuthToken();
+      return await this.api
+        .get(environment.API_URL + url, {
+          headers: new HttpHeaders({
+            authportal: token,
+          }),
+        })
+        .toPromise();
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  }
+  async patch(url: string, body?: any): Promise<any> {
+    try {
+      return await this.api
+        .patch(environment.API_URL + url, body, {
+          headers: new HttpHeaders({
+            authportal: await this.getAuthToken(),
+          }),
+        })
+        .toPromise();
     } catch (e) {
       console.log(e);
       return null;
@@ -55,27 +56,28 @@ export class ApiService {
   }
   async delete(url: string): Promise<any> {
     try {
-      // return await this.api.delete(environment.API_URL+url).toPromise();
-      var token:string = await this.getAuthToken();
-      return await this.api.delete(environment.API_URL + url, {
-        headers: new HttpHeaders({
-          authportal: token
-        }),
-      }).toPromise();
+      var token: string = await this.getAuthToken();
+      return await this.api
+        .delete(environment.API_URL + url, {
+          headers: new HttpHeaders({
+            authportal: token,
+          }),
+        })
+        .toPromise();
     } catch (e) {
       console.log(e);
       return null;
     }
   }
+
   async getAuthToken(): Promise<string> {
-    try{
+    try {
       var user = await this.auth.currentUser;
       var token = await user?.getIdToken();
       console.log(token);
       return `${token}`;
-    }
-    catch(e){
-      console.log(e);
+    } catch (error) {
+      console.log(error);
       return 'errorGeneratingToken';
     }
   }
