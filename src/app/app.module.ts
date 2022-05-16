@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     DefaultLayoutComponent,
     FooterComponent,
     NavbarComponent,
-    UserComponent
+    UserComponent,
+    AdminComponent
   ],
   imports: [
     HttpClientModule,
