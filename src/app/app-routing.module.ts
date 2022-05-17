@@ -9,7 +9,7 @@ import { AuthGuard } from './shared/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    component: DefaultLayoutComponent,
+    component: LoginComponent,
     children: [
       {
         path: 'login',
