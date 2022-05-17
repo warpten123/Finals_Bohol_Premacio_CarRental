@@ -1,4 +1,4 @@
-import { UsersInterface } from './../../services/user-interface';
+import { UsersInterface } from '../../services/users/user-interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
@@ -6,7 +6,7 @@ import { Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/api.service';
 import { User } from '../../../../src/app/models/user.model';
 import { AuthService } from '../../../../src/app/shared/auth.service';
-import { UsersService } from '../../services/users.service'
+import { UsersService } from '../../services/users/users.service'
 
 @Component({
   selector: 'app-login',

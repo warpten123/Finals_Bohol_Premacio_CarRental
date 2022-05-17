@@ -1,3 +1,4 @@
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
@@ -9,8 +10,9 @@ import { AuthGuard } from './shared/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     component: LoginComponent,
-    children: [
+  },
       {
         path: 'login',
         component: LoginComponent,
@@ -18,6 +20,10 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent,
+      },
+      {
+        path: 'admin',
+        component: AdminLoginComponent,
       },
       {
         path: '',
@@ -29,8 +35,8 @@ const routes: Routes = [
         canActivate:[AuthGuard],
         component: HomeComponent,
       },
-    ],
-  }
+ 
+  
 ];
 
 @NgModule({
