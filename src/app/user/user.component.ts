@@ -279,7 +279,7 @@ export class UserComponent implements OnInit {
   }
 
   private toArray(result: any): any[] {
-    var list = [];
+    var list: string[] = [];
     for (var items in result) {
       list.push(result[items]);
     }

@@ -17,7 +17,7 @@ export class AuthService {
     private router: Router
   ) {
     console.log('I am instance' + `${Date.now()}`);
-    this.userObs = this.afAuth.user.subscribe((data) => {
+    this.userObs = this.afAuth.user.subscribe((data: { uid: any; } | null | undefined) => {
       console.log('data');
       console.log(data);
       if (data == undefined || data == null) return;
