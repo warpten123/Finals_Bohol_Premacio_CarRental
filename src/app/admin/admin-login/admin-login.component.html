@@ -1,0 +1,53 @@
+<html lang = "en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title> PreBol Car Rental! </title>
+        <link rel = "stylesheet" href = "./admin-login.component.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <input type="checkbox" id="flip">
+            <div class="cover">
+                <div class="front">
+                    <img src="assets/right.jpg" alt="">
+                    <div class="text">
+                        <span class="text-1">Welcome Back!</span>
+                        <span class="text-2">How was your day Mr. Admin?</span>
+                    </div>
+                </div>
+                <div class="back">
+                    <img class="backImg" src="assets/right.jpg" alt="">
+                    <div class="text">
+                        <!-- <span class="text-1">Join us now!</span>
+                        <span class="text-2">Yea right!</span> -->
+                    </div>
+                </div>
+            </div>
+            <form action = "#">
+               <div class="form-content">
+                <div class="login-form">
+                    <div class="title">Admin Login</div>
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fa fa-key"></i>
+                            <input type="text" #adminKey placeholder="Key" required>
+                        </div>
+                        <div class="input-box">
+                            <i class="fa fa-lock"></i>
+                            <input type="password" #adminPasword placeholder="Password" required>
+                        </div>
+                        
+                        <div class="button input-box">
+                        
+                            <input type="submit" value="Let's Go!" click="validateClickAdmin()" (click)="onSubmitAdmin(adminKey.value)">
+                        </div>
+                        <div class="text sign-up-text">Why Am I Here? <a routerLink="/login">Take me back!</a></div>
+                    </div>
+                </div>
+                </div>
+            </form>
+            </div>
+        </body>
+
