@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { UsersInterface } from '../../services/users/user-interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -7,6 +8,7 @@ import { ApiService } from 'src/app/shared/api.service';
 import { User } from '../../../../src/app/models/user.model';
 import { AuthService } from '../../../../src/app/shared/auth.service';
 import { UsersService } from '../../services/users/users.service'
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -18,12 +20,16 @@ export class LoginComponent implements OnInit {
   clickLogin!: boolean;
   clickRegister!: boolean;
   test: any;
-  userFound!: boolean;
+  userEmailFound!: boolean;
+  userPassFound!: boolean;
+  fUserEmailFound!: boolean;
+  fUserPassFound!: boolean;
   emailLogin: any;
   passLogin: any;
-
-  constructor(private router: Router, private fb: FormBuilder, private crud: UsersService) { }
-
+  userEmail: any;
+  userPass: any;
+  constructor(private router: Router, private fb: FormBuilder, private crud: UsersService,private afs: AngularFirestore) { }
+  users!: Observable<UsersInterface[]>;
   ngOnInit(): void {
     this.clickLogin = false;
     this.clickRegister = false;
@@ -61,18 +67,15 @@ export class LoginComponent implements OnInit {
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,
         age: this.registerForm.value.age,
+        password: this.registerForm.value.password,
       };
-      if(!this.crud.searchUser(this.registerForm.value.email)){
+      console.log(payload);
         this.crud.addUsers(payload);
         alert('Registered!');
-      }
-      else{
-        alert('User already exist');
-      }
+     
       
     }
   }
-
   onSubmitLogin() {
     if (this.loginForm.valid) {
       var payload: {
@@ -84,20 +87,52 @@ export class LoginComponent implements OnInit {
         password: this.loginForm.value.passLogin,
       };
       console.log(payload);
-      alert('Hellow')
-      var exist: boolean;
-      exist = this.crud.searchUser(this.loginForm.value.emailLogin);
-      console.log(exist)
-      if (exist) {
-        alert('User found');
-        this.nav('home');
-      }
-      else {
-        alert('User not found!!!');
-      }
-    }
+      ///checking email///
+        this.userEmail = this.afs.collection("users", ref => ref.where('email','==',this.loginForm.value.emailLogin)).valueChanges();
+        this.userEmail.subscribe((users: Observable<UsersInterface[]>[]) => {
+        this.users = users[0]
+          if(this.users == undefined){
+            this.userEmailFound = false;
+          }
+          else{
+            this.userEmailFound = true;
+          }
+          this.fUserEmailFound = this.userEmailFound;
+          console.log(this.userEmailFound);
+        
+        })
+       
+    ///checking password///
+        this.userPass = this.afs.collection("users", ref => ref.where('password','==',this.loginForm.value.passLogin)).valueChanges();
+        this.userPass.subscribe((users: Observable<UsersInterface[]>[]) => {
+          this.users = users[0]
+            if(this.users == undefined){
+              this.userPassFound = false;
+            }
+            else{
+              this.userPassFound = true;
+            }
+            this.fUserPassFound = this.userPassFound;
+            
+        if(this.fUserEmailFound && this.fUserPassFound){
+          alert("Credentials Accepted!");
+          this.nav('home');
+        }
+        else{
+          alert("Invalid Login");
+        }
+          
+          })
+          
+          
+    
+      }// if login form is valid
+
+    
   }
+ 
   nav(destination: string) {
     this.router.navigate([destination]);
   }
 }
+
