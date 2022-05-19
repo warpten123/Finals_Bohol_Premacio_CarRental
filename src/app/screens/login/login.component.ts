@@ -70,40 +70,44 @@ export class LoginComponent implements OnInit {
 
   registerForm: FormGroup = new FormGroup({
     $key: new FormControl(['']),
-    name: new FormControl(['', Validators.required]),
-    email: new FormControl([
-      '',
-      {
-        validators: [Validators.required, Validators.email],
-      },
+    name: new FormControl('', Validators.required),
+    age: new FormControl('', [
+      Validators.required,
+      Validators.min(18),
+      Validators.max(65)
     ]),
-    age: new FormControl(['', Validators.required]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+    ]),
+    // fcPassword2: new FormControl('', Validators.required),
   });
 
   error: string = '';
 
   onSubmitRegister() {
-    if (this.clickRegister) {
+    if (this.registerForm.valid) {
       const payload: UsersInterface = {
         $key: '',
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,
         age: this.registerForm.value.age,
       };
-      this.crud.addUsers(payload);
-      // this.form.reset();
-      alert('Registered!');
+      if(!this.crud.searchUser(this.registerForm.value.email)){
+        this.crud.addUsers(payload);
+        alert('Registered!');
+      }
+      else{
+        alert('User already exist');
+      }
+      
     }
   }
 
   onSubmitLogin() {
-    if (!this.loginForm.valid) {
-      {
-        this.error = 'No fields must be empty';
-        alert(this.error);
-        return;
-      }
-    }
     if (this.loginForm.valid) {
       var payload: {
         email: string;
@@ -118,24 +122,13 @@ export class LoginComponent implements OnInit {
       var exist: boolean;
       exist = this.crud.searchUser(this.loginForm.value.emailLogin);
       console.log(exist)
-      if(exist){
+      if (exist) {
         alert('User found');
         // nav home
       }
-      else{
+      else {
         alert('User not found!!!');
       }
-  }
-}
-  validateClickRegister() {
-    console.log('click register');
-    this.clickRegister = true;
-  }
-  validateClickLogin() {
-    console.log('click login');
-    this.clickLogin = true;
-    if (this.emailLogin.value == '' && this.passLogin.value == '') {
-      this.clickLogin = false;
     }
   }
 }

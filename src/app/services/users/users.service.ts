@@ -23,8 +23,8 @@ export class UsersService {
   addUsers(users: UsersInterface) {
     const pushkey = this.afs.createId();
     users.$key = pushkey;
-    this.usersCollection.doc(pushkey).set(users);
   }
+
   getUsers() {
     return this.users;
   }
@@ -43,11 +43,11 @@ export class UsersService {
     this.users = users[0]
       if(this.users == undefined){
         this.userFound = false;
-        alert('User not found!');
+        // alert('User not found!');
       }
       else{
         this.userFound = true;
-        alert('Welcome');
+        // alert('Welcome');
       }
         
 
