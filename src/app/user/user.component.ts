@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Helper } from '../models/helper';
 import { User } from '../models/user.model';
+import { UsersInterface } from '../services/users/user-interface';
+import { UsersService } from '../services/users/users.service';
 
 @Component({
   selector: 'app-user',
@@ -13,7 +15,7 @@ export class UserComponent implements OnInit {
 
   addUserForm: FormGroup;
 
-  constructor(private router: Router, fb: FormBuilder) {
+  constructor(private router: Router, fb: FormBuilder, private crud: UsersService) {
     this.addUserForm = fb.group({
       fcName: new FormControl('', Validators.required),
       fcAge: new FormControl(0, [
@@ -89,23 +91,24 @@ export class UserComponent implements OnInit {
     try {
       var decision = confirm('Add User');
       if (decision == true) {
-
-        // var result: any = await this.api
-        //   .post('/user/register', {
-        //     name: this.addUserForm.value.fcName,
-        //     age: this.addUserForm.value.fcAge,
-        //     email: this.addUserForm.value.fcEmail,
-        //     password: this.addUserForm.value.fcPassword,
-        //   });
-        // console.log(result)
-        // console.log('f')
-        // if (result.success == true) {
-        //   this.nav('home');
-        //   this.clearFields()
-        // }
-        // else {
-        //   alert(result.data);
-        // }
+        const payload: UsersInterface = {
+          $key: '',
+          name: this.addUserForm.value.fcName,
+          email: this.addUserForm.value.fcEmail,
+          age: this.addUserForm.value.fcAge,
+        };
+        
+        var result: any = this.crud.searchUser(this.addUserForm.value.fcEmail)
+        if (!result.success) {
+          this.crud.addUsers(payload);
+          console.log(result)
+          console.log('f')
+          this.nav('home');
+          this.clearFields()
+        }
+        else {
+          alert(result.data);
+        }
       }
     } catch (e) {
       console.log(e);
