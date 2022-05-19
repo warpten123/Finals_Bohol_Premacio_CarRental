@@ -15,48 +15,14 @@ import { UsersService } from '../../services/users/users.service'
 })
 export class LoginComponent implements OnInit {
 
-  // constructor(private router: Router, private api: ApiService, private auth: AuthService) { }
-
-  // ngOnInit(): void {
-  //   console.log('login');
-  // }
-
-  // logInForm: FormGroup = new FormGroup({
-  //   fCEmail: new FormControl('', Validators.required),
-  //   fCPassword: new FormControl('', Validators.required)
-  // });
-
-  // fcEmail = new FormControl();
-  // fcPassword = new FormControl();
-  // requestResult = '';
-
-  // error = '';
-  // async login() {
-  //   try {
-  //     this.error = '';
-  //     var result: any = await this.auth.login(
-  //       this.fcEmail.value,
-  //       this.fcPassword.value
-  //     );
-  //     console.log(result);
-  //     if (!this.auth.authenticated) {
-  //       this.error = result.data;
-  //       alert(result.data);
-  //     }
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-  // nav(destination: string) {
-  //   this.router.navigate([destination]);
-  // }
   clickLogin!: boolean;
   clickRegister!: boolean;
   test: any;
   userFound!: boolean;
   emailLogin: any;
   passLogin: any;
-  constructor(private fb: FormBuilder, private crud: UsersService) { }
+
+  constructor(private router: Router, private fb: FormBuilder, private crud: UsersService) { }
 
   ngOnInit(): void {
     this.clickLogin = false;
@@ -124,11 +90,14 @@ export class LoginComponent implements OnInit {
       console.log(exist)
       if (exist) {
         alert('User found');
-        // nav home
+        this.nav('home');
       }
       else {
         alert('User not found!!!');
       }
     }
+  }
+  nav(destination: string) {
+    this.router.navigate([destination]);
   }
 }

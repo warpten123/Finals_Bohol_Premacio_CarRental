@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { Helper } from '../models/helper';
 import { User } from '../models/user.model';
-import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +13,7 @@ export class UserComponent implements OnInit {
 
   addUserForm: FormGroup;
 
-  constructor(private router: Router, private api: ApiService, fb: FormBuilder) {
+  constructor(private router: Router, fb: FormBuilder) {
     this.addUserForm = fb.group({
       fcName: new FormControl('', Validators.required),
       fcAge: new FormControl(0, [
@@ -93,22 +90,22 @@ export class UserComponent implements OnInit {
       var decision = confirm('Add User');
       if (decision == true) {
 
-        var result: any = await this.api
-          .post('/user/register', {
-            name: this.addUserForm.value.fcName,
-            age: this.addUserForm.value.fcAge,
-            email: this.addUserForm.value.fcEmail,
-            password: this.addUserForm.value.fcPassword,
-          });
-        console.log(result)
-        console.log('f')
-        if (result.success == true) {
-          this.nav('home');
-          this.clearFields()
-        }
-        else {
-          alert(result.data);
-        }
+        // var result: any = await this.api
+        //   .post('/user/register', {
+        //     name: this.addUserForm.value.fcName,
+        //     age: this.addUserForm.value.fcAge,
+        //     email: this.addUserForm.value.fcEmail,
+        //     password: this.addUserForm.value.fcPassword,
+        //   });
+        // console.log(result)
+        // console.log('f')
+        // if (result.success == true) {
+        //   this.nav('home');
+        //   this.clearFields()
+        // }
+        // else {
+        //   alert(result.data);
+        // }
       }
     } catch (e) {
       console.log(e);
@@ -121,28 +118,29 @@ export class UserComponent implements OnInit {
   async editUser() {
     try {
       const id1 = this.userSelected.id;
-    console.log(id1)
+    console.log(id1);
 
       var decision = confirm('Edit User? ');
-      if (decision == true) {
-        var result: any = await this.api
-          .patch('/user/' + id1, {
-            name: this.addUserForm.value.fcName,
-            age: this.addUserForm.value.fcAge,
-            email: this.addUserForm.value.fcEmail,
-            password: this.addUserForm.value.fcPassword,
-          });
-        console.log(result)
-        if (result.success == true) {
-          alert('success')
-          this.nav('home')
-          this.clearFields()
-        }
-        else {
-          alert('Error')
-          this.nav('home')
-        }
-      }
+      console.log(decision)
+      // if (decision == true) {
+      //   var result: any = await this.api
+      //     .patch('/user/' + id1, {
+      //       name: this.addUserForm.value.fcName,
+      //       age: this.addUserForm.value.fcAge,
+      //       email: this.addUserForm.value.fcEmail,
+      //       password: this.addUserForm.value.fcPassword,
+      //     });
+      //   console.log(result)
+      //   if (result.success == true) {
+      //     alert('success')
+      //     this.nav('home')
+      //     this.clearFields()
+      //   }
+      //   else {
+      //     alert('Error')
+      //     this.nav('home')
+      //   }
+      // }
     } catch (e) {
       console.log(e);
       console.log('---')
@@ -207,15 +205,15 @@ export class UserComponent implements OnInit {
     console.log(names)
     var decision = confirm('Delete user ' + names);
     if (decision == true) {
-      var result = await this.api.delete('/user/' + id1);
-      if (result.success) {
-        console.log(this.getData());
-        this.clearFields();
-        alert('success')
-        this.nav('home')
-      }
+      // var result = await this.api.delete('/user/' + id1);
+      // if (result.success) {
+      //   console.log(this.getData());
+      //   this.clearFields();
+      //   alert('success')
+      //   this.nav('home')
+      // }
       alert('Error')
-      this.nav('home')
+      // this.nav('home')
     }
   }
 
@@ -244,14 +242,14 @@ export class UserComponent implements OnInit {
     this.clearFields();
   }
   async getAll(): Promise<Array<User>> {
-    var result = await this.api.get('/user/all');
+    // var result = await this.api.get('/user/all');
     var temp: Array<User> = [];
-    if (result.success) {
-      result.data.forEach((json: any) => {
-        var tempU = User.fromJson(json.id, json);
-        if (tempU != null) temp.push(tempU);
-      });
-    }
+    // if (result.success) {
+    //   result.data.forEach((json: any) => {
+    //     var tempU = User.fromJson(json.id, json);
+    //     if (tempU != null) temp.push(tempU);
+    //   });
+    // }
     return temp;
   }
 
@@ -260,10 +258,10 @@ export class UserComponent implements OnInit {
 
   async search(query: string) {
     if (query.trim() == '') return;
-    var result = await this.api.get('/user/search/' + query);
-    this.getResult(result);
-    alert(result)
-    console.log(result)
+    // var result = await this.api.get('/user/search/' + query);
+    // this.getResult(result);
+    // alert(result)
+    // console.log(result)
   }
 
 
@@ -289,15 +287,15 @@ export class UserComponent implements OnInit {
   }
 
   async displayUsers() {
-    var result: any = await this.api
-      .get(environment.API_URL + '/user/all');
-    console.log(result)
-    if (result.success == true) {
-      this.users = result.data;
-      console.log(result);
-    }
-    else {
-      alert(result.data);
-    }
+    // var result: any = await this.api
+    //   .get(environment.API_URL + '/user/all');
+    // console.log(result)
+    // if (result.success == true) {
+    //   this.users = result.data;
+    //   console.log(result);
+    // }
+    // else {
+    //   alert(result.data);
+    // }
   }
 }

@@ -13,30 +13,24 @@ const routes: Routes = [
     pathMatch: 'full',
     component: LoginComponent,
   },
-      {
-        path: 'login',
-        component: LoginComponent,
-      },
-      {
-        path: 'register',
-        component: RegisterComponent,
-      },
-      {
-        path: 'admin',
-        component: AdminLoginComponent,
-      },
-      {
-        path: '',
-        canActivate:[AuthGuard],
-        component: HomeComponent,
-      },
-      {
-        path: 'home',
-        canActivate:[AuthGuard],
-        component: HomeComponent,
-      },
- 
-  
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminLoginComponent,
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+
+
 ];
 
 @NgModule({
