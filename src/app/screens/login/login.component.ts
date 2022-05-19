@@ -54,53 +54,88 @@ export class LoginComponent implements OnInit {
   clickRegister!: boolean;
   test: any;
   userFound!: boolean;
+  emailLogin: any;
+  passLogin: any;
   constructor(private fb: FormBuilder, private crud: UsersService) { }
 
   ngOnInit(): void {
     this.clickLogin = false;
     this.clickRegister = false;
   }
- form = this.fb.group({
-   $key: [''],
-   name: ['',Validators.required],
-   email: [
-    '',
-    {
-      validators: [Validators.required, Validators.email],
-    },
-  ],
-   age: ['',Validators.required],
- });
 
- onSubmitRegister(){
-   if(this.clickRegister){
-    const payload: UsersInterface = {
-      $key: '',
-      name: this.form.value['name'],
-      age: this.form.value['age'],
-      email: this.form.value['email'],
-    };
-    this.crud.addUsers(payload);
-    this.form.reset();
-    alert('Registered!');
-   
-   }
- }
+  loginForm: FormGroup = new FormGroup({
+    emailLogin: new FormControl('', Validators.required),
+    passLogin: new FormControl('', Validators.required)
+  });
 
-  onSubmitLogin(id: string) {
-   this.userFound = this.crud.searchUser(id);
- }
- validateClickRegister(){
-  console.log('click register');
-   this.clickRegister = true;
- }
- validateClickLogin(){
-   console.log('click login');
-  this.clickLogin = true;
+  registerForm: FormGroup = new FormGroup({
+    $key: new FormControl(['']),
+    name: new FormControl(['', Validators.required]),
+    email: new FormControl([
+      '',
+      {
+        validators: [Validators.required, Validators.email],
+      },
+    ]),
+    age: new FormControl(['', Validators.required]),
+  });
+
+  error: string = '';
+
+  onSubmitRegister() {
+    if (this.clickRegister) {
+      const payload: UsersInterface = {
+        $key: '',
+        name: this.registerForm.value.name,
+        email: this.registerForm.value.email,
+        age: this.registerForm.value.age,
+      };
+      this.crud.addUsers(payload);
+      // this.form.reset();
+      alert('Registered!');
+    }
+  }
+
+  onSubmitLogin() {
+    if (!this.loginForm.valid) {
+      {
+        this.error = 'No fields must be empty';
+        alert(this.error);
+        return;
+      }
+    }
+    if (this.loginForm.valid) {
+      var payload: {
+        email: string;
+        password: string;
+      };
+      payload = {
+        email: this.loginForm.value.emailLogin,
+        password: this.loginForm.value.passLogin,
+      };
+      console.log(payload);
+      alert('Hellow')
+      var exist: boolean;
+      exist = this.crud.searchUser(this.loginForm.value.emailLogin);
+      console.log(exist)
+      if(exist){
+        alert('User found');
+        // nav home
+      }
+      else{
+        alert('User not found!!!');
+      }
+  }
 }
- get f() {
-  return this.form.controls;
-}
-
-
+  validateClickRegister() {
+    console.log('click register');
+    this.clickRegister = true;
+  }
+  validateClickLogin() {
+    console.log('click login');
+    this.clickLogin = true;
+    if (this.emailLogin.value == '' && this.passLogin.value == '') {
+      this.clickLogin = false;
+    }
+  }
 }
