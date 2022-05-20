@@ -70,17 +70,9 @@ export class LoginComponent implements OnInit {
   error: string = '';
 
   onSubmitRegister() {
-    if (this.registerForm.valid) {
-
-      this.authService.register(this.registerForm.value.emailLogin,this.registerForm.value.passLogin).pipe(
-        this.toast.observe({
-          success: 'Registered Successfully!',
-          loading: 'Processing',
-          error: (message) => `${message}`
-        })
-      ).subscribe(()=>{
-        this.nav('login');
-      });
+    if (!this.registerForm.valid) {
+return
+     
       // const payload: UsersInterface = {
       //   $key: '',
       //   name: this.registerForm.value.name,
@@ -94,6 +86,15 @@ export class LoginComponent implements OnInit {
      
       
     }
+    this.authService.register(this.registerForm.value.email,this.registerForm.value.password).pipe(
+      this.toast.observe({
+        success: 'Registered Successfully!',
+        loading: 'Processing',
+        error: (message) => `${message}`
+      })
+    ).subscribe(()=>{
+      this.nav('login');
+    });
   }
   onSubmitLogin() {
     if (!this.loginForm.valid) {
