@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { UsersInterface } from '../../services/users/user-interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,12 +9,15 @@ import { User } from '../../../../src/app/models/user.model';
 import { AuthService } from '../../../../src/app/shared/auth.service';
 import { UsersService } from '../../services/users/users.service'
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   clickLogin!: boolean;
@@ -28,7 +31,13 @@ export class LoginComponent implements OnInit {
   passLogin: any;
   userEmail: any;
   userPass: any;
-  constructor(private router: Router, private fb: FormBuilder, private crud: UsersService,private afs: AngularFirestore) { }
+  constructor(
+    private router: Router,
+    private crud: UsersService,
+    private afs: AngularFirestore,
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    ) { }
   users!: Observable<UsersInterface[]>;
   ngOnInit(): void {
     this.clickLogin = false;
@@ -62,72 +71,46 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     if (this.registerForm.valid) {
-      const payload: UsersInterface = {
-        $key: '',
-        name: this.registerForm.value.name,
-        email: this.registerForm.value.email,
-        age: this.registerForm.value.age,
-        password: this.registerForm.value.password,
-      };
-      console.log(payload);
-        this.crud.addUsers(payload);
-        alert('Registered!');
+
+      this.authService.register(this.registerForm.value.emailLogin,this.registerForm.value.passLogin).pipe(
+        this.toast.observe({
+          success: 'Registered Successfully!',
+          loading: 'Processing',
+          error: (message) => `${message}`
+        })
+      ).subscribe(()=>{
+        this.nav('login');
+      });
+      // const payload: UsersInterface = {
+      //   $key: '',
+      //   name: this.registerForm.value.name,
+      //   email: this.registerForm.value.email,
+      //   age: this.registerForm.value.age,
+      //   password: this.registerForm.value.password,
+      // };
+      // console.log(payload);
+      //   this.crud.addUsers(payload);
+      //   alert('Registered!');
      
       
     }
   }
   onSubmitLogin() {
-    if (this.loginForm.valid) {
-      var payload: {
-        email: string;
-        password: string;
-      };
-      payload = {
-        email: this.loginForm.value.emailLogin,
-        password: this.loginForm.value.passLogin,
-      };
-      console.log(payload);
-      ///checking email///
-        this.userEmail = this.afs.collection("users", ref => ref.where('email','==',this.loginForm.value.emailLogin)).valueChanges();
-        this.userEmail.subscribe((users: Observable<UsersInterface[]>[]) => {
-        this.users = users[0]
-          if(this.users == undefined){
-            this.userEmailFound = false;
-          }
-          else{
-            this.userEmailFound = true;
-          }
-          this.fUserEmailFound = this.userEmailFound;
-          console.log(this.userEmailFound);
-        
+    if (!this.loginForm.valid) {
+      return;
+    }
+      const {email, password} = this.loginForm.value;
+      console.log(email,password);
+      this.authService.login(this.loginForm.value.emailLogin,this.loginForm.value.passLogin).pipe(
+        this.toast.observe({
+          success: 'Logged In Sucessfully',
+          loading: 'Loading',
+          error: 'There was a problem with your login.'
         })
-       
-    ///checking password///
-        this.userPass = this.afs.collection("users", ref => ref.where('password','==',this.loginForm.value.passLogin)).valueChanges();
-        this.userPass.subscribe((users: Observable<UsersInterface[]>[]) => {
-          this.users = users[0]
-            if(this.users == undefined){
-              this.userPassFound = false;
-            }
-            else{
-              this.userPassFound = true;
-            }
-            this.fUserPassFound = this.userPassFound;
-            
-        if(this.fUserEmailFound && this.fUserPassFound){
-          alert("Credentials Accepted!");
-          this.nav('home');
-        }
-        else{
-          alert("Invalid Login");
-        }
-          
-          })
-          
-          
-    
-      }// if login form is valid
+      ).subscribe(()=>{
+        this.nav('user-dashboard');
 
+      });
     
   }
  
