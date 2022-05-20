@@ -71,20 +71,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     if (!this.registerForm.valid) {
-return
-     
-      // const payload: UsersInterface = {
-      //   $key: '',
-      //   name: this.registerForm.value.name,
-      //   email: this.registerForm.value.email,
-      //   age: this.registerForm.value.age,
-      //   password: this.registerForm.value.password,
-      // };
-      // console.log(payload);
-      //   this.crud.addUsers(payload);
-      //   alert('Registered!');
-     
-      
+      return;
     }
     this.authService.register(this.registerForm.value.email,this.registerForm.value.password).pipe(
       this.toast.observe({
@@ -95,7 +82,18 @@ return
     ).subscribe(()=>{
       this.nav('login');
     });
-  }
+       const payload: UsersInterface = {
+        $key: '',
+        name: this.registerForm.value.name,
+        email: this.registerForm.value.email,
+        age: this.registerForm.value.age,
+        password: this.registerForm.value.password,
+      };
+      console.log(payload);
+        this.crud.addUsers(payload);
+        this.registerForm.reset();
+     
+  } //end register
   onSubmitLogin() {
     if (!this.loginForm.valid) {
       return;

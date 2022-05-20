@@ -26,6 +26,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
     NavbarComponent,
     UserComponent,
     AdminLoginComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
     HttpClientModule,
