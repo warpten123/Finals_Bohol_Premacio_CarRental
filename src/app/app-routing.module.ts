@@ -1,3 +1,4 @@
+import { AdminAddComponent } from './admin/admin-add/admin-add.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
@@ -39,6 +40,11 @@ const routes: Routes = [
     component: UserDashboardComponent,
     ...canActivate(redirecToLogin),
   },
+  {
+    path: 'admin-add',
+    component: AdminAddComponent,
+  },
+  
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,

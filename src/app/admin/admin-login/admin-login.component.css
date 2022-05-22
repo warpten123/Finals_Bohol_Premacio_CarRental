@@ -197,7 +197,7 @@ form .form-content .button input{
     transition: all 0.4s ease;
 }
 form .form-content .button input:hover{
-    background: #5b13b9
+    background: #5b13b9;
 }
 form .form-content label{
     color: #5b13b9;
