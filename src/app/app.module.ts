@@ -30,8 +30,8 @@ import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AdminAddComponent } from './admin/admin-add/admin-add.component';
-import { AvailableComponent } from './admin/available/available.component';
-import { RentedComponent } from './admin/rented/rented.component';
+import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
+import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +48,8 @@ import { RentedComponent } from './admin/rented/rented.component';
     AdminDashboardComponent,
     AdminNavbarComponent,
     AdminAddComponent,
-    AvailableComponent,
-    RentedComponent
+    AdminAvailableComponent,
+    AdminRentedComponent
   ],
   imports: [
     HttpClientModule,

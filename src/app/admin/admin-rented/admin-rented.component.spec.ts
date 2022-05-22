@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvailableComponent } from './available.component';
+import { AdminRentedComponent } from './admin-rented.component';
 
-describe('AvailableComponent', () => {
-  let component: AvailableComponent;
-  let fixture: ComponentFixture<AvailableComponent>;
+describe('AdminRentedComponent', () => {
+  let component: AdminRentedComponent;
+  let fixture: ComponentFixture<AdminRentedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AvailableComponent ]
+      declarations: [ AdminRentedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvailableComponent);
+    fixture = TestBed.createComponent(AdminRentedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
