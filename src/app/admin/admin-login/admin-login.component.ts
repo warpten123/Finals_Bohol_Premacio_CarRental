@@ -34,6 +34,7 @@ export class AdminLoginComponent implements OnInit {
   });
   onSubmitAdmin(){
     if (!this.adminLoginForm.valid) {
+      this.toast.error("Please fill up all fields");
       return;
     }
     this.authService.login(this.adminLoginForm.value.adminEmail,this.adminLoginForm.value.adminPass).pipe(

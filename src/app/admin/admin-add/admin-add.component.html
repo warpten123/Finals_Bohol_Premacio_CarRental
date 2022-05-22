@@ -54,13 +54,13 @@
 
                         <div class="input-box">
                             <i class="fa fa-key"></i>
-                            <input type="string" id="carStatus" placeholder="Status" formControlName="carStatus" required>
+                           <input disabled="disabled" type="string" id="carStatus" placeholder="This car is already listed as Available"  required>
                         </div>
                          <!--WE NEED TO ADD MORE-->
                          <!--INPUT FIELDS END-->
                         <div class="button input-box">
                         
-                            <input type="submit" value="Add" (click)="onSubmitAdd()" [disabled]="!adminAddForm.valid">
+                            <input type="submit" value="Add" (click)="onSubmitAdd()">
                         </div>
                         
                     </div>

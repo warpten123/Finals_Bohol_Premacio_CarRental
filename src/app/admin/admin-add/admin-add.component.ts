@@ -25,12 +25,13 @@ export class AdminAddComponent implements OnInit {
     carColor: new FormControl('', Validators.required),
     carPrice: new FormControl('', Validators.required),
     carMileage: new FormControl('', Validators.required),
-    carStatus: new FormControl('', Validators.required),
+   
     
   });
 
   onSubmitAdd(){
     if(!this.adminAddForm.valid){
+      this.toast.error("Please Complete All Fields!");
       return;
     }
     const payload: CarsInterface = {
@@ -39,7 +40,7 @@ export class AdminAddComponent implements OnInit {
       carColor: this.adminAddForm.value.carColor,
       carRentPrice: this.adminAddForm.value.carPrice,
       carMileage: this.adminAddForm.value.carMileage,
-      carStatus: this.adminAddForm.value.carStatus,
+      carStatus: true,
     }
     console.log(payload);
     this.crud.addCars(payload);
