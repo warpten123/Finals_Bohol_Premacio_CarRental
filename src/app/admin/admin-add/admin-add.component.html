@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <form class="inputs">
+            <form class="inputs" [formGroup]="adminAddForm">
                <div class="form-content">
                 <div class="admin-form">
                     <div class="title">Add Cars</div>
@@ -39,7 +39,7 @@
 
                         <div class="input-box">
                             <i class="fa fa-paint-brush"></i>
-                            <input type="password" id="carColor" placeholder="Color" formControlName="carColor" required>
+                            <input type="text" id="carColor" placeholder="Color" formControlName="carColor" required>
                         </div>
 
                         <div class="input-box">
@@ -49,13 +49,18 @@
 
                         <div class="input-box">
                             <i class="fa fa-road"></i>
-                            <input type="number" id="carMileage" placeholder="Mileage" formControlName="carMileage" required>
+                            <input type="number" id="carMileage" placeholder="Mileage (Kilometers)" formControlName="carMileage" required>
+                        </div>
+
+                        <div class="input-box">
+                            <i class="fa fa-key"></i>
+                            <input type="string" id="carStatus" placeholder="Status" formControlName="carStatus" required>
                         </div>
                          <!--WE NEED TO ADD MORE-->
                          <!--INPUT FIELDS END-->
                         <div class="button input-box">
                         
-                            <input type="submit" value="Put That In!">
+                            <input type="submit" value="Add" (click)="onSubmitAdd()" [disabled]="!adminAddForm.valid">
                         </div>
                         
                     </div>

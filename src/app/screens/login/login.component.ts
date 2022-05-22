@@ -20,11 +20,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 
 export class LoginComponent implements OnInit {
 
-  clickLogin!: boolean;
-  clickRegister!: boolean;
-  test: any;
-  userEmailFound!: boolean;
-  userPassFound!: boolean;
+  
   fUserEmailFound!: boolean;
   fUserPassFound!: boolean;
   emailLogin: any;
@@ -40,8 +36,7 @@ export class LoginComponent implements OnInit {
     ) { }
   users!: Observable<UsersInterface[]>;
   ngOnInit(): void {
-    this.clickLogin = false;
-    this.clickRegister = false;
+   
   }
 
   loginForm: FormGroup = new FormGroup({

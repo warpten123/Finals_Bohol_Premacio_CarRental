@@ -21,7 +21,8 @@ export class UsersService {
   isLoggedIn = false;
   userFound = false;
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) {
+  constructor(private afs: AngularFirestore, 
+    private afAuth: AngularFireAuth) {
     this.usersCollection = this.afs.collection<UsersInterface>('users');
     //this.users = this.usersCollection.valueChanges();
     this.users = this.usersCollection.snapshotChanges().pipe(
@@ -73,7 +74,5 @@ export class UsersService {
   // }
  
   
-  get authenticated(): boolean {
-    return this.users != undefined && this.users != null;
-  }
+ 
 }
