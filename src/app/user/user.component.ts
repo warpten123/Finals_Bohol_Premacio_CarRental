@@ -87,34 +87,35 @@ export class UserComponent implements OnInit {
     console.log(this.id)
   }
 
-  async addUser() {
-    try {
-      var decision = confirm('Add User');
-      if (decision == true) {
-        const payload: UsersInterface = {
-          $key: '',
-          name: this.addUserForm.value.fcName,
-          email: this.addUserForm.value.fcEmail,
-          age: this.addUserForm.value.fcAge,
-        };
+  // async addUser() {
+  //   try {
+  //     var decision = confirm('Add User');
+  //     if (decision == true) {
+  //       const payload: UsersInterface = {
+  //         $key: '',
+  //         name: this.addUserForm.value.fcName,
+  //         email: this.addUserForm.value.fcEmail,
+  //         age: this.addUserForm.value.fcAge,
+  //         password: this.addUserForm.value.fcPassword,
+  //       };
         
-        var result: any = this.crud.searchUser(this.addUserForm.value.fcEmail)
-        if (!result.success) {
-          this.crud.addUsers(payload);
-          console.log(result)
-          console.log('f')
-          this.nav('home');
-          this.clearFields()
-        }
-        else {
-          alert(result.data);
-        }
-      }
-    } catch (e) {
-      console.log(e);
-      console.log('---')
-    }
-  }
+  //       var result: any = this.crud.searchUser(this.addUserForm.value.fcEmail)
+  //       if (!result.success) {
+  //         this.crud.addUsers(payload);
+  //         console.log(result)
+  //         console.log('f')
+  //         this.nav('home');
+  //         this.clearFields()
+  //       }
+  //       else {
+  //         alert(result.data);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //     console.log('---')
+  //   }
+  // }
 
   
   userSelected: any;
@@ -177,7 +178,7 @@ export class UserComponent implements OnInit {
       };
       console.log(payload);
       alert('Hellow')
-      this.addUser();
+     //this.addUser();
     }
   }
 

@@ -1,3 +1,4 @@
+import { Observable, Subscription } from 'rxjs';
 import { UsersInterface } from '../../services/users/user-interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -7,23 +8,37 @@ import { ApiService } from 'src/app/shared/api.service';
 import { User } from '../../../../src/app/models/user.model';
 import { AuthService } from '../../../../src/app/shared/auth.service';
 import { UsersService } from '../../services/users/users.service'
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   clickLogin!: boolean;
   clickRegister!: boolean;
   test: any;
-  userFound!: boolean;
+  userEmailFound!: boolean;
+  userPassFound!: boolean;
+  fUserEmailFound!: boolean;
+  fUserPassFound!: boolean;
   emailLogin: any;
   passLogin: any;
-
-  constructor(private router: Router, private fb: FormBuilder, private crud: UsersService) { }
-
+  userEmail: any;
+  userPass: any;
+  constructor(
+    private router: Router,
+    private crud: UsersService,
+    private afs: AngularFirestore,
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    ) { }
+  users!: Observable<UsersInterface[]>;
   ngOnInit(): void {
     this.clickLogin = false;
     this.clickRegister = false;
@@ -55,49 +70,51 @@ export class LoginComponent implements OnInit {
   error: string = '';
 
   onSubmitRegister() {
-    if (this.registerForm.valid) {
-      const payload: UsersInterface = {
+    if (!this.registerForm.valid) {
+      return;
+    }
+    this.authService.register(this.registerForm.value.email,this.registerForm.value.password).pipe(
+      this.toast.observe({
+        success: 'Registered Successfully!',
+        loading: 'Processing',
+        error: (message) => `${message}`
+      })
+    ).subscribe(()=>{
+      this.nav('login');
+    });
+       const payload: UsersInterface = {
         $key: '',
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,
         age: this.registerForm.value.age,
-      };
-      if(!this.crud.searchUser(this.registerForm.value.email)){
-        this.crud.addUsers(payload);
-        alert('Registered!');
-      }
-      else{
-        alert('User already exist');
-      }
-      
-    }
-  }
-
-  onSubmitLogin() {
-    if (this.loginForm.valid) {
-      var payload: {
-        email: string;
-        password: string;
-      };
-      payload = {
-        email: this.loginForm.value.emailLogin,
-        password: this.loginForm.value.passLogin,
+        password: this.registerForm.value.password,
       };
       console.log(payload);
-      alert('Hellow')
-      var exist: boolean;
-      exist = this.crud.searchUser(this.loginForm.value.emailLogin);
-      console.log(exist)
-      if (exist) {
-        alert('User found');
-        this.nav('home');
-      }
-      else {
-        alert('User not found!!!');
-      }
+        this.crud.addUsers(payload);
+        this.registerForm.reset();
+     
+  } //end register
+  onSubmitLogin() {
+    if (!this.loginForm.valid) {
+      return;
     }
+      const {email, password} = this.loginForm.value;
+      console.log(email,password);
+      this.authService.login(this.loginForm.value.emailLogin,this.loginForm.value.passLogin).pipe(
+        this.toast.observe({
+          success: 'Logged In Sucessfully',
+          loading: 'Loading',
+          error: 'There was a problem with your login.'
+        })
+      ).subscribe(()=>{
+        this.nav('user-dashboard');
+
+      });
+    
   }
+ 
   nav(destination: string) {
     this.router.navigate([destination]);
   }
 }
+

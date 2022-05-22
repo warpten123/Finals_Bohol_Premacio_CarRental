@@ -117,7 +117,7 @@ body{
    align-items: center;
    justify-content: space-between;  
 }
-.form-content .login-form,
+.form-content .admin-form,
 .form-content .signup-form{
     width: calc(100% /2 - 25px);
     /* background: red; */
@@ -205,7 +205,7 @@ form .form-content label{
 form .form-content label:hover{
     text-decoration: underline; 
 }
-form .form-content .login-text,
+form .form-content .admin-text,
 form .form-content .sign-up-text{
     text-align: center;
     margin-top: 25px;
@@ -217,7 +217,7 @@ form .form-content .sign-up-text{
     .container .cover{
         display: none;
     }
-    .form-content .login-form,
+    .form-content .admin-form,
     .form-content .signup-form{
         width: 100%;
     }
@@ -228,6 +228,6 @@ form .form-content .sign-up-text{
 .container #flip:checked ~ .signup-form{
     display: block;
 }
-.container #flip:checked ~ .login-form{
+.container #flip:checked ~ .admin-form{
     display: none;
 }

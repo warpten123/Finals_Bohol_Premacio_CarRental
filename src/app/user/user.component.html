@@ -1,17 +1,10 @@
-<div class="intro-section">
+<!-- <div class="intro-section">
     <div class="left-side">
         <div class="control">
             <input type="search" placeholder="Type to Search" id="search" autocomplete="on" (change)="search(term.value)" #term>
             <button type="button" class="button" id="search_button" (click)="getData()" (click)="clearSearch()">Clear Search</button>
             <h3>User's Information</h3>
-            <!-- <p>{{ error }}</p>
-            <p>{{ addUserForm.value | json }}</p>
-            <p>{{ addUserForm.status }}</p> -->
-            <!-- <p>{{ name.value }}</p> -->
-            <!-- <p>ss {{ term.value }}</p> -->
-
-            <!-- <label for="id" class="txt">ID</label>
-            <input type="text" name="id" id="id" formControlName="fcId"/> -->
+           
             <form class="inputs" [formGroup]="addUserForm" (ngSubmit)="onSubmit()">
                 <label for="Name" class="txt">Name</label>
                 <input type="text" placeholder="Full Name" name="name" id="name" formControlName="fcName" />
@@ -65,4 +58,4 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->

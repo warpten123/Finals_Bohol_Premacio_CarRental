@@ -24,6 +24,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { HotToastModule } from '@ngneat/hot-toast';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     FooterComponent,
     NavbarComponent,
     UserComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    UserDashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +56,8 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    HotToastModule.forRoot()
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]

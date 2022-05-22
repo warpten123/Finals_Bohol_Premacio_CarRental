@@ -30,7 +30,7 @@
         <div class="form-content">
             <div class="login-form">
                 <form class="inputs" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
-                    <div class="title">LogIn</div>
+                    <div class="title-login">LogIn</div>
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fa fa-envelope"></i>
@@ -41,7 +41,7 @@
                             <input type="password" formControlName="passLogin" placeholder="Enter your Password" required>
                         </div>
                         <div class="text"><a routerLink="/admin">Hey! I'm an Admin!</a></div>
-                        <div class="button input-box">
+                        <div class="button-login input-box">
                             <input type="submit" [disabled]="!loginForm.valid" value="Submit">
                         </div>
                         <div class="text sign-up-text">Want to join us? <label for="flip">Sign Up Now! </label>
@@ -52,8 +52,8 @@
 
             <div class="signup-form">
                 <form class="inputs" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
-                    <div class=" title ">Sign Up</div>
-                    <div class=" input-boxes">
+                    <div class=" title-register ">Sign Up</div>
+                    <div class=" input-boxes-register">
                         <div class="input-box">
                             <i class="fa fa-user "></i>
                             <input type="email" placeholder="Enter your Username" id="username" formControlName="name" required>
@@ -71,7 +71,7 @@
                             <input type="password" placeholder="*********" id="password" formControlName="password" required>
                         </div>
 
-                        <div class="button input-box">
+                        <div class="button-register input-box">
                             <input type="submit" value="Submit" [disabled]="!registerForm.valid">
                         </div>
                         <div class="text sign-up-text">

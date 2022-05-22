@@ -1,0 +1,5 @@
+<p *ngIf="user$ | async as user">Welcome {{user.email}}</p>
+
+
+<ng-container *ngIf="authService.currentUser$ | async as user"></ng-container>
+<button (click)="logout()">Log out!</button>
