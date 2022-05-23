@@ -26,8 +26,12 @@ export class AdminAddComponent implements OnInit {
     carPrice: new FormControl('', Validators.required),
     carMileage: new FormControl('', Validators.required),
     carImage: new FormControl('', Validators.required),
-
+    carStreet: new FormControl('', Validators.required),
+    carCity: new FormControl('', Validators.required),
+    carZipcode: new FormControl('', Validators.required),
+    carCountry: new FormControl('', Validators.required),
   });
+  
 
   imagePath: any;
   url: any;
@@ -70,6 +74,12 @@ export class AdminAddComponent implements OnInit {
       carMileage: this.adminAddForm.value.carMileage,
       carStatus: true,
       carImage: this.adminAddForm.value.carImage,
+      carLocation: {
+        city: this.adminAddForm.value.carCity,
+        street: this.adminAddForm.value.carStreet,
+        zipcode: this.adminAddForm.value.carZipcode,
+        country: this.adminAddForm.value.carCountry,
+      }
     }
     console.log(payload);
     this.crud.addCars(payload);
