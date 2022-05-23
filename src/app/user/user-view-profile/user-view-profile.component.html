@@ -9,47 +9,6 @@
         <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <!-- <div class="container">
-            <input type="checkbox" id="flip">
-            <div class="cover">
-                <div class="front">
-                    <img src="assets/open.jpg" alt="">
-                    <div class="text">
-                        <span class="text-1">Welcome {{curr_User.name}}!</span>
-                        <span class="text-2">How was your day?</span>
-                    </div>
-                </div>
-                <div class="back">
-                    <img class="backImg" src="assets/open.jpg" alt="">
-                    <div class="text">
-                     
-                    </div>
-                </div>
-            </div>
-            <form class="inputs">
-               <div class="form-content">
-                <div class="admin-form">
-                    <div class="title">Your Information</div>
-                    <div class="input-boxes">
-                        <div class="input-box">
-                            <i class="fa fa-envelope"></i>
-                            <input type="text" placeholder="{{curr_User.email}}"disabled="disabled">
-                        </div>
-                        <div class="input-box">
-                            <i class="fa fa-money"></i>
-                            <input type="password" placeholder="₱ {{curr_User.money}}.00"disabled="disabled">
-                        </div>
-                        
-                        <div class="button input-box">
-                        
-                            <input type="submit" value="Add Money">
-                        </div>
-                        <div class="text sign-up-text">I want to update my information <label for="flip">Update!</label></div>
-                    </div>
-                </div>
-                </div>
-            </form>
-            </div> -->
             <div class="container">
                 <input type="checkbox" id="flip">
             <div class="cover">
@@ -67,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <form class="inputs">
+            <form class="inputs" [formGroup]="updateUserForm">
                 <div class="form-content">
                  <div class="admin-form">
                      <div class="title">Your Information</div>
@@ -78,12 +37,12 @@
                          </div>
                          <div class="input-box">
                              <i class="fa fa-money"></i>
-                             <input type="password" placeholder="₱ {{curr_User.money}}.00"disabled="disabled">
+                             <input type="number" placeholder="₱ {{curr_User.money}}.00"formControlName="updateMoney" >
                          </div>
                          
                          <div class="button input-box">
                          
-                             <input type="submit" value="Add Money">
+                             <input type="submit" value="Add Money" (click)="validateMoney()" (click)="onSubmitUpdate(curr_User.$key)">
                          </div>
                          <div class="text sign-up-text">I want to update my information <label for="flip">Update!</label></div>
                      </div>
@@ -107,12 +66,12 @@
                             </div>
                             <div class="input-box">
                                 <i class="fa fa-lock"></i>
-                                <input type="password"  id= "updateEmail" placeholder="{{curr_User.password}}" required>
+                                <input type="password"  id= "updatePassword" formControlName="updatePassword" placeholder="{{curr_User.password}}" required>
                             </div>
                            
                             <div class="button input-box">
                               
-                                <input type="submit" value="Update">
+                                <input type="submit" value="Update" (click)="onSubmitUpdate(curr_User.$key)">
                             </div>
                             <div class="text sign-up-text">Your information is safe with us<label for ="flip">Take me back!</label></div>
                         </div>

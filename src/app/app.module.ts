@@ -33,7 +33,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
-
+import {MatIconModule} from '@angular/material/icon';
 //
 //
 
@@ -74,6 +74,7 @@ import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
     MatCardModule,
     MatButtonModule,
     FlexLayoutModule,
+    MatIconModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]

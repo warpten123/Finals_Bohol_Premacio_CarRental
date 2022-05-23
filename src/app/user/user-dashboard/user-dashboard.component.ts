@@ -13,6 +13,7 @@ import { CarsService } from 'src/app/services/cars/cars.service';
 export class UserDashboardComponent implements OnInit {
   // user$ = this.authService.currentUser$;
   cars!: CarsInterface[];
+  check!: CarsInterface;
   constructor(private router: Router, 
     private crud: CarsService,
     private authService: AuthenticationService,
@@ -23,8 +24,8 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.crud.getCars().subscribe((val) => {
       this.cars = val;
-      console.log(this.cars);
     });
+    
   }
 logout(){
   this.authService.logout().subscribe(()=>{

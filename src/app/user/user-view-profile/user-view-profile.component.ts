@@ -1,9 +1,13 @@
+import { HotToastService } from '@ngneat/hot-toast';
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersService } from 'src/app/services/users/users.service';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { UsersInterface } from 'src/app/services/users/user-interface';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-user-view-profile',
@@ -11,6 +15,7 @@ import { UsersInterface } from 'src/app/services/users/user-interface';
   styleUrls: ['./user-view-profile.component.css']
 })
 export class UserViewProfileComponent implements OnInit {
+  isWallet: boolean = false;
   user$: any;
   cars!: CarsInterface[];
   temp_User!: UsersInterface[];
@@ -22,7 +27,8 @@ export class UserViewProfileComponent implements OnInit {
     private afs: AuthenticationService,
     private crudCar: CarsService,
     private crudUser: UsersService,
-
+    private toast: HotToastService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -45,4 +51,64 @@ export class UserViewProfileComponent implements OnInit {
     })
   }
 
+  updateUserForm: FormGroup = new FormGroup({
+    $key: new FormControl(['']),
+    updateUsername: new FormControl('', Validators.required),
+    updateAge: new FormControl('', [
+      Validators.required,
+      Validators.min(18),
+      Validators.max(65)
+    ]),
+    updateEmail: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    updatePassword: new FormControl('', [
+      Validators.required,
+    ]),
+    updateMoney: new FormControl(['']),
+  });
+
+
+onSubmitUpdate(key: string){
+  if(!this.updateUserForm.valid && this.isWallet == false){
+    this.toast.error("Complete All Fields");
+    return;
+  }
+  if(!this.updateUserForm.valid && this.isWallet == true){
+    this.toast.success("Wallet Updated!");
+    this.curr_User.money = this.updateUserForm.value.updateMoney;
+    this.crudUser.modifyUsers(key,this.curr_User);
+    return;
+  }
+  this.afs.delete();
+  const payload: UsersInterface = {
+    $key: '',
+    name: this.updateUserForm.value.updateUsername,
+    email: this.updateUserForm.value.updateEmail,
+    age: this.updateUserForm.value.updateAge,
+    password: this.updateUserForm.value.updatePassword,
+    money: this.curr_User.money,
+  };
+
+  this.afs.register(payload.email,payload.password).pipe(
+    this.toast.observe({
+      success: 'Update Successfully!',
+      loading: 'Processing',
+      error: (message) => `${message}`
+    })
+  ).subscribe(()=>{
+    this.router.navigate(['/user-dashboard']);
+  });
+    this.crudUser.modifyUsers(key,payload);
+   
+  
+
+}
+
+validateMoney(){
+  this.isWallet = true;
+}
+
+  
 }

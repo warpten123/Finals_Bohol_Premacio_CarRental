@@ -1,3 +1,4 @@
+import { User } from './../../models/user.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { where } from 'firebase/firestore';
 import { Observable } from 'rxjs';
@@ -47,12 +48,17 @@ export class UsersService {
   modifyUsers(userId: string, userChanges: UsersInterface) {
     this.usersCollection.doc(userId).update(userChanges);
   }
+  updateUsers(user: UsersInterface){
+    this.usersCollection.doc(`users/${user.$key}`).update(user);
+    
+  }
   removeUsers(userId: string) {
     this.usersCollection.doc(userId).delete();
   }
   getOneUsers(id: string) {
     return this.usersCollection.doc(id).get();
   }
+
   // searchUser(email: string){
   //   this.userData = this.afs.collection("users", ref => ref.where('email','==',email)).valueChanges();
   //   this.userData.subscribe((users: Observable<UsersInterface[]>[]) => {

@@ -4,10 +4,12 @@ mat-toolbar {
   
   .content {
     padding: 16px;
+    
   }
   
   .content > mat-card {
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
+    display: inline;
   }
   
   .column-label {
