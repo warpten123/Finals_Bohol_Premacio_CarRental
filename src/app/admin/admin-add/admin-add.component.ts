@@ -25,12 +25,40 @@ export class AdminAddComponent implements OnInit {
     carColor: new FormControl('', Validators.required),
     carPrice: new FormControl('', Validators.required),
     carMileage: new FormControl('', Validators.required),
-   
-    
+    carImage: new FormControl('', Validators.required),
+
   });
 
-  onSubmitAdd(){
-    if(!this.adminAddForm.valid){
+  imagePath: any;
+  url: any;
+  message: String = "";
+
+
+  onFileChanged(event) {
+    console.log('triggered');
+    const files = event.target.files;
+    if (files.length === 0)
+      return;
+
+    const mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+
+    const reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.url = reader.result;
+      console.log(this.url);
+    }
+  }
+
+
+  onSubmitAdd() {
+    console.log(this.adminAddForm.value.carImage);
+    if (!this.adminAddForm.valid) {
       this.toast.error("Please Complete All Fields!");
       return;
     }
@@ -41,6 +69,7 @@ export class AdminAddComponent implements OnInit {
       carRentPrice: this.adminAddForm.value.carPrice,
       carMileage: this.adminAddForm.value.carMileage,
       carStatus: true,
+      carImage: this.adminAddForm.value.carImage,
     }
     console.log(payload);
     this.crud.addCars(payload);

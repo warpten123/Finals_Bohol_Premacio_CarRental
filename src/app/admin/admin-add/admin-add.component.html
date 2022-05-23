@@ -1,40 +1,44 @@
 <app-admin-navbar></app-admin-navbar>
-<html lang = "en" dir="ltr">
-    <head>
-        <meta charset="UTF-8">
-        <title> PreBol Car Rental! </title>
-        <link rel = "stylesheet" href = "./admin-add.component.css">
-        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="container">
-            <input type="checkbox" id="flip">
-            <div class="cover">
-                <div class="front">
-                    <img src="assets/add.jpg" alt="">
-                    <div class="text">
-                        <span class="text-1">Plan nako ari i butang ang image sa car</span>
-                        <span class="text-2">pero later nalang</span>
-                    </div>
-                </div>
-                <div class="back">
-                    <img class="backImg" src="assets/left.jpeg" alt="">
-                    <div class="text">
-                        <!-- <span class="text-1">Join us now!</span>
-                        <span class="text-2">Yea right!</span> -->
-                    </div>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title> PreBol Car Rental! </title>
+    <link rel="stylesheet" href="./admin-add.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="flip">
+        <div class="cover">
+            <div class="front">
+                <!-- put the image from FormControl carimage -->
+                <img src="{{url}}" alt="car-image" class="car-image">
+                <!-- <img src="assets/add.jpg" alt=""> -->
+                <div class="text">
+                    <span class="text-1">Plan nako ari i butang ang image sa car</span>
+                    <span class="text-2">pero later nalang</span>
                 </div>
             </div>
-            <form class="inputs" [formGroup]="adminAddForm">
-               <div class="form-content">
+            <div class="back">
+                <img class="backImg" src="assets/left.jpeg" alt="">
+                <div class="text">
+                    <!-- <span class="text-1">Join us now!</span>
+                        <span class="text-2">Yea right!</span> -->
+                </div>
+            </div>
+        </div>
+        <form class="inputs" [formGroup]="adminAddForm">
+            <div class="form-content">
                 <div class="admin-form">
                     <div class="title">Add Cars</div>
                     <div class="input-boxes">
                         <!--INPUT FIELDS START-->
                         <div class="input-box">
                             <i class="fa fa-car"></i>
-                            <input type="text" id="carName" placeholder="Car Name" formControlName="carName"required>
+                            <input type="text" id="carName" placeholder="Car Name" formControlName="carName" required>
                         </div>
 
                         <div class="input-box">
@@ -54,20 +58,32 @@
 
                         <div class="input-box">
                             <i class="fa fa-key"></i>
-                           <input disabled="disabled" type="string" id="carStatus" placeholder="This car is already listed as Available"  required>
+                            <input disabled="disabled" type="string" id="carStatus" placeholder="This car is already listed as Available" required>
                         </div>
-                         <!--WE NEED TO ADD MORE-->
-                         <!--INPUT FIELDS END-->
+                        <!--WE NEED TO ADD MORE-->
+                        <!-- Add upload button -->
+                        <div class="input-box">
+                            <i class="fa fa-upload"></i>
+                            <input type="file" id="carImage" placeholder="Upload Image" (change)="onFileChanged($event)" formControlName="carImage" required>
+                        </div>
+                        <!-- Add location like city, street,zipcode,country -->
+                        <div class="input-box">
+                            <i class="fa fa-map-marker"></i>
+                            <!-- inline FIELDS for street, city zipcode and country-->
+                            <input type="text" id="carStreet" placeholder="Street" formControlName="carStreet" required>
+                            <input type="text" id="carCity" placeholder="City" formControlName="carCity" required>
+                            <input type="text" id="carCountry" placeholder="Country" formControlName="carCountry" required>
+                            <input type="number" id="carZipcode" placeholder="Zipcode" formControlName="carZipcode" required>
+                        </div>
+                        <!--INPUT FIELDS END-->
                         <div class="button input-box">
-                        
+
                             <input type="submit" value="Add" (click)="onSubmitAdd()">
                         </div>
-                        
+
                     </div>
                 </div>
-                </div>
-            </form>
             </div>
-        </body>
-
-
+        </form>
+    </div>
+</body>
