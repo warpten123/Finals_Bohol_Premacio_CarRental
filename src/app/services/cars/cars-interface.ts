@@ -5,5 +5,6 @@ export interface CarsInterface{
     carRentPrice: number;
     carMileage: number;
     carStatus: boolean;
+    carImage: string;
     //need to add more
 }
