@@ -7,16 +7,10 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
-import { UserComponent } from './user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
-import { RegisterComponent } from './screens/register/register.component';
 import { AuthGuard } from './shared/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -28,28 +22,37 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { AdminAddComponent } from './admin/admin-add/admin-add.component';
 import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
 import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
+import { ViewHistoryComponent } from './user/view-history/view-history.component';
+import { UserViewRequestComponent } from './user/user-view-request/user-view-request.component';
+import { UserViewProfileComponent } from './user/user-view-profile/user-view-profile.component';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
+
+//
+//
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    RegisterComponent,
-    DefaultLayoutComponent,
-    FooterComponent,
-    NavbarComponent,
-    UserComponent,
     AdminLoginComponent,
     UserDashboardComponent,
     AdminDashboardComponent,
     AdminNavbarComponent,
     AdminAddComponent,
     AdminAvailableComponent,
-    AdminRentedComponent
+    AdminRentedComponent,
+    ViewHistoryComponent,
+    UserViewRequestComponent,
+    UserViewProfileComponent,
+    UserNavbarComponent,
+    
   ],
   imports: [
     HttpClientModule,
@@ -68,6 +71,9 @@ import { AdminRentedComponent } from './admin/admin-rented/admin-rented.componen
     HotToastModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    FlexLayoutModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]

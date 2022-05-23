@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefaultLayoutComponent } from './default-layout.component';
+import { UserViewProfileComponent } from './user-view-profile.component';
 
-describe('DefaultLayoutComponent', () => {
-  let component: DefaultLayoutComponent;
-  let fixture: ComponentFixture<DefaultLayoutComponent>;
+describe('UserViewProfileComponent', () => {
+  let component: UserViewProfileComponent;
+  let fixture: ComponentFixture<UserViewProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DefaultLayoutComponent ]
+      declarations: [ UserViewProfileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefaultLayoutComponent);
+    fixture = TestBed.createComponent(UserViewProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

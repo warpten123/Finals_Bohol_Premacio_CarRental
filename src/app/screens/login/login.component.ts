@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
         email: this.registerForm.value.email,
         age: this.registerForm.value.age,
         password: this.registerForm.value.password,
+        money: 0,
       };
       console.log(payload);
         this.crud.addUsers(payload);

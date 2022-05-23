@@ -13,6 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
 })
 export class AdminDashboardComponent implements OnInit {
   users!: UsersInterface[];
+  user: any;
   constructor(private router: Router, 
     private crud: UsersService,
     private authService: AuthenticationService,
@@ -26,6 +27,7 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
-  
+ 
+ 
   
 }

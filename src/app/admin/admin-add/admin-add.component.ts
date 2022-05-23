@@ -28,8 +28,6 @@ export class AdminAddComponent implements OnInit {
     carImage: new FormControl('', Validators.required),
     carStreet: new FormControl('', Validators.required),
     carCity: new FormControl('', Validators.required),
-    carZipcode: new FormControl('', Validators.required),
-    carCountry: new FormControl('', Validators.required),
   });
   
 
@@ -65,6 +63,7 @@ export class AdminAddComponent implements OnInit {
     this.imagePath = "";
     this.url = "";
     this.validImage = false;
+    this.adminAddForm.reset();
   }
   onSubmitAdd() {
     console.log(this.adminAddForm.value.carImage);
@@ -83,8 +82,6 @@ export class AdminAddComponent implements OnInit {
       carLocation: {
         city: this.adminAddForm.value.carCity,
         street: this.adminAddForm.value.carStreet,
-        zipcode: this.adminAddForm.value.carZipcode,
-        country: this.adminAddForm.value.carCountry,
       }
     }
     console.log(payload);
