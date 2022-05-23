@@ -12,24 +12,6 @@
 <body>
     <div class="container">
         <input type="checkbox" id="flip">
-        <div class="cover">
-            <div class="front">
-                <!-- put the image from FormControl carimage -->
-                <img src="{{url}}" alt="car-image" class="car-image">
-                <!-- <img src="assets/add.jpg" alt=""> -->
-                <div class="text">
-                    <span class="text-1">Plan nako ari i butang ang image sa car</span>
-                    <span class="text-2">pero later nalang</span>
-                </div>
-            </div>
-            <div class="back">
-                <img class="backImg" src="assets/left.jpeg" alt="">
-                <div class="text">
-                    <!-- <span class="text-1">Join us now!</span>
-                        <span class="text-2">Yea right!</span> -->
-                </div>
-            </div>
-        </div>
         <form class="inputs" [formGroup]="adminAddForm">
             <div class="form-content">
                 <div class="admin-form">
@@ -61,23 +43,36 @@
                             <input disabled="disabled" type="string" id="carStatus" placeholder="This car is already listed as Available" required>
                         </div>
                         <!--WE NEED TO ADD MORE-->
-                        <!-- Add upload button -->
-                        <div class="input-box">
-                            <i class="fa fa-upload"></i>
-                            <input type="file" id="carImage" placeholder="Upload Image" (change)="onFileChanged($event)" formControlName="carImage" required>
-                        </div>
-                        <!-- Add location like city, street,zipcode,country -->
-                        <div class="input-box">
-                            <i class="fa fa-map-marker"></i>
-                            <!-- inline FIELDS for street, city zipcode and country-->
-                            <input type="text" id="carStreet" placeholder="Street" formControlName="carStreet" required>
-                            <input type="text" id="carCity" placeholder="City" formControlName="carCity" required>
-                            <input type="text" id="carCountry" placeholder="Country" formControlName="carCountry" required>
-                            <input type="number" id="carZipcode" placeholder="Zipcode" formControlName="carZipcode" required>
+                        <div class="cover">
+                            <div class="front">
+                                <!-- put the image from FormControl carimage -->
+                                <img src="{{url}}" *ngIf="validImage" alt="car-image" class="car-image">
+                                <img src="assets\Upload-Transparent.png" *ngIf="!validImage" alt="car-image" class="car-image"> </div>
+                            <div class="back">
+                                <div class="text">
+                                    <!-- Add upload button -->
+                                    <div class="input-box dist">
+                                        <i class="fa fa-upload"></i>
+                                        <input type="file" id="carImage" placeholder="Upload Image" (change)="onFileChanged($event)" formControlName="carImage" required>
+                                    </div>
+                                    <!-- Add location like city, street,zipcode,country -->
+                                    <div class="input-box">
+                                        <i class="fa fa-map-marker"></i>
+                                        <!-- inline FIELDS for street, city zipcode and country-->
+                                        <input type="text" id="carStreet" placeholder="Street" formControlName="carStreet" required>
+                                        <input type="text" id="carCity" placeholder="City" formControlName="carCity" required>
+                                        <input type="text" id="carCountry" placeholder="Country" formControlName="carCountry" required>
+                                        <input type="number" id="carZipcode" placeholder="Zipcode" formControlName="carZipcode" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button input-box">
+                                <!-- add a clear button -->
+                                <button type="button" class="clear-button" (click)="clearImage()">Clear</button>
+                            </div>
                         </div>
                         <!--INPUT FIELDS END-->
                         <div class="button input-box">
-
                             <input type="submit" value="Add" (click)="onSubmitAdd()">
                         </div>
 

@@ -36,6 +36,7 @@ export class AdminAddComponent implements OnInit {
   imagePath: any;
   url: any;
   message: String = "";
+  validImage: boolean = false;
 
 
   onFileChanged(event) {
@@ -56,10 +57,15 @@ export class AdminAddComponent implements OnInit {
     reader.onload = (_event) => {
       this.url = reader.result;
       console.log(this.url);
+      this.validImage = true;
     }
   }
 
-
+  clearImage(){
+    this.imagePath = "";
+    this.url = "";
+    this.validImage = false;
+  }
   onSubmitAdd() {
     console.log(this.adminAddForm.value.carImage);
     if (!this.adminAddForm.valid) {
