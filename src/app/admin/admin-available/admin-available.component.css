@@ -14,3 +14,7 @@ mat-toolbar {
     margin-right: 8px;
     font-size: 1rem;
   }
+
+  .image{
+      object-fit: contain;
+  }

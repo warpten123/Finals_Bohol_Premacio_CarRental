@@ -10,7 +10,7 @@
       <mat-card-header>
         <mat-card-title> {{car.carName}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{car.carImage}}">
+      <img mat-card-image src="{{car.carImage}}"class=".img-responsive" width="304" height="236">
       <mat-card-content>
         <p>
             {{car.carMileage}}
@@ -26,7 +26,7 @@
   </div>
 <!--END CARD-->
 
-<button (click)="logout()">Log out!</button>
+<!-- <button (click)="logout()">Log out!</button> -->
 <ng-template #noCars>
     <hr>
     <h5>There are no cars listed!</h5>

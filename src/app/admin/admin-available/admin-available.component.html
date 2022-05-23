@@ -7,14 +7,14 @@
     <mat-card-header>
       <mat-card-title> {{car.carName}}</mat-card-title>
     </mat-card-header>
-    <img mat-card-image src="{{car.carImage}}">
+    <img mat-card-image src="{{car.carImage}}"class=".img-responsive" width="304" height="236">
     <mat-card-content>
       <p>
           {{car.carMileage}}
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>DELETE</button>
+      <button mat-button (click)="onDelete(car)">DELETE</button>
       <button mat-button>EDIT</button>
     </mat-card-actions>
   </mat-card>
