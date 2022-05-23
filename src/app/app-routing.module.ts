@@ -1,3 +1,6 @@
+import { UserViewRequestComponent } from './user/user-view-request/user-view-request.component';
+import { ViewHistoryComponent } from './user/view-history/view-history.component';
+import { UserViewProfileComponent } from './user/user-view-profile/user-view-profile.component';
 import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
 import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
 import { AdminAddComponent } from './admin/admin-add/admin-add.component';
@@ -36,6 +39,7 @@ const routes: Routes = [
     component: UserDashboardComponent,
     ...canActivate(redirecToLogin),
   },
+  
   {
     path: 'admin-add',
     component: AdminAddComponent,
@@ -54,7 +58,18 @@ const routes: Routes = [
     component: AdminDashboardComponent,
     //...canActivate(redirecToAdmin),
   },
-
+  {
+    path: 'user-profile',
+    component: UserViewProfileComponent,
+  },
+  {
+    path: 'user-history',
+    component: ViewHistoryComponent,
+  },
+  {
+    path: 'user-request',
+    component: UserViewRequestComponent,
+  },
 
 ];
 

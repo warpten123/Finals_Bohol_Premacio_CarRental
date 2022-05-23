@@ -22,10 +22,20 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { AdminAddComponent } from './admin/admin-add/admin-add.component';
 import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
 import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
+import { ViewHistoryComponent } from './user/view-history/view-history.component';
+import { UserViewRequestComponent } from './user/user-view-request/user-view-request.component';
+import { UserViewProfileComponent } from './user/user-view-profile/user-view-profile.component';
+import { MatCardModule} from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
+
+//
+//
 
 @NgModule({
   declarations: [
@@ -37,7 +47,12 @@ import { AdminRentedComponent } from './admin/admin-rented/admin-rented.componen
     AdminNavbarComponent,
     AdminAddComponent,
     AdminAvailableComponent,
-    AdminRentedComponent
+    AdminRentedComponent,
+    ViewHistoryComponent,
+    UserViewRequestComponent,
+    UserViewProfileComponent,
+    UserNavbarComponent,
+    
   ],
   imports: [
     HttpClientModule,
@@ -56,6 +71,9 @@ import { AdminRentedComponent } from './admin/admin-rented/admin-rented.componen
     HotToastModule.forRoot(),
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    FlexLayoutModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]

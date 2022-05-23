@@ -1,25 +1,31 @@
-<div *ngIf="cars.length > 0;else noCars" class="container"></div>
-<table class="content-table">
-    <thead>
-      <tr>
-        <th>Car Name</th>
-        <th>Car Mileage</th>
-        <th>Car Color</th>
-        <th>Car Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of cars">
-        <td>{{car.carName}}</td>
-        <td>{{car.carMileage}}</td>
-        <td>{{car.carColor}}</td>
-        <td>{{car.carRentPrice}}</td>
-      </tr>
-     
-    </tbody>
-  </table>
 
-<!-- <ng-container *ngIf="authService.currentUser$ | async as user"></ng-container> -->
+
+<div *ngIf="cars.length > 0;else noCars" class="container"></div>
+<!--START CARD-->
+<app-user-navbar></app-user-navbar>
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let car of cars">
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title> {{car.carName}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="../../../assets/right.jpg">
+      <mat-card-content>
+        <p>
+            {{car.carMileage}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>RESERVE CAR</button>
+        <button mat-button>VIEW</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  </div>
+  </div>
+<!--END CARD-->
+
 <button (click)="logout()">Log out!</button>
 <ng-template #noCars>
     <hr>
