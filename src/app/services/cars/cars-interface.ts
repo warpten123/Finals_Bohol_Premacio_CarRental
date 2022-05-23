@@ -5,8 +5,8 @@ export interface CarsInterface{
     carRentPrice: number;
     carMileage: number;
     carStatus: boolean;
-    carImage: string;
-    location: {
+    carImage?: string;
+    location?: {
         city: string;
         street: string;
         zipcode: string;

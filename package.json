@@ -23,6 +23,7 @@
     "@angular/router": "~13.3.0",
     "@ngneat/hot-toast": "^4.1.0",
     "@ngneat/overview": "^3.0.4",
+    "angular-font-awesome": "^3.1.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "materialize-css": "^1.0.0",
