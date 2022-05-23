@@ -9,8 +9,6 @@ export interface CarsInterface{
     carLocation?: {
         city: string;
         street: string;
-        zipcode: string;
-        country: string;
     }
     //need to add more
 }

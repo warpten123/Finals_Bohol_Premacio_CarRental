@@ -1,5 +1,28 @@
-<p *ngIf="user$ | async as user">Welcome {{user.email}}</p>
+<div *ngIf="cars.length > 0;else noCars" class="container"></div>
+<table class="content-table">
+    <thead>
+      <tr>
+        <th>Car Name</th>
+        <th>Car Mileage</th>
+        <th>Car Color</th>
+        <th>Car Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{car.carName}}</td>
+        <td>{{car.carMileage}}</td>
+        <td>{{car.carColor}}</td>
+        <td>{{car.carRentPrice}}</td>
+      </tr>
+     
+    </tbody>
+  </table>
 
-
-<ng-container *ngIf="authService.currentUser$ | async as user"></ng-container>
+<!-- <ng-container *ngIf="authService.currentUser$ | async as user"></ng-container> -->
 <button (click)="logout()">Log out!</button>
+<ng-template #noCars>
+    <hr>
+    <h5>There are no cars listed!</h5>
+    
+</ng-template>

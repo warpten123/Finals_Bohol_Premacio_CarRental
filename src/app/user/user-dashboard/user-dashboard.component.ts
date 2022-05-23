@@ -1,6 +1,9 @@
+import { CarsInterface } from './../../services/cars/cars-interface';
+import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CarsService } from 'src/app/services/cars/cars.service';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -8,10 +11,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
-  user$ = this.authService.currentUser$;
-  constructor(public authService: AuthenticationService, private router: Router) { }
+  // user$ = this.authService.currentUser$;
+  cars!: CarsInterface[];
+  constructor(private router: Router, 
+    private crud: CarsService,
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    ) { }
+  
 
   ngOnInit(): void {
+    this.crud.getCars().subscribe((val) => {
+      this.cars = val;
+      console.log(this.cars);
+    });
   }
 logout(){
   this.authService.logout().subscribe(()=>{

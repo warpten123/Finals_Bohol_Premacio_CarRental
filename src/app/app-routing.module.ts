@@ -6,10 +6,7 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultLayoutComponent } from './layout/default-layout/default-layout.component';
-import { HomeComponent } from './screens/home/home.component';
 import { LoginComponent } from './screens/login/login.component';
-import { RegisterComponent } from './screens/register/register.component';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo, AuthGuard} from '@angular/fire/auth-guard';
 
 const redirecToLogin = () => redirectUnauthorizedTo(['login']);
@@ -33,10 +30,7 @@ const routes: Routes = [
     //...canActivate(redirecToLogin)
     
   },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
+ 
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
