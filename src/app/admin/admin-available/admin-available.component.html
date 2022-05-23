@@ -1,0 +1,30 @@
+<app-admin-navbar></app-admin-navbar>
+<div *ngIf="cars.length > 0;else noCars" class="container">
+    <table class="content-table">
+        <thead>
+          <tr>
+            <th>Car Name</th>
+            <th>Car Color</th>
+            <th>Car Mileage</th>
+            <th>Car Price</th>
+            <th>Car Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{car.carName}}</td>
+            <td>{{car.carColor}}</td>
+            <td>{{car.carMileage}} km</td>
+            <td>₱{{car.carRentPrice}}.00</td>
+            <td>{{car.carStatus}}</td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
+
+<ng-template #noCars>
+    <hr>
+    <h5>There are no cars registered!</h5>
+    
+</ng-template>

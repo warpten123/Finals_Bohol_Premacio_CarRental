@@ -37,24 +37,25 @@ export class AdminServicesService {
   getOneAdmin(id: string) {
     return this.adminCollection.doc(id).get();
   }
-  searchAdmin(adminKey: string){
-    this.adminData = this.afs.collection("admin", ref => ref.where('adminKey','==',adminKey)).valueChanges();
-    this.adminData.subscribe((admins: Observable<AdminInterface[]>[]) => {
-    this.admins = admins[0]
-      if(this.admins == undefined){
-        this.adminFound = false;
-        alert('Admin not Found!');
-      }
-      else{
-        this.adminFound = true;
-        alert('Welcome Administrator!');
-      }
+  // searchAdmin(adminKey: string){
+  //   this.adminData = this.afs.collection("admin", ref => ref.where('adminKey','==',adminKey)).valueChanges();
+  //   this.adminData.subscribe((admins: Observable<AdminInterface[]>[]) => {
+  //   this.admins = admins[0]
+  //     if(this.admins == undefined){
+  //       this.adminFound = false;
+  //       alert('Admin not Found!');
+  //     }
+  //     else{
+  //       this.adminFound = true;
+  //       alert('Welcome Administrator!');
+  //     }
         
 
 
-    })
-   return this.adminFound;
+  //   })
+  //  return this.adminFound;
  
-  }
+  // }
+  
  
 }

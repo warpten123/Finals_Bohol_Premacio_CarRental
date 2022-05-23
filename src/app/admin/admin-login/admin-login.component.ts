@@ -2,8 +2,9 @@ import { Router } from '@angular/router';
 import { AdminServicesService } from './../../services/admin/admin-services.service';
 import { AdminInterface } from './../../services/admin/admin-interface';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { HotToastService } from '@ngneat/hot-toast';
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -11,16 +12,40 @@ import { FormBuilder } from '@angular/forms';
 })
 export class AdminLoginComponent implements OnInit {
   isAdmin!: boolean;
-  constructor(private fb: FormBuilder, private crud: AdminServicesService,private router: Router) { }
+  constructor(private fb: FormBuilder, 
+    private crud: AdminServicesService,
+    private router: Router,
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    ) { }
 
   ngOnInit(): void {
   }
-  onSubmitAdmin(adminKey: string){
-    this.crud.searchAdmin(adminKey);
-    this.router.navigate(['/admin-dashboard']);
+  adminLoginForm: FormGroup = new FormGroup({
+    $key: new FormControl(['']),
+    adminEmail: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    adminPass: new FormControl('', [
+      Validators.required,
+    ]),
+    // fcPassword2: new FormControl('', Validators.required),
+  });
+  onSubmitAdmin(){
+    if (!this.adminLoginForm.valid) {
+      this.toast.error("Please fill up all fields");
+      return;
+    }
+    this.authService.login(this.adminLoginForm.value.adminEmail,this.adminLoginForm.value.adminPass).pipe(
+      this.toast.observe({
+        success: 'Welcome Admin',
+        loading: 'Checking...',
+        error: 'There was a problem with your login'
+      })
+    ).subscribe(() => {
+      this.router.navigate(['/admin-dashboard']);
+    });
   }
-  validateClickAdmin(){
-    console.log('click admin');
-     this.isAdmin = true;
-   }
+  
 }

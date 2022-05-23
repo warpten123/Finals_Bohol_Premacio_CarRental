@@ -1,6 +1,10 @@
+import { HotToastService } from '@ngneat/hot-toast';
+import { UsersInterface } from './../../services/users/user-interface';
 import { UsersService } from './../../services/users/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -8,18 +12,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  users$: any[]  = [];
-  constructor(private router: Router, private crud: UsersService) { }
+  users!: UsersInterface[];
+  constructor(private router: Router, 
+    private crud: UsersService,
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    ) { }
 
   ngOnInit(): void {
     this.crud.getUsers().subscribe((val) => {
-      this.users$ = val;
-      console.log(this.users$);
+      this.users = val;
+      console.log(this.users);
     });
   }
-  onSubmit(){
 
-  }
   
   
 }

@@ -1,3 +1,6 @@
+import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
+import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
+import { AdminAddComponent } from './admin/admin-add/admin-add.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
@@ -39,6 +42,19 @@ const routes: Routes = [
     component: UserDashboardComponent,
     ...canActivate(redirecToLogin),
   },
+  {
+    path: 'admin-add',
+    component: AdminAddComponent,
+  },
+  {
+    path: 'admin-available',
+    component: AdminAvailableComponent,
+  },
+  {
+    path: 'admin-rented',
+    component: AdminRentedComponent,
+  },
+  
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,

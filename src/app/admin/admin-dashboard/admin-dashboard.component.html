@@ -1,1 +1,28 @@
-<p>Admin Dashboard!</p>
+<app-admin-navbar></app-admin-navbar>
+<div *ngIf="users.length > 0;else noUsers" class="container">
+    <table class="content-table">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>User Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.$key}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
+
+<ng-template #noUsers>
+    <hr>
+    <h5>There are no users registered!</h5>
+    
+</ng-template>

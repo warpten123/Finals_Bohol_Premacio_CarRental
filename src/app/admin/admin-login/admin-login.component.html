@@ -18,30 +18,30 @@
                     </div>
                 </div>
                 <div class="back">
-                    <img class="backImg" src="assets/left.jpeg" alt="">
+                    <img class="backImg" src="assets/check.jpeg" alt="">
                     <div class="text">
                         <!-- <span class="text-1">Join us now!</span>
                         <span class="text-2">Yea right!</span> -->
                     </div>
                 </div>
             </div>
-            <form action = "#">
+            <form class="inputs" [formGroup]="adminLoginForm" (ngSubmit)="onSubmitAdmin()">
                <div class="form-content">
                 <div class="admin-form">
                     <div class="title">Admin Login</div>
                     <div class="input-boxes">
                         <div class="input-box">
                             <i class="fa fa-key"></i>
-                            <input type="text" #adminKey placeholder="Key" required>
+                            <input type="text" id="adminEmail" placeholder="Key" formControlName="adminEmail"required>
                         </div>
                         <div class="input-box">
                             <i class="fa fa-lock"></i>
-                            <input type="password" #adminPasword placeholder="Password" required>
+                            <input type="password" id="adminPasword" placeholder="Password" formControlName="adminPass" required>
                         </div>
                         
                         <div class="button input-box">
                         
-                            <input type="submit" value="Let's Go!" click="validateClickAdmin()" (click)="onSubmitAdmin(adminKey.value)">
+                            <input type="submit" value="Let's Go!">
                         </div>
                         <div class="text sign-up-text">Why Am I Here? <a routerLink="/login">Take me back!</a></div>
                     </div>

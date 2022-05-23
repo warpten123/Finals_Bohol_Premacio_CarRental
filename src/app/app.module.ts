@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -27,7 +26,12 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-
+import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { AdminAddComponent } from './admin/admin-add/admin-add.component';
+import { AdminAvailableComponent } from './admin/admin-available/admin-available.component';
+import { AdminRentedComponent } from './admin/admin-rented/admin-rented.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     UserComponent,
     AdminLoginComponent,
     UserDashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AdminNavbarComponent,
+    AdminAddComponent,
+    AdminAvailableComponent,
+    AdminRentedComponent
   ],
   imports: [
     HttpClientModule,
@@ -57,7 +65,9 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
+    BrowserAnimationsModule,
+    MatToolbarModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]
