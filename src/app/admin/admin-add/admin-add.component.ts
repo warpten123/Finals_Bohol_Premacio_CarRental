@@ -78,7 +78,7 @@ export class AdminAddComponent implements OnInit {
       carRentPrice: this.adminAddForm.value.carPrice,
       carMileage: this.adminAddForm.value.carMileage,
       carStatus: true,
-      carImage: this.adminAddForm.value.carImage,
+      carImage: this.url,
       carLocation: {
         city: this.adminAddForm.value.carCity,
         street: this.adminAddForm.value.carStreet,

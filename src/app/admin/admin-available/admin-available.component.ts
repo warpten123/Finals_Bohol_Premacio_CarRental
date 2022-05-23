@@ -18,6 +18,7 @@ export class AdminAvailableComponent implements OnInit {
     ) { 
       this.crud.getCars().subscribe((val)=>{
         this.cars = val;
+        console.log(this.cars);
       })
 
     }
