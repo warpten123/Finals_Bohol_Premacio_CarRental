@@ -77,11 +77,11 @@ onSubmitUpdate(key: string){
   }
   if(!this.updateUserForm.valid && this.isWallet == true){
     this.toast.success("Wallet Updated!");
-    this.curr_User.money = this.updateUserForm.value.updateMoney;
+    this.curr_User.money = this.curr_User.money + this.updateUserForm.value.updateMoney;
     this.crudUser.modifyUsers(key,this.curr_User);
     return;
   }
-  this.afs.delete();
+ 
   const payload: UsersInterface = {
     $key: '',
     name: this.updateUserForm.value.updateUsername,
@@ -90,7 +90,7 @@ onSubmitUpdate(key: string){
     password: this.updateUserForm.value.updatePassword,
     money: this.curr_User.money,
   };
-
+  this.afs.delete();
   this.afs.register(payload.email,payload.password).pipe(
     this.toast.observe({
       success: 'Update Successfully!',
