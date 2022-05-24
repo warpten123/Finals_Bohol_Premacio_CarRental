@@ -1,2 +1,36 @@
 <app-user-navbar></app-user-navbar>
-<p>user-view-request works!</p>
+<div *ngIf="rentals.length > 0;else noRequests" class="container"></div>
+<!--START CARD-->
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="25px grid">
+        <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let user of curr_User">
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title><mat-icon> directions_car</mat-icon> {{user.name}}</mat-card-title>
+      </mat-card-header>
+      <!-- <img mat-card-image src="{{car.carImage}}"class=".img-responsive" width="304" height="236"> -->
+      <mat-card-content class="mat-typography">
+        <p>
+            <mat-icon> location_on</mat-icon>
+            {{user.name}}
+        </p>
+        <p>
+            <mat-icon> location_on</mat-icon>
+            Price: {{user.money}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions *ngFor="let rents of rentals">
+        <button mat-button><mat-icon>add_circle</mat-icon>{{rents.requestStatus}}</button>
+        <button mat-button><mat-icon>open_with</mat-icon>Cancel Rental</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  </div>
+  </div>
+
+
+  <ng-template #noRequests>
+    <hr>
+    <h5>There are no requests listed!</h5>
+    
+</ng-template>

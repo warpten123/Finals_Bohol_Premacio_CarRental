@@ -1,5 +1,6 @@
+import { UserViewRequestComponent } from './../user-view-request/user-view-request.component';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -15,14 +16,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-view-profile.component.css']
 })
 export class UserViewProfileComponent implements OnInit {
+  
   isWallet: boolean = false;
   user$: any;
-  cars!: CarsInterface[];
-  temp_User!: UsersInterface[];
+  cars: CarsInterface[]=[];
+  temp_User: UsersInterface[]=[];
   curr_User!: UsersInterface;
   email!: string;
   count: number = 0;
   found: boolean = false;
+  
+
+  
   constructor(
     private afs: AuthenticationService,
     private crudCar: CarsService,
@@ -30,7 +35,7 @@ export class UserViewProfileComponent implements OnInit {
     private toast: HotToastService,
     private router: Router,
   ) { }
-
+  
   ngOnInit(): void {
     this.afs.currentUser$.subscribe((user: any)=>{
       this.user$ = user;
@@ -41,7 +46,6 @@ export class UserViewProfileComponent implements OnInit {
     while(!this.found){
       if(this.temp_User[this.count].email == this.email){
         this.curr_User = this.temp_User[this.count];
-        console.log(this.curr_User);
         this.found = true;
         }else
           this.count++;

@@ -55,8 +55,11 @@ export class UsersService {
   removeUsers(userId: string) {
     this.usersCollection.doc(userId).delete();
   }
-  getOneUsers(id: string) {
-    return this.usersCollection.doc(id).get();
+  getOneUsers(email: string){
+    this.userData = this.afs.collection("users", ref => ref.where('email','==',email)).valueChanges();
+    this.userData.subscribe((userss: Observable<UsersInterface[]>[]) => {
+    return this.users = userss[0];
+    })
   }
 
   // searchUser(email: string){

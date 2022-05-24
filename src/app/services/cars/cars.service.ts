@@ -19,8 +19,7 @@ export class CarsService {
   search!: Observable<CarsInterface[]>;
   carData: any;
   image!: any;
-  constructor(private afs: AngularFirestore, 
-    private afAuth: AngularFireAuth) {
+  constructor(private afs: AngularFirestore) {
     this.carsCollection = this.afs.collection<CarsInterface>('cars'); // name sa collection
     //this.users = this.usersCollection.valueChanges();
     this.cars = this.carsCollection.snapshotChanges().pipe(//basically just to get the id from collection katong random ass numbers
