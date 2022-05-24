@@ -1,0 +1,22 @@
+mat-toolbar {
+    justify-content: space-between;
+  }
+  
+  .content {
+    padding: 16px;
+    
+  }
+  
+  .content > mat-card {
+    /* margin-bottom: 16px; */
+    display: inline;
+  }
+  
+  .column-label {
+    margin-right: 8px;
+    font-size: 1rem;
+  }
+
+  .image{
+      object-fit: contain;
+  }

@@ -1,2 +1,83 @@
 <app-user-navbar></app-user-navbar>
-<p>user-view-profile works!</p>
+
+<html lang = "en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title> PreBol Car Rental! </title>
+        <link rel = "stylesheet" href = "./user-view-profile.component.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <div class="container">
+                <input type="checkbox" id="flip">
+            <div class="cover">
+                <div class="front">
+                    <img src="assets/open.jpg" alt="">
+                    <div class="text">
+                        <span class="text-1">Welcome {{curr_User.name}}!</span>
+                        <span class="text-2">It's a good day to rent a car isn't?</span>
+                    </div>
+                </div>
+                <div class="back">
+                    <img class="backImg" src="assets/open.jpg" alt="">
+                    <div class="text">
+                     
+                    </div>
+                </div>
+            </div>
+            <form class="inputs" [formGroup]="updateUserForm">
+                <div class="form-content">
+                 <div class="admin-form">
+                     <div class="title">Your Information</div>
+                     <div class="input-boxes">
+                         <div class="input-box">
+                             <i class="fa fa-envelope"></i>
+                             <input type="text" placeholder="{{curr_User.email}}"disabled="disabled">
+                         </div>
+                         <div class="input-box">
+                             <i class="fa fa-money"></i>
+                             <input type="number" placeholder="₱ {{curr_User.money}}.00"formControlName="updateMoney" >
+                         </div>
+                         
+                         <div class="button input-box">
+                         
+                             <input type="submit" value="Add Money" (click)="validateMoney()" (click)="onSubmitUpdate(curr_User.$key)">
+                         </div>
+                         <div class="text sign-up-text">I want to update my information <label for="flip">Update!</label></div>
+                     </div>
+                 </div>
+                 
+    
+                    <div class="signup-form">
+                        <div class="title">Update Information</div>
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fa fa-user"></i>
+                                <input type="text" id= "updateUsername" formControlName="updateUsername" placeholder="{{curr_User.name}}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fa fa-user"></i>
+                                <input type="age"  id= "updateAge" formControlName="updateAge" placeholder="{{curr_User.age}}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fa fa-envelope"></i>
+                                <input type="text"   id= "updateEmail" formControlName="updateEmail" placeholder="{{curr_User.email}}" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fa fa-lock"></i>
+                                <input type="password"  id= "updatePassword" formControlName="updatePassword" placeholder="{{curr_User.password}}" required>
+                            </div>
+                           
+                            <div class="button input-box">
+                              
+                                <input type="submit" value="Update" (click)="onSubmitUpdate(curr_User.$key)">
+                            </div>
+                            <div class="text sign-up-text">Your information is safe with us<label for ="flip">Take me back!</label></div>
+                        </div>
+                    </div>
+                   </div>
+                </form>
+            </div>
+        </body>
+

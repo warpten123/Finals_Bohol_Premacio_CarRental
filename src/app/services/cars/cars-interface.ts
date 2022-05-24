@@ -8,7 +8,7 @@ export interface CarsInterface{
     carImage: string;
     carLocation?: {
         city: string;
-        street: string;
+        barangay: string;
     }
     //need to add more
 }

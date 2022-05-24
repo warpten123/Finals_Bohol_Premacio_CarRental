@@ -1,28 +1,32 @@
 <app-admin-navbar></app-admin-navbar>
-<div *ngIf="cars.length > 0;else noCars" class="container">
-    <table class="content-table">
-        <thead>
-          <tr>
-            <th>Car Name</th>
-            <th>Car Color</th>
-            <th>Car Mileage</th>
-            <th>Car Price</th>
-            <th>Car Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let car of cars">
-            <td>{{car.carName}}</td>
-            <td>{{car.carColor}}</td>
-            <td>{{car.carMileage}} km</td>
-            <td>₱{{car.carRentPrice}}.00</td>
-            <td>{{car.carStatus}}</td>
-          </tr>
-         
-        </tbody>
-      </table>
+<div *ngIf="cars.length > 0;else noCars" class="container"></div>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let car of cars">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title><mat-icon> directions_car</mat-icon> {{car.carName}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{car.carImage}}"class=".img-responsive" width="304" height="236">
+    <mat-card-content >
+      <p>
+          {{car.carMileage}} km
+      </p>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+        
+        ₱{{car.carRentPrice}}.00
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="onDelete(car)"><mat-icon>delete</mat-icon>DELETE</button>
+      <button mat-button><mat-icon>edit</mat-icon>EDIT</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
-
+</div>
+</div>
 <ng-template #noCars>
     <hr>
     <h5>There are no cars registered!</h5>

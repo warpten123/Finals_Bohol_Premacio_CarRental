@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         error: (message) => `${message}`
       })
     ).subscribe(()=>{
-      this.nav('login');
+      this.nav('/login');
     });
        const payload: UsersInterface = {
         $key: '',

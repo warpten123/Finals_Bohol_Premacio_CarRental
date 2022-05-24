@@ -18,11 +18,15 @@ export class AdminAvailableComponent implements OnInit {
     ) { 
       this.crud.getCars().subscribe((val)=>{
         this.cars = val;
+        
       })
 
     }
-
   ngOnInit(): void {
+  }
+  onDelete(carCheck: CarsInterface){
+    this.crud.removeCars(carCheck.$carKey);
+    this.toast.success(carCheck.carName + " deleted successfully!");
   }
 
 }
