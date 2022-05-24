@@ -9,6 +9,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +18,7 @@ export class CarsService {
   cars!: Observable<CarsInterface[]>;
   search!: Observable<CarsInterface[]>;
   carData: any;
+  image!: any;
   constructor(private afs: AngularFirestore, 
     private afAuth: AngularFireAuth) {
     this.carsCollection = this.afs.collection<CarsInterface>('cars'); // name sa collection
@@ -44,6 +46,21 @@ export class CarsService {
   removeCars(carId: string) {//delete a single document in the cars collection
     this.carsCollection.doc(carId).delete();
   }
+  editCarForm: FormGroup = new FormGroup({
+    $carKey: new FormControl('', Validators.required),
+    carName: new FormControl('', Validators.required),
+    carColor: new FormControl('', Validators.required),
+    carRentPrice: new FormControl('', Validators.required),
+    carMileage: new FormControl('', Validators.required),
+    carImage: new FormControl(this.image),
+    city: new FormControl('', Validators.required),
+    barangay: new FormControl('', Validators.required),
+    
+  });
 
+  populateForm(car: CarsInterface){
+    this.editCarForm.patchValue(car);
+  }
+ 
 
 }
