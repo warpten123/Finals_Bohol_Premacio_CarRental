@@ -71,6 +71,7 @@ export class AdminAddComponent implements OnInit {
       this.toast.error("Please Complete All Fields!");
       return;
     }
+    console.log(this.url+"kk");
     const payload: CarsInterface = {
       $carKey: '',
       carName: this.adminAddForm.value.carName,

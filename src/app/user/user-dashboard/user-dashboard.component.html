@@ -1,3 +1,4 @@
+<div *ngIf="cars.length > 0;else noCars" class="container">
 
 
 <div *ngIf="cars.length > 0;else noCars" class="container"></div>
@@ -32,5 +33,5 @@
 <ng-template #noCars>
     <hr>
     <h5>There are no cars listed!</h5>
-    
+
 </ng-template>
