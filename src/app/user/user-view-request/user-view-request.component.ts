@@ -1,3 +1,4 @@
+import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { RequestRental } from './../../services/request-rental/request-rental-interface';
@@ -17,10 +18,10 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 export class UserViewRequestComponent implements OnInit {
   
   constructor(
-    private afs: AuthenticationService,
     private crudUser: UsersService,
     private crudRents: RequestRentalService,
     private crudCar: CarsService,
+    private toast: HotToastService,
     ) { }
   userData!: any;
   user$: any;
@@ -28,6 +29,7 @@ export class UserViewRequestComponent implements OnInit {
   temp_User: UsersInterface[] = [];
   temp_Cars: CarsInterface[] = [];
   curr_Cars: CarsInterface[] = [];
+  final_Cars: CarsInterface[]=[];
   curr_User!: UsersInterface;
   count: number = 0;
   found: boolean = false;
@@ -49,25 +51,41 @@ export class UserViewRequestComponent implements OnInit {
       }
       })
       this.found = false;
-      //this.getCars(this.found,this.count);
+        this.crudCar.getCars().subscribe((cars: CarsInterface[])=>{
+          this.temp_Cars = cars; 
+          for(let i = 0; i < this.rentals.length; i++){
+            for(let j = 0; j < this.temp_Cars.length; j++){
+              if(this.rentals[i].carKey == this.temp_Cars[j].$carKey){
+                this.curr_Cars[i] = this.temp_Cars[j];
+                break;
+              }
+            }
+          }
+          this.final_Cars = this.curr_Cars
+          console.log(this.final_Cars);
+        })
+        
+      
 
 
     //  console.log(this.rentals);
   }//end ngoninit
   
-  getCars(found: boolean, count: number){
+  onDelete(rents: RequestRental){
     
-    this.crudCar.getCars().subscribe((cars: CarsInterface[])=>{
-      count = 0;
-      this.temp_Cars = cars; 
-        if(this.temp_Cars[count].$carKey == this.rentals[count].carKey){
-          this.curr_Cars[count] = this.temp_Cars[count];
-          found = true;
-          count = 0;
-        }else
-          count++;
-        
-    })
+    this.rentals.forEach((element,index) => {
+      if(element.$key == rents.$key){
+        this.rentals.splice(index,1);
+      }
+    });
+    this.final_Cars.forEach((element,index) => {
+      if(element.$carKey == rents.carKey){
+        this.final_Cars.splice(index,1);
+      }
+    });
+    this.crudRents.deleteRequest(rents.$key);
+    console.log(rents);
+    this.toast.success(rents.$key + " cancelled successfully!");
   }
 
 }

@@ -1,14 +1,39 @@
 <app-user-navbar></app-user-navbar>
 <div *ngIf="rentals.length > 0;else noRequests" class="container"></div>
 <!--START CARD-->
-<div *ngFor="let rents of rentals">
-  <p>Rental ID: {{rents.$key}}</p>
-  <p>Rented By: {{curr_User.name}}</p>
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let rents of rentals; let i = index">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title><mat-icon> directions_car</mat-icon> {{final_Cars[i].carName}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{final_Cars[i].carImage}}"class=".img-responsive" width="304" height="236">
+    <mat-card-content>
+      <p>
+          Rented by: {{curr_User.name}} 
+      </p>
+      <p>
+        Rental ID: {{rents.$key}} 
+      </p>
+      <p>
+        Rental Date: {{rents.requestDate}} 
+      </p>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+        
+        ₱{{final_Cars[i].carRentPrice}}.00
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button><mat-icon>delete</mat-icon>{{rents.requestStatus}}</button>
+      <button mat-button (click)="onDelete(rents)"><mat-icon>edit</mat-icon>Cancel Request</button>
+    </mat-card-actions>
+  </mat-card>
 </div>
-<div>
-  <p>Car ID: </p>
 </div>
-
+</div>
   <ng-template #noRequests>
     <hr>
     <h5>There are no requests listed!</h5>
