@@ -1,6 +1,6 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { where } from 'firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CarsInterface } from './cars-interface';
 import { Injectable } from '@angular/core';
 import {
@@ -19,6 +19,18 @@ export class CarsService {
   search!: Observable<CarsInterface[]>;
   carData: any;
   image!: any;
+  //PASS CAR DATA
+  passCarsValues$: Subject<CarsInterface> = new Subject();
+  get passCarsValues(): Subject<CarsInterface>{
+    return this.passCarsValues$;
+  }
+  set passCarsValues(src: Subject<CarsInterface>){
+    this.passCarsValues$ = src;
+  }
+  getPassCarValue(car: CarsInterface){
+    this.passCarsValues$.next(car);
+  }
+  //END PASS CAR DATA
   constructor(private afs: AngularFirestore) {
     this.carsCollection = this.afs.collection<CarsInterface>('cars'); // name sa collection
     //this.users = this.usersCollection.valueChanges();
@@ -60,6 +72,8 @@ export class CarsService {
   populateForm(car: CarsInterface){
     this.editCarForm.patchValue(car);
   }
+
+  
  
 
 }

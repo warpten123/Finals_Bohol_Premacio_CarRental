@@ -4,12 +4,13 @@ mat-toolbar {
 
 .content {
   padding: 16px;
+  text-align: center;
+  font-size: 50px;
   
 }
 
 .content > mat-card {
   margin-bottom: 16px;
-  font-size: 50%;
 }
 
 .column-label {
@@ -24,7 +25,7 @@ mat-toolbar {
 }
 .mat-typography{
   display: inline-block;
-  font-size: 15px;
+  font-size: 18px;
 }
 .mat-button{
   padding: 5%;

@@ -1,0 +1,33 @@
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="10px">
+        <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="33%">
+    <mat-card class="mat-elevation-z4">
+      <mat-card-header>
+        <mat-card-title><mat-icon> directions_car</mat-icon> {{cars.carName}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{cars.carImage}}"class=".img-responsive" width="304" height="236">
+      <mat-card-content class="mat-typography">
+        <p>
+            <mat-icon> location_on</mat-icon>
+            {{cars.carLocation?.barangay}}, {{cars.carLocation?.city}}  
+            &nbsp;&nbsp;
+            <mat-icon> money</mat-icon>
+            ₱{{cars.carRentPrice}}.00
+        </p>
+        <p>
+          <mat-icon>color_lens</mat-icon>
+            {{cars.carColor}} &nbsp;&nbsp;&nbsp;
+          <mat-icon> directions_run</mat-icon>
+            {{cars.carMileage}} km &nbsp;&nbsp;&nbsp;
+          <mat-icon>event_available</mat-icon>
+            {{cars.carStatus}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button><mat-icon>add_circle</mat-icon>RESERVE CAR</button>
+        <button mat-button (click)="close()"><mat-icon>close</mat-icon>CLOSE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  </div>
+  </div>

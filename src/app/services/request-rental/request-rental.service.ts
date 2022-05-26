@@ -21,8 +21,17 @@ export class RequestRentalService {
   search!: Observable<RequestRental[]>;
   constructor(private afs: AngularFirestore) {
     this.requestCollection = this.afs.collection<RequestRental>('pendingRentals'); // name sa collection
+    this.requests = this.requestCollection.snapshotChanges().pipe(
+      map((changes: any[]) =>{
+        return changes.map(a => {
+          const data = a.payload.doc.data() as RequestRental;
+          data.$key = a.payload.doc.id;
+          return data;
+        });
+      }));
   }
-  getRentalRequests() { //get all items in the collection of cars
+  getRentalRequests(){
+    // console.log(this.requests); //get all items in the collection of cars
     return this.requests;
   }
   addRequest(requets: RequestRental) { // to add cars to the collection 'cars'

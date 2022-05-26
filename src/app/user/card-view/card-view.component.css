@@ -1,0 +1,23 @@
+mat-toolbar {
+    justify-content: space-between;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .content > mat-card {
+    margin-bottom: 16px;
+    font-size: 50%;
+    padding: 20px;
+    
+  }
+  .mat-typography{
+    
+    font-size: 20px;
+  }
+  .mat-button{
+    padding: 5%;
+    
+  }
+  

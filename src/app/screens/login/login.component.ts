@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     if (!this.registerForm.valid) {
+      this.toast.error("Invalid Registration");
       return;
     }
     this.authService.register(this.registerForm.value.email,this.registerForm.value.password).pipe(
@@ -92,6 +93,7 @@ export class LoginComponent implements OnInit {
   } //end register
   onSubmitLogin() {
     if (!this.loginForm.valid) {
+      this.toast.error("Invalid Login");
       return;
     }
       const {email, password} = this.loginForm.value;

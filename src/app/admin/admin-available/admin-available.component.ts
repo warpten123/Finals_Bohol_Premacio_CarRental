@@ -1,5 +1,4 @@
 import { AdminEditComponent } from './../admin-edit/admin-edit.component';
-import { AdminAddComponent } from './../admin-add/admin-add.component';
 import { CarsService } from './../../services/cars/cars.service';
 import { CarsInterface } from './../../services/cars/cars-interface';
 import { Component, OnInit } from '@angular/core';

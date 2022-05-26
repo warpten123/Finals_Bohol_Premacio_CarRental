@@ -1,3 +1,5 @@
+import { CardViewComponent } from './../card-view/card-view.component';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { RequestRental } from './../../services/request-rental/request-rental-interface';
 import { RequestRentalService } from './../../services/request-rental/request-rental.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersInterface } from 'src/app/services/users/user-interface';
+import { AdminEditComponent } from 'src/app/admin/admin-edit/admin-edit.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -18,13 +21,14 @@ export class UserDashboardComponent implements OnInit {
   // user$ = this.authService.currentUser$;
   cars: CarsInterface[]=[];
   check!: CarsInterface;
-
   user$: any;
   temp_User!: UsersInterface[];
   curr_User!: UsersInterface;
   email!: string;
   count: number = 0;
   found: boolean = false;
+  passCarData!: CarsInterface;
+
   
   constructor(private router: Router, 
     private crudCar: CarsService,
@@ -33,7 +37,11 @@ export class UserDashboardComponent implements OnInit {
     private toast: HotToastService,
     private rent: RequestRentalService,
     private crudRental: RequestRentalService,
-    ) { }
+    private dialog: MatDialog,
+    ) {
+      
+
+     }
   
 
   ngOnInit(): void {
@@ -85,4 +93,15 @@ export class UserDashboardComponent implements OnInit {
     this.toast.success("Request Submitted!");
     this.router.navigate(['/user-request']);
   }
+
+  onEdit(cars: CarsInterface){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true
+    dialogConfig.autoFocus = true;
+    dialogConfig.width =  "60%";
+    this.dialog.open(CardViewComponent,dialogConfig);
+    this.crudCar.getPassCarValue(cars);
+    
+  }
+  
 }

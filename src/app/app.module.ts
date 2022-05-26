@@ -36,6 +36,7 @@ import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminEditComponent } from './admin/admin-edit/admin-edit.component';
+import { CardViewComponent } from './user/card-view/card-view.component';
 //
 //
 
@@ -55,6 +56,7 @@ import { AdminEditComponent } from './admin/admin-edit/admin-edit.component';
     UserViewProfileComponent,
     UserNavbarComponent,
     AdminEditComponent,
+    CardViewComponent,
     
   ],
   imports: [
