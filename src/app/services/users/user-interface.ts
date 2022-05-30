@@ -5,5 +5,6 @@ export interface UsersInterface{
     age: number;
     password: string;
     money: number;
+    rentedVehicles: string[];
 
 }

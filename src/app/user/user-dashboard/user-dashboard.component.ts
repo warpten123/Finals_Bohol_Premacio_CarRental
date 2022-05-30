@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersInterface } from 'src/app/services/users/user-interface';
 import { AdminEditComponent } from 'src/app/admin/admin-edit/admin-edit.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -20,7 +21,7 @@ import { AdminEditComponent } from 'src/app/admin/admin-edit/admin-edit.componen
 export class UserDashboardComponent implements OnInit {
   // user$ = this.authService.currentUser$;
   cars: CarsInterface[]=[];
-  check!: CarsInterface;
+  check!: UsersInterface;
   user$: any;
   temp_User!: UsersInterface[];
   curr_User!: UsersInterface;
@@ -28,7 +29,7 @@ export class UserDashboardComponent implements OnInit {
   count: number = 0;
   found: boolean = false;
   passCarData!: CarsInterface;
-
+  passUserData!: Subject<UsersInterface>;
   
   constructor(private router: Router, 
     private crudCar: CarsService,
@@ -39,12 +40,12 @@ export class UserDashboardComponent implements OnInit {
     private crudRental: RequestRentalService,
     private dialog: MatDialog,
     ) {
-      
-
+     
      }
   
 
   ngOnInit(): void {
+    
     this.crudCar.getCars().subscribe((val: CarsInterface[]) => {
       this.cars = val;
     });
@@ -60,22 +61,18 @@ export class UserDashboardComponent implements OnInit {
         this.found = true;
         }else
           this.count++;
-        console.log(this.count)
+        
     }
-     
+     console.log(this.curr_User);
     })
     
   }
-  logout(){
-  this.authService.logout().subscribe(()=>{
-    this.nav('login');
-  })
-  }
+  
   nav(destination: string) {
   this.router.navigate([destination]);
   }
   submitRequest(car: CarsInterface){
-    if( this.curr_User.money< car.carRentPrice){
+    if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
     }
@@ -88,8 +85,10 @@ export class UserDashboardComponent implements OnInit {
       requestDate: current_timestamp,
       requestStatus: "Pending",
     }
-  console.log(payload);
+    this.curr_User.rentedVehicles?.push(payload.carKey);
     this.crudRental.addRequest(payload);
+    this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
+    console.log(this.curr_User);
     this.toast.success("Request Submitted!");
     this.router.navigate(['/user-request']);
   }

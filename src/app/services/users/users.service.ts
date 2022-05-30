@@ -1,27 +1,40 @@
 import { User } from './../../models/user.model';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { where } from 'firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { UsersInterface } from './user-interface';
 import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-  AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
-import { CRUDReturn } from 'src/app/models/crud_return.interface';
 import { map } from 'rxjs/operators';
+
+import { arrayRemove, FieldValue} from 'firebase/firestore';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
+  
   private usersCollection!: AngularFirestoreCollection<UsersInterface>;
   users!: Observable<UsersInterface[]>;
   search!: Observable<UsersInterface[]>;
   userData: any;
   isLoggedIn = false;
   userFound = false;
-
+//START USER PASS DATA
+  passUserValues$: Subject<UsersInterface> = new Subject();
+  get passUserValues(): Subject<UsersInterface>{
+    return this.passUserValues$;
+  }
+  set passUserValues(src: Subject<UsersInterface>){
+    this.passUserValues$ = src;
+  }
+  getPassUserValue(user: UsersInterface){
+    console.log("from service",user);
+    this.passUserValues$.next(user);
+  }
+//END USER PASS DATA
   constructor(private afs: AngularFirestore, 
     private afAuth: AngularFireAuth) {
     this.usersCollection = this.afs.collection<UsersInterface>('users');
@@ -49,12 +62,19 @@ export class UsersService {
     this.usersCollection.doc(userId).update(userChanges);
   }
   updateUsers(user: UsersInterface){
-    this.usersCollection.doc(`users/${user.$key}`).update(user);
+    this.usersCollection.doc(`users/renred`).update(user);
     
   }
   removeUsers(userId: string) {
     this.usersCollection.doc(userId).delete();
   }
+  // removeCarsFromUsers(carKey: string,index: number){
+  //   this.usersCollection.doc().update(
+  //     {
+  //       rentedVehicles: FieldValue.arrayRemove(carKey)
+  //     }
+  //   );
+  // }
   getOneUsers(email: string){
     this.userData = this.afs.collection("users", ref => ref.where('email','==',email)).valueChanges();
     this.userData.subscribe((userss: Observable<UsersInterface[]>[]) => {

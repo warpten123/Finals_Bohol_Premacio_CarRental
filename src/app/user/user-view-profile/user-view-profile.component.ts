@@ -8,7 +8,7 @@ import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { UsersInterface } from 'src/app/services/users/user-interface';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-view-profile',
@@ -19,13 +19,13 @@ export class UserViewProfileComponent implements OnInit {
   
   isWallet: boolean = false;
   user$: any;
-  cars: CarsInterface[]=[];
+  cars!: CarsInterface;
   temp_User: UsersInterface[]=[];
   curr_User!: UsersInterface;
   email!: string;
   count: number = 0;
   found: boolean = false;
-  
+  passUserData!: Subject<UsersInterface>;
 
   
   constructor(
@@ -34,10 +34,17 @@ export class UserViewProfileComponent implements OnInit {
     private crudUser: UsersService,
     private toast: HotToastService,
     private router: Router,
-  ) { }
+  ) { 
+    
+    
+    
+
+  }
   
   ngOnInit(): void {
-    this.afs.currentUser$.subscribe((user: any)=>{
+    
+    
+       this.afs.currentUser$.subscribe((user: any)=>{
       this.user$ = user;
      this.email = this.user$.email;
     })
@@ -49,7 +56,6 @@ export class UserViewProfileComponent implements OnInit {
         this.found = true;
         }else
           this.count++;
-        console.log(this.count)
     }
      
     })
@@ -93,6 +99,7 @@ onSubmitUpdate(key: string){
     age: this.updateUserForm.value.updateAge,
     password: this.updateUserForm.value.updatePassword,
     money: this.curr_User.money,
+    rentedVehicles: this.curr_User.rentedVehicles,
   };
   this.afs.delete();
   this.afs.register(payload.email,payload.password).pipe(
