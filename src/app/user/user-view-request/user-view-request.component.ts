@@ -1,4 +1,3 @@
-
 import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { CarsService } from 'src/app/services/cars/cars.service';
@@ -11,7 +10,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UsersInterface } from './../../services/users/user-interface';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-user-view-request',
   templateUrl: './user-view-request.component.html',
@@ -31,7 +30,7 @@ export class UserViewRequestComponent implements OnInit {
   user$: any;
   email!: string;
 
- 
+  cont: boolean = false;
   temp_User: UsersInterface[] = [];
   curr_User!: UsersInterface;
   final_Users!: UsersInterface;
@@ -52,7 +51,11 @@ export class UserViewRequestComponent implements OnInit {
   ngOnInit(): void {
    this.populateData();
   }//end ngoninit
-   populateData(){ 
+  populateData(){
+    this.rentals.length=0;
+    this.finalRentals.length = 0;
+    this.final_Cars.length = 0;
+
     this.afs.currentUser$.subscribe((user: any)=>{
       this.user$ = user;
      this.email = this.user$.email;
@@ -66,12 +69,12 @@ export class UserViewRequestComponent implements OnInit {
         }else
           this.count++;
     }
-  })
      this.crudRents.getRentalRequests().subscribe((rents: RequestRental[])=>{
       this.rentals = rents;
       for(let i = 0; i < this.rentals.length; i++){
         if(this.rentals[i].userKey == this.curr_User.$key){
           this.finalRentals.push(this.rentals[i]);
+          
         } 
       }
     })
@@ -90,9 +93,13 @@ export class UserViewRequestComponent implements OnInit {
         console.log("FINAL CARS: ",this.final_Cars);
         console.log("FINAL RENTALS: ",this.finalRentals);
       })
-    
-  }//end method populate data
+    })
+  }
   onDelete(rents: RequestRental,index: number){
+    if(!this.checkDateForCancel(rents)){
+      this.toast.error("You can't cancel this rental anymore")
+      return;
+    }
      this.final_Users.rentedVehicles.splice(index,1);
      this.finalRentals.splice(index,1);
      this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
@@ -100,5 +107,13 @@ export class UserViewRequestComponent implements OnInit {
      this.populateData();
      this.toast.success(rents.$key + " cancelled successfully!");
   }
-
+  checkDateForCancel(rent: RequestRental){
+    const currentDay = moment();
+    const rentalDate = moment(rent.requestDate);
+    const diff = rentalDate.diff(currentDay,'days');
+      if(diff > 7)
+        return this.cont = true;
+      else
+        return this.cont = false;
+    }
 }

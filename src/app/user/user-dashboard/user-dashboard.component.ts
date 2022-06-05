@@ -72,7 +72,7 @@ export class UserDashboardComponent implements OnInit {
   nav(destination: string) {
   this.router.navigate([destination]);
   }
-  submitRequest(car: CarsInterface){
+  onView(car: CarsInterface){
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
@@ -80,31 +80,20 @@ export class UserDashboardComponent implements OnInit {
       this.toast.error("You already requested this car!");
       return;
     }
-    console.log(car.carName);
-    var moment = require("moment");
-    var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
-    const payload: RequestRental = {
-      $key: '',
-      userKey: this.curr_User.$key,
-      carKey: car.$carKey,
-      requestDate: current_timestamp,
-      requestStatus: "Pending",
-    }
-    this.curr_User.rentedVehicles?.push(payload.carKey);
-    this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
-    this.crudRental.addRequest(payload);
-    console.log(this.curr_User);
-    this.toast.success("Request Submitted!");
-    this.router.navigate(['/user-request']);
+    this.onEdit(car);
+    // var moment = require("moment");
+    // var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
+   
   }
 
   onEdit(cars: CarsInterface){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true
+    //dialogConfig.disableClose = true
     dialogConfig.autoFocus = true;
     dialogConfig.width =  "60%";
     this.dialog.open(CardViewComponent,dialogConfig);
     this.crudCar.getPassCarValue(cars);
+    this.crudUser.getPassUserValue(this.curr_User);
     
   }
   checkCar(carKey: String){

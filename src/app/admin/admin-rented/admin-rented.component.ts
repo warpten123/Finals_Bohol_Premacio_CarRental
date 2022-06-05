@@ -1,3 +1,4 @@
+import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from './../../services/cars/cars-interface';
 import { UsersInterface } from './../../services/users/user-interface';
 import { RequestRental } from './../../services/request-rental/request-rental-interface';
@@ -21,6 +22,7 @@ export class AdminRentedComponent implements OnInit {
     private crudCars: CarsService,
     private crudRentals: RequestRentalService,
     private crudUsers: UsersService,
+    private toast: HotToastService,
   ) { }
 
   ngOnInit(): void {
@@ -53,10 +55,11 @@ export class AdminRentedComponent implements OnInit {
   rentAccept(rents: RequestRental){
     rents.requestStatus = "Accepted";
     this.crudRentals.editRequest(rents.$key,rents);
-    console.log(rents);
+    this.toast.success("Requet Accepted!");
   }
   rentDeny(rents: RequestRental){
     rents.requestStatus = "Denied";
     this.crudRentals.editRequest(rents.$key,rents);
+    this.toast.info("Requet Denied!");
   }
 }

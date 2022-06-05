@@ -37,6 +37,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminEditComponent } from './admin/admin-edit/admin-edit.component';
 import { CardViewComponent } from './user/card-view/card-view.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 //
 //
 
@@ -81,6 +85,10 @@ import { CardViewComponent } from './user/card-view/card-view.component';
     FlexLayoutModule,
     MatIconModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    FormsModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]
