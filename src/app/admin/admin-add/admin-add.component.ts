@@ -13,8 +13,9 @@ export class AdminAddComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private crud: CarsService,
+    public crud: CarsService,
     private toast: HotToastService,
+    
   ) { }//end constructor
 
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class AdminAddComponent implements OnInit {
     carImage: new FormControl('', Validators.required),
     carBarangay: new FormControl('', Validators.required),
     carCity: new FormControl('', Validators.required),
+    
   });
   
 

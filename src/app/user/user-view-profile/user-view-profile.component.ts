@@ -1,5 +1,6 @@
+import { UserViewRequestComponent } from './../user-view-request/user-view-request.component';
 import { HotToastService } from '@ngneat/hot-toast';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -7,7 +8,7 @@ import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { UsersInterface } from 'src/app/services/users/user-interface';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-view-profile',
@@ -15,24 +16,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-view-profile.component.css']
 })
 export class UserViewProfileComponent implements OnInit {
+  
   isWallet: boolean = false;
   user$: any;
-  cars!: CarsInterface[];
-  temp_User!: UsersInterface[];
+  cars!: CarsInterface;
+  temp_User: UsersInterface[]=[];
   curr_User!: UsersInterface;
   email!: string;
   count: number = 0;
   found: boolean = false;
+  passUserData!: Subject<UsersInterface>;
+
+  
   constructor(
     private afs: AuthenticationService,
     private crudCar: CarsService,
     private crudUser: UsersService,
     private toast: HotToastService,
     private router: Router,
-  ) { }
+  ) { 
+    
+    
+    
 
+  }
+  
   ngOnInit(): void {
-    this.afs.currentUser$.subscribe((user: any)=>{
+    
+    
+       this.afs.currentUser$.subscribe((user: any)=>{
       this.user$ = user;
      this.email = this.user$.email;
     })
@@ -41,11 +53,9 @@ export class UserViewProfileComponent implements OnInit {
     while(!this.found){
       if(this.temp_User[this.count].email == this.email){
         this.curr_User = this.temp_User[this.count];
-        console.log(this.curr_User);
         this.found = true;
         }else
           this.count++;
-        console.log(this.count)
     }
      
     })
@@ -77,11 +87,11 @@ onSubmitUpdate(key: string){
   }
   if(!this.updateUserForm.valid && this.isWallet == true){
     this.toast.success("Wallet Updated!");
-    this.curr_User.money = this.updateUserForm.value.updateMoney;
+    this.curr_User.money = this.curr_User.money + this.updateUserForm.value.updateMoney;
     this.crudUser.modifyUsers(key,this.curr_User);
     return;
   }
-  this.afs.delete();
+ 
   const payload: UsersInterface = {
     $key: '',
     name: this.updateUserForm.value.updateUsername,
@@ -89,8 +99,9 @@ onSubmitUpdate(key: string){
     age: this.updateUserForm.value.updateAge,
     password: this.updateUserForm.value.updatePassword,
     money: this.curr_User.money,
+    rentedVehicles: this.curr_User.rentedVehicles,
   };
-
+  this.afs.delete();
   this.afs.register(payload.email,payload.password).pipe(
     this.toast.observe({
       success: 'Update Successfully!',

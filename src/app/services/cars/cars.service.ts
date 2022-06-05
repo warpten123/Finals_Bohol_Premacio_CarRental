@@ -1,6 +1,6 @@
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { where } from 'firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CarsInterface } from './cars-interface';
 import { Injectable } from '@angular/core';
 import {
@@ -9,6 +9,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +18,20 @@ export class CarsService {
   cars!: Observable<CarsInterface[]>;
   search!: Observable<CarsInterface[]>;
   carData: any;
-  constructor(private afs: AngularFirestore, 
-    private afAuth: AngularFireAuth) {
+  image!: any;
+  //PASS CAR DATA
+  passCarsValues$: Subject<CarsInterface> = new Subject();
+  get passCarsValues(): Subject<CarsInterface>{
+    return this.passCarsValues$;
+  }
+  set passCarsValues(src: Subject<CarsInterface>){
+    this.passCarsValues$ = src;
+  }
+  getPassCarValue(car: CarsInterface){
+    this.passCarsValues$.next(car);
+  }
+  //END PASS CAR DATA
+  constructor(private afs: AngularFirestore) {
     this.carsCollection = this.afs.collection<CarsInterface>('cars'); // name sa collection
     //this.users = this.usersCollection.valueChanges();
     this.cars = this.carsCollection.snapshotChanges().pipe(//basically just to get the id from collection katong random ass numbers
@@ -44,6 +57,23 @@ export class CarsService {
   removeCars(carId: string) {//delete a single document in the cars collection
     this.carsCollection.doc(carId).delete();
   }
+  editCarForm: FormGroup = new FormGroup({
+    $carKey: new FormControl('', Validators.required),
+    carName: new FormControl('', Validators.required),
+    carColor: new FormControl('', Validators.required),
+    carRentPrice: new FormControl('', Validators.required),
+    carMileage: new FormControl('', Validators.required),
+    carImage: new FormControl(this.image),
+    city: new FormControl('', Validators.required),
+    barangay: new FormControl('', Validators.required),
+    
+  });
 
+  populateForm(car: CarsInterface){
+    this.editCarForm.patchValue(car);
+  }
+
+  
+ 
 
 }

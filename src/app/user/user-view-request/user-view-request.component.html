@@ -1,2 +1,41 @@
 <app-user-navbar></app-user-navbar>
-<p>user-view-request works!</p>
+ <div *ngIf="finalRentals.length > 0;else noRequests" class="container"></div>
+
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let cars of final_Cars; let i = index">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title><mat-icon> directions_car</mat-icon> {{cars.carName}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{cars.carImage}}"class=".img-responsive" width="304" height="236">
+    <mat-card-content>
+      <p>
+          Rented by: {{final_Users.name}} 
+      </p>
+      <p>
+        Rental ID: {{finalRentals[i].$key}} 
+      </p>
+      <p>
+        Rental Date: {{finalRentals[i].requestDate}} 
+      </p>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+        
+        ₱{{cars.carRentPrice}}.00
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button><mat-icon>delete</mat-icon>{{finalRentals[i].requestStatus}}</button>
+      <button mat-button (click)="onDelete(finalRentals[i],i)"><mat-icon>edit</mat-icon>Cancel Request</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>
+</div>  
+  <ng-template #noRequests>
+    <hr>
+    <h5>There are no requests listed!</h5>
+    
+</ng-template>

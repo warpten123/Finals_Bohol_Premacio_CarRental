@@ -34,6 +34,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UserNavbarComponent } from './user/user-navbar/user-navbar.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AdminEditComponent } from './admin/admin-edit/admin-edit.component';
+import { CardViewComponent } from './user/card-view/card-view.component';
 //
 //
 
@@ -52,6 +55,8 @@ import {MatIconModule} from '@angular/material/icon';
     UserViewRequestComponent,
     UserViewProfileComponent,
     UserNavbarComponent,
+    AdminEditComponent,
+    CardViewComponent,
     
   ],
   imports: [
@@ -75,6 +80,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     FlexLayoutModule,
     MatIconModule,
+    MatDialogModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
   bootstrap: [AppComponent]

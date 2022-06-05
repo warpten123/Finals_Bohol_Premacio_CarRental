@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UsersService } from './../../services/users/users.service';
 import { UsersInterface } from './../../services/users/user-interface';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
@@ -11,20 +12,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-navbar.component.css']
 })
 export class UserNavbarComponent implements OnInit {
-  cars!: CarsInterface[];
+  
  
   constructor(
-    private afs: AuthenticationService,
-    private crudCar: CarsService,
-    private crudUser: UsersService,
+    private authService: AuthenticationService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.crudCar.getCars().subscribe((val: CarsInterface[]) => {
-      this.cars = val;
-    });
-
+   
   }
   
-
+  logout(){
+    this.authService.logout().subscribe(()=>{
+      this.router.navigate(['/login']);
+    })
+    }
 }

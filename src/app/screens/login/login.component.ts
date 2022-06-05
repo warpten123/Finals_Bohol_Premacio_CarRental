@@ -1,4 +1,4 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { UsersInterface } from '../../services/users/user-interface';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -27,12 +27,19 @@ export class LoginComponent implements OnInit {
   passLogin: any;
   userEmail: any;
   userPass: any;
+  temp_User: UsersInterface[]=[];
+  checkUser!: Subject<UsersInterface>;
+  checkUser2!: UsersInterface;
+  curr_User!: UsersInterface;
+  count: number = 0;
+  found: boolean = false;
   constructor(
     private router: Router,
     private crud: UsersService,
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private toast: HotToastService,
+    private crudUser: UsersService,
     ) { }
   users!: Observable<UsersInterface[]>;
   ngOnInit(): void {
@@ -66,6 +73,7 @@ export class LoginComponent implements OnInit {
 
   onSubmitRegister() {
     if (!this.registerForm.valid) {
+      this.toast.error("Invalid Registration");
       return;
     }
     this.authService.register(this.registerForm.value.email,this.registerForm.value.password).pipe(
@@ -75,7 +83,7 @@ export class LoginComponent implements OnInit {
         error: (message) => `${message}`
       })
     ).subscribe(()=>{
-      this.nav('/login');
+      this.nav('/user-dashboard');
     });
        const payload: UsersInterface = {
         $key: '',
@@ -84,18 +92,17 @@ export class LoginComponent implements OnInit {
         age: this.registerForm.value.age,
         password: this.registerForm.value.password,
         money: 0,
+        rentedVehicles: [],
       };
-      console.log(payload);
         this.crud.addUsers(payload);
         this.registerForm.reset();
      
   } //end register
   onSubmitLogin() {
     if (!this.loginForm.valid) {
+      this.toast.error("Invalid Login");
       return;
     }
-      const {email, password} = this.loginForm.value;
-      console.log(email,password);
       this.authService.login(this.loginForm.value.emailLogin,this.loginForm.value.passLogin).pipe(
         this.toast.observe({
           success: 'Logged In Sucessfully',
@@ -106,8 +113,10 @@ export class LoginComponent implements OnInit {
         this.nav('user-dashboard');
 
       });
+      
+     
     
-  }
+  }//end submit
  
   nav(destination: string) {
     this.router.navigate([destination]);
