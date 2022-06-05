@@ -48,17 +48,11 @@ export class UserViewRequestComponent implements OnInit {
   count: number = 0;
   found: boolean = false;
   
-  tempKey!: string;
+  
   ngOnInit(): void {
    this.populateData();
-    
-  
   }//end ngoninit
-  populateData(){
-    this.rentals.length=0;
-    this.finalRentals.length = 0;
-    this.final_Cars.length = 0;
-
+   populateData(){ 
     this.afs.currentUser$.subscribe((user: any)=>{
       this.user$ = user;
      this.email = this.user$.email;
@@ -72,6 +66,7 @@ export class UserViewRequestComponent implements OnInit {
         }else
           this.count++;
     }
+  })
      this.crudRents.getRentalRequests().subscribe((rents: RequestRental[])=>{
       this.rentals = rents;
       for(let i = 0; i < this.rentals.length; i++){
@@ -85,7 +80,7 @@ export class UserViewRequestComponent implements OnInit {
         this.temp_Cars = cars;
         for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
           for(let j = 0; j < this.temp_Cars.length; j++){
-            if(this.curr_User.rentedVehicles[i] == this.temp_Cars[j].$carKey){
+            if(this.finalRentals[i].carKey == this.temp_Cars[j].$carKey){
               this.curr_Cars[i] = this.temp_Cars[j];
             }
           }
@@ -95,29 +90,15 @@ export class UserViewRequestComponent implements OnInit {
         console.log("FINAL CARS: ",this.final_Cars);
         console.log("FINAL RENTALS: ",this.finalRentals);
       })
-    })
-  }
+    
+  }//end method populate data
   onDelete(rents: RequestRental,index: number){
-    
-    
      this.final_Users.rentedVehicles.splice(index,1);
      this.finalRentals.splice(index,1);
-     console.log(this.final_Users.rentedVehicles);
      this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
      this.crudRents.deleteRequest(rents.$key);
      this.populateData();
      this.toast.success(rents.$key + " cancelled successfully!");
-  
-    // this.final_Cars.forEach((element,index) => {
-    //   if(element.$carKey == rents.carKey){
-    //     this.final_Cars.splice(index,1);
-    //   }
-    // });
-   
-   
-     
-    // console.log(rents);
-    // 
   }
 
 }

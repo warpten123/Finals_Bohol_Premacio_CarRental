@@ -25,9 +25,11 @@ export class UserDashboardComponent implements OnInit {
   user$: any;
   temp_User!: UsersInterface[];
   curr_User!: UsersInterface;
+  rents!: RequestRental[];
   email!: string;
   count: number = 0;
   found: boolean = false;
+  foundCar: boolean = false;
   passCarData!: CarsInterface;
   passUserData!: Subject<UsersInterface>;
   
@@ -36,7 +38,6 @@ export class UserDashboardComponent implements OnInit {
     private authService: AuthenticationService,
     private crudUser: UsersService,
     private toast: HotToastService,
-    private rent: RequestRentalService,
     private crudRental: RequestRentalService,
     private dialog: MatDialog,
     ) {
@@ -75,7 +76,11 @@ export class UserDashboardComponent implements OnInit {
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
+    }else if(this.checkCar(car.$carKey)){
+      this.toast.error("You already requested this car!");
+      return;
     }
+    console.log(car.carName);
     var moment = require("moment");
     var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
     const payload: RequestRental = {
@@ -86,8 +91,8 @@ export class UserDashboardComponent implements OnInit {
       requestStatus: "Pending",
     }
     this.curr_User.rentedVehicles?.push(payload.carKey);
-    this.crudRental.addRequest(payload);
     this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
+    this.crudRental.addRequest(payload);
     console.log(this.curr_User);
     this.toast.success("Request Submitted!");
     this.router.navigate(['/user-request']);
@@ -102,5 +107,14 @@ export class UserDashboardComponent implements OnInit {
     this.crudCar.getPassCarValue(cars);
     
   }
-  
+  checkCar(carKey: String){
+    for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
+      if(carKey == this.curr_User.rentedVehicles[i]){
+        return this.foundCar = true;
+      }
+    }
+
+
+  return this.foundCar = false;
+  }
 }

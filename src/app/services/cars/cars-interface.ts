@@ -4,7 +4,7 @@ export interface CarsInterface{
     carColor: string;
     carRentPrice: number;
     carMileage: number;
-    carStatus: boolean;
+    carStatus: string;
     carImage: string;
     carLocation: {
         city: string;

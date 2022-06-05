@@ -22,13 +22,13 @@
     </mat-card-content>
     <mat-card-content>
       <p>
-        
+       
         ₱{{cars.carRentPrice}}.00
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button><mat-icon>delete</mat-icon>{{finalRentals[i].requestStatus}}</button>
-      <button mat-button (click)="onDelete(finalRentals[i],i)"><mat-icon>edit</mat-icon>Cancel Request</button>
+      <button mat-button> <mat-icon>notification_important</mat-icon>{{finalRentals[i].requestStatus}}</button>
+      <button mat-button (click)="onDelete(finalRentals[i],i)"><mat-icon>delete</mat-icon>Cancel Request</button>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -1,2 +1,22 @@
 <app-admin-navbar></app-admin-navbar>
-<p>admin-rented works!</p>
+
+<div class="wrapper" *ngFor="let rents of rentals; let i = index">
+<div class="view_main">
+    <div class="view_wrap list-view" style="display: block;">
+        <div class="view_item">
+            <div class="vi_left">
+                <img src="{{final_Cars[i].carImage}}" alt="img car">
+            </div>
+            <div class="vi_right">
+                <p class="title">{{final_Cars[i].carName}}</p>
+                <p class="content">Rental ID: {{rents.$key}}</p>
+                <p class="content">Requested by: {{final_Users[i].name}}</p>
+                <p class="content">Request Date: {{rents.requestDate}}</p>
+                <div class="btn" style="background-color: #4abd3e;" (click)="rentAccept(rents)" *ngIf="rents.requestStatus == 'Pending'">Accept</div>
+                <div class="btn" style="background-color: red;"(click)="rentDeny(rents)" *ngIf="rents.requestStatus == 'Pending'">Deny</div>
+                <p class="content" *ngIf="rents.requestStatus == 'Accepted'">REQUEST ACCEPTED!</p>
+                <p class="content" *ngIf="rents.requestStatus == 'Denied'">REQUEST DENIED!</p>
+            </div>
+        </div>
+    </div>
+</div>
