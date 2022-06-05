@@ -12,7 +12,6 @@ import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersInterface } from 'src/app/services/users/user-interface';
 import { AdminEditComponent } from 'src/app/admin/admin-edit/admin-edit.component';
 import { Subject } from 'rxjs';
-
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
@@ -76,21 +75,21 @@ export class UserDashboardComponent implements OnInit {
       this.toast.error("You don't have enough money!");
       return;
     }
-    var moment = require("moment");
-    var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
-    const payload: RequestRental = {
-      $key: '',
-      userKey: this.curr_User.$key,
-      carKey: car.$carKey,
-      requestDate: current_timestamp,
-      requestStatus: "Pending",
-    }
-    this.curr_User.rentedVehicles?.push(payload.carKey);
-    this.crudRental.addRequest(payload);
-    this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
-    console.log(this.curr_User);
-    this.toast.success("Request Submitted!");
-    this.router.navigate(['/user-request']);
+    // var moment = require("moment");
+    // var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
+    // const payload: RequestRental = {
+    //   $key: '',
+    //   userKey: this.curr_User.$key,
+    //   carKey: car.$carKey,
+    //   requestDate: current_timestamp,
+    //   requestStatus: "Pending",
+    // }
+    // this.curr_User.rentedVehicles?.push(payload.carKey);
+    // this.crudRental.addRequest(payload);
+    // this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
+    // console.log(this.curr_User);
+    // this.toast.success("Request Submitted!");
+    // this.router.navigate(['/user-request']);
   }
 
   onEdit(cars: CarsInterface){
