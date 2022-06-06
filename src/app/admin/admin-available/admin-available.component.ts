@@ -12,8 +12,8 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
   styleUrls: ['./admin-available.component.css']
 })
 export class AdminAvailableComponent implements OnInit {
-  cars!: CarsInterface[];
-  finalCars!: CarsInterface[];
+  cars: CarsInterface[]=[];
+  finalCars: CarsInterface[]=[];
   constructor(private router: Router, 
     private crud: CarsService,
     private toast: HotToastService,
