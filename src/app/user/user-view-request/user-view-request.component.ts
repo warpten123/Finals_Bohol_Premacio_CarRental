@@ -1,4 +1,3 @@
-
 import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { CarsService } from 'src/app/services/cars/cars.service';
@@ -11,7 +10,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UsersInterface } from './../../services/users/user-interface';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Subject } from 'rxjs';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-user-view-request',
   templateUrl: './user-view-request.component.html',
@@ -31,7 +30,7 @@ export class UserViewRequestComponent implements OnInit {
   user$: any;
   email!: string;
 
- 
+  cont: boolean = false;
   temp_User: UsersInterface[] = [];
   curr_User!: UsersInterface;
   final_Users!: UsersInterface;
@@ -48,11 +47,9 @@ export class UserViewRequestComponent implements OnInit {
   count: number = 0;
   found: boolean = false;
   
-  tempKey!: string;
+  
   ngOnInit(): void {
    this.populateData();
-    
-  
   }//end ngoninit
   populateData(){
     this.rentals.length=0;
@@ -77,6 +74,7 @@ export class UserViewRequestComponent implements OnInit {
       for(let i = 0; i < this.rentals.length; i++){
         if(this.rentals[i].userKey == this.curr_User.$key){
           this.finalRentals.push(this.rentals[i]);
+          
         } 
       }
     })
@@ -85,7 +83,7 @@ export class UserViewRequestComponent implements OnInit {
         this.temp_Cars = cars;
         for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
           for(let j = 0; j < this.temp_Cars.length; j++){
-            if(this.curr_User.rentedVehicles[i] == this.temp_Cars[j].$carKey){
+            if(this.finalRentals[i].carKey == this.temp_Cars[j].$carKey){
               this.curr_Cars[i] = this.temp_Cars[j];
             }
           }
@@ -98,26 +96,24 @@ export class UserViewRequestComponent implements OnInit {
     })
   }
   onDelete(rents: RequestRental,index: number){
-    
-    
+    if(!this.checkDateForCancel(rents)){
+      this.toast.error("You can't cancel this rental anymore")
+      return;
+    }
      this.final_Users.rentedVehicles.splice(index,1);
      this.finalRentals.splice(index,1);
-     console.log(this.final_Users.rentedVehicles);
      this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
      this.crudRents.deleteRequest(rents.$key);
      this.populateData();
      this.toast.success(rents.$key + " cancelled successfully!");
-  
-    // this.final_Cars.forEach((element,index) => {
-    //   if(element.$carKey == rents.carKey){
-    //     this.final_Cars.splice(index,1);
-    //   }
-    // });
-   
-   
-     
-    // console.log(rents);
-    // 
   }
-
+  checkDateForCancel(rent: RequestRental){
+    const currentDay = moment();
+    const rentalDate = moment(rent.requestDate);
+    const diff = rentalDate.diff(currentDay,'days');
+      if(diff > 7)
+        return this.cont = true;
+      else
+        return this.cont = false;
+    }
 }

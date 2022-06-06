@@ -2,7 +2,7 @@
  <div *ngIf="finalRentals.length > 0;else noRequests" class="container"></div>
 
 <div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxLayout="row wrap" fxLayoutGap="20px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let cars of final_Cars; let i = index">
   <mat-card class="mat-elevation-z4">
     <mat-card-header>
@@ -22,13 +22,13 @@
     </mat-card-content>
     <mat-card-content>
       <p>
-        
+       
         ₱{{cars.carRentPrice}}.00
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button><mat-icon>delete</mat-icon>{{finalRentals[i].requestStatus}}</button>
-      <button mat-button (click)="onDelete(finalRentals[i],i)"><mat-icon>edit</mat-icon>Cancel Request</button>
+      <button mat-button> <mat-icon>notification_important</mat-icon>{{finalRentals[i].requestStatus}}</button>
+      <button mat-button (click)="onDelete(finalRentals[i],i)"><mat-icon>delete</mat-icon>Cancel Request</button>
     </mat-card-actions>
   </mat-card>
 </div>

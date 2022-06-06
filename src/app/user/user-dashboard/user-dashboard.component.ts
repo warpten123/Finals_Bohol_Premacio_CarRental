@@ -25,9 +25,11 @@ export class UserDashboardComponent implements OnInit {
   user$: any;
   temp_User!: UsersInterface[];
   curr_User!: UsersInterface;
+  rents!: RequestRental[];
   email!: string;
   count: number = 0;
   found: boolean = false;
+  foundCar: boolean = false;
   passCarData!: CarsInterface;
   passUserData!: Subject<UsersInterface>;
   
@@ -36,7 +38,6 @@ export class UserDashboardComponent implements OnInit {
     private authService: AuthenticationService,
     private crudUser: UsersService,
     private toast: HotToastService,
-    private rent: RequestRentalService,
     private crudRental: RequestRentalService,
     private dialog: MatDialog,
     ) {
@@ -71,36 +72,38 @@ export class UserDashboardComponent implements OnInit {
   nav(destination: string) {
   this.router.navigate([destination]);
   }
-  submitRequest(car: CarsInterface){
+  onView(car: CarsInterface){
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
+    }else if(this.checkCar(car.$carKey)){
+      this.toast.error("You already requested this car!");
+      return;
     }
-    var moment = require("moment");
-    var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
-    const payload: RequestRental = {
-      $key: '',
-      userKey: this.curr_User.$key,
-      carKey: car.$carKey,
-      requestDate: current_timestamp,
-      requestStatus: "Pending",
-    }
-    this.curr_User.rentedVehicles?.push(payload.carKey);
-    this.crudRental.addRequest(payload);
-    this.crudUser.modifyUsers(this.curr_User.$key,this.curr_User);
-    console.log(this.curr_User);
-    this.toast.success("Request Submitted!");
-    this.router.navigate(['/user-request']);
+    this.onEdit(car);
+    // var moment = require("moment");
+    // var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
+   
   }
 
   onEdit(cars: CarsInterface){
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true
+    //dialogConfig.disableClose = true
     dialogConfig.autoFocus = true;
     dialogConfig.width =  "60%";
     this.dialog.open(CardViewComponent,dialogConfig);
     this.crudCar.getPassCarValue(cars);
+    this.crudUser.getPassUserValue(this.curr_User);
     
   }
-  
+  checkCar(carKey: String){
+    for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
+      if(carKey == this.curr_User.rentedVehicles[i]){
+        return this.foundCar = true;
+      }
+    }
+
+
+  return this.foundCar = false;
+  }
 }

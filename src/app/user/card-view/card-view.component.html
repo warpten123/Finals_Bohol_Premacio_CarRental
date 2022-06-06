@@ -1,33 +1,64 @@
-<div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="10px">
-        <div fxFlex="70%" fxFlex.xs="100%" fxFlex.sm="33%">
-    <mat-card class="mat-elevation-z4">
-      <mat-card-header>
-        <mat-card-title><mat-icon> directions_car</mat-icon> {{cars.carName}}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{cars.carImage}}"class=".img-responsive" width="304" height="236">
-      <mat-card-content class="mat-typography">
-        <p>
-            <mat-icon> location_on</mat-icon>
-            {{cars.carLocation?.barangay}}, {{cars.carLocation?.city}}  
-            &nbsp;&nbsp;
-            <mat-icon> money</mat-icon>
-            ₱{{cars.carRentPrice}}.00
-        </p>
-        <p>
-          <mat-icon>color_lens</mat-icon>
-            {{cars.carColor}} &nbsp;&nbsp;&nbsp;
-          <mat-icon> directions_run</mat-icon>
-            {{cars.carMileage}} km &nbsp;&nbsp;&nbsp;
-          <mat-icon>event_available</mat-icon>
-            {{cars.carStatus}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button><mat-icon>add_circle</mat-icon>RESERVE CAR</button>
-        <button mat-button (click)="close()"><mat-icon>close</mat-icon>CLOSE</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  </div>
-  </div>
+<html lang = "en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title> PreBol Car Rental! </title>
+        <link rel = "stylesheet" href = "./card-view.component.css">
+        <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+        <div class="container">
+            <input type="checkbox" id="flip">
+            <div class="cover">
+               
+                    <img src="{{cars.carImage}}" alt="">
+               
+            </div>
+            <form class="inputs">
+               <div class="form-content">
+                <div class="admin-form">
+                    <div class="title">Rental Reservation</div>
+                    <div class="input-boxes">
+                      <div class="input-box">
+                        <i class="fa fa-car"></i>
+                        <input disabled="disabled" placeholder="{{cars.carName}}">
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa fa-paint-brush"></i>
+                        <input disabled="disabled" placeholder="{{cars.carColor}}">
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa fa-money"></i>
+                        <input disabled="disabled" placeholder="₱ {{cars.carRentPrice}}.00">
+                    </div>
+
+                    <div class="input-box">
+                        <i class="fa fa-road"></i>
+                        <input disabled="disabled" placeholder="{{cars.carMileage}} km">
+                    </div>
+
+                    <div class="input-box">
+                      <i class="fa fa-key"></i>
+                        <input matInput [matDatepicker]= "datePicker" placeholder="Pick-up Date"[min]="minDate"[max]="maxDate"[(ngModel)]="getDate" [ngModelOptions]="{standalone: true}">
+                        <!-- <button mat-raised-button color="accent" class="Button" (click)="searchFor()">Search</button> -->
+                        <mat-datepicker-toggle [for]= "datePicker" matSuffix>
+                          <mat-datepicker #datePicker>
+                          </mat-datepicker>
+                        </mat-datepicker-toggle>
+                     
+                    </div>
+                        
+                        <div class="button input-box">
+        
+                            <input type="submit" value="Request!" (click)="onSubmitRequest(cars)">
+                        </div>
+                        <div class="text sign-up-text">Let me check another car <a routerLink="/user-dashboard" (click)="close()">Take me back!</a></div>
+                    </div>
+                </div>
+                </div>
+            </form>
+            </div>
+     
+
