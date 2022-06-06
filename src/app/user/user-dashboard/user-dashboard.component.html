@@ -1,8 +1,8 @@
 <app-user-navbar></app-user-navbar>
 <!--SEARCH BUTTON-->
-<form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-  <input type="text" placeholder="Search City or Brgy..." name="search">
-  <button type="submit"><i class="fa fa-search"></i></button>
+<form class="example"[formGroup]="searchForm" style="margin:auto;max-width:300px">
+  <input (input)="filterItems(search.value)" #search type="text" placeholder="Search City or Brgy..." name="search" formControlName="search">
+  <!-- <button type="submit" (click)="filterItems(search.value)"><i class="fa fa-search"></i></button> -->
 </form>
 <!--END SEARCH BUTTON-->
 <div *ngIf="cars.length > 0;else noCars" class="container"></div>

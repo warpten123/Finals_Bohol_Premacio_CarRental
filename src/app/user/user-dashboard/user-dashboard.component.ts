@@ -12,6 +12,7 @@ import { CarsService } from 'src/app/services/cars/cars.service';
 import { UsersInterface } from 'src/app/services/users/user-interface';
 import { AdminEditComponent } from 'src/app/admin/admin-edit/admin-edit.component';
 import { Subject } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -43,10 +44,13 @@ export class UserDashboardComponent implements OnInit {
     ) {
      
      }
-  
+     searchForm: FormGroup = new FormGroup({
+      search: new FormControl('', Validators.required),
+      
+    });
+    
 
   ngOnInit(): void {
-    
     this.crudCar.getCars().subscribe((val: CarsInterface[]) => {
       this.cars = val;
     });
@@ -62,16 +66,32 @@ export class UserDashboardComponent implements OnInit {
         this.found = true;
         }else
           this.count++;
-        
     }
      console.log(this.curr_User);
     })
     
   }
   
-  nav(destination: string) {
-  this.router.navigate([destination]);
-  }
+  filterItems(search: string){ //
+    // const search = event.target.search.value;
+    
+    this.cars.length = 0;
+    
+    this.crudCar.getCars().subscribe((cars: CarsInterface[])=>{
+      for(let i = 0; i < cars.length; i++){
+        if(cars[i].carLocation.barangay == search){
+          this.cars.push(cars[i]);
+          console.log(this.cars.length);
+        }else if(cars[i].carLocation.city == search){
+          this.cars.push(cars[i]);
+        }
+      }
+      if(!this.searchForm.valid){
+        this.cars = cars;
+      }
+    })
+    
+  }//end filter items
   onView(car: CarsInterface){
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
@@ -81,8 +101,6 @@ export class UserDashboardComponent implements OnInit {
       return;
     }
     this.onEdit(car);
-    // var moment = require("moment");
-    // var current_timestamp = moment().format("ddd MMM D YYYY 00:00:00");
    
   }
 
@@ -94,7 +112,6 @@ export class UserDashboardComponent implements OnInit {
     this.dialog.open(CardViewComponent,dialogConfig);
     this.crudCar.getPassCarValue(cars);
     this.crudUser.getPassUserValue(this.curr_User);
-    
   }
   checkCar(carKey: String){
     for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
