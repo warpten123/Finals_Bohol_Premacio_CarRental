@@ -1,2 +1,61 @@
 <app-user-navbar></app-user-navbar>
-<p>view-history works!</p>
+
+ <div *ngIf="rents.length > 0;else noRequests" class="container"></div>
+
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="40px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let rent of rents; let i = index">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-header>
+      <mat-card-title>{{cars[i].carName}}</mat-card-title>
+    
+    </mat-card-header>
+    <img mat-card-image src="{{cars[i].carImage}}"class=".img-responsive" width="304" height="236">
+    <mat-card-content>
+      <p class = "content-p">
+      </p>
+      <p *ngIf="rent.requestStatus == 'Accepted' ">
+        Money Deducted: ₱{{cars[i].carRentPrice}}.00
+      </p>
+      <p *ngIf="!(rent.requestStatus == 'Accepted')">
+        Money Deducted: ₱0.00 
+      </p>
+      <p>
+        Pick-up Date:  {{rent.requestDate}}
+      </p>
+      <p>
+      Location: {{cars[i].carLocation.barangay}}, {{cars[i].carLocation.city}}
+      </p>
+      <p *ngIf="rent.requestStatus == 'Accepted' ">
+        {{days[i]}} day(s) from now
+      </p>
+     <p *ngIf="!(rent.requestStatus == 'Accepted')">
+        0 days from now 
+      </p>
+      <p *ngIf="rent.requestStatus == 'Accepted' && checkDateForCancel(rent)">
+       <a (click)="cancelRequest(rent,cars[i])">You can cancel this request.</a>
+      </p>
+      <p *ngIf="!(rent.requestStatus == 'Accepted') || !checkDateForCancel(rent)">
+        <a style="color:red;">You can't cancel this request.</a>
+       </p>
+    </mat-card-content>
+    <mat-card-content>
+      <p>
+       
+     
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+       <!-- <button mat-button> <mat-icon>notification_important</mat-icon></button> -->
+      <!-- <button mat-button (click)="cancelRequest(rent,cars[i])" *ngIf="rent.requestStatus == 'Accepted'"><mat-icon>delete</mat-icon>Cancel Request</button>  -->
+    </mat-card-actions>
+    <mat-card-footer [ngStyle]="{'background-color':rent.requestStatus == 'Accepted' ? 'rgb(104, 243, 104)' : 'red' }">{{rent.requestStatus.toUpperCase()}}</mat-card-footer>
+  </mat-card>
+</div>
+</div>
+</div>  
+  <ng-template #noRequests>
+    <hr>
+    <h5>There are no requests listed!</h5>
+    
+</ng-template>

@@ -76,8 +76,8 @@ export class UserDashboardComponent implements OnInit {
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
-    }else if(this.checkCar(car.$carKey)){
-      this.toast.error("You already requested this car!");
+    }else if(this.checkCar(car.$carKey) && car.carStatus != "Available"){
+      this.toast.error("The car might be already in your request tab.");
       return;
     }
     this.onEdit(car);
@@ -102,8 +102,6 @@ export class UserDashboardComponent implements OnInit {
         return this.foundCar = true;
       }
     }
-
-
   return this.foundCar = false;
   }
 }

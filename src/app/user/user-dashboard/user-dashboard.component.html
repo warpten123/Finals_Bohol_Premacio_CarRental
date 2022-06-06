@@ -17,7 +17,8 @@
         
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="onView(car)"><mat-icon>add_circle</mat-icon>RESERVE CAR</button>
+        <button mat-button (click)="onView(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>add_circle</mat-icon>RESERVE CAR</button>
+        <button mat-button (click)="onView(car)" *ngIf="car.carStatus == 'Rented'"[disabled]="true"><mat-icon>warning</mat-icon>Unavailable</button>
         
       </mat-card-actions>
     </mat-card>
