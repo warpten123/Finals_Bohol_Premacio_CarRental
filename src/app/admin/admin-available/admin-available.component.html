@@ -15,13 +15,19 @@
     </mat-card-content>
     <mat-card-content>
       <p>
-        
         ₱{{car.carRentPrice}}.00
       </p>
     </mat-card-content>
+    <mat-card-content>
+      <p>
+        Status: {{car.carStatus}}
+      </p>
+    </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="onDelete(car)"><mat-icon>delete</mat-icon>DELETE</button>
-      <button mat-button (click)="onEdit(car)"><mat-icon>edit</mat-icon>EDIT</button>
+      <button mat-button (click)="onDelete(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>delete</mat-icon>DELETE</button>
+      <button mat-button (click)="onEdit(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>edit</mat-icon>EDIT</button>
+      <button mat-button (click)="onDelete(car)" *ngIf="car.carStatus == 'Rented'"[disabled]="true"><mat-icon>delete</mat-icon>DELETE</button>
+      <button mat-button (click)="onEdit(car)" *ngIf="car.carStatus == 'Rented'"[disabled]="true"><mat-icon>edit</mat-icon>EDIT</button>
     </mat-card-actions>
   </mat-card>
 </div>

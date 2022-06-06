@@ -16,7 +16,7 @@ var require:any;
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
   // user$ = this.authService.currentUser$;
@@ -76,8 +76,8 @@ export class UserDashboardComponent implements OnInit {
     if( this.curr_User.money < car.carRentPrice){
       this.toast.error("You don't have enough money!");
       return;
-    }else if(this.checkCar(car.$carKey)){
-      this.toast.error("You already requested this car!");
+    }else if(this.checkCar(car.$carKey) && car.carStatus != "Available"){
+      this.toast.error("The car might be already in your request tab.");
       return;
     }
     this.onEdit(car);
@@ -88,7 +88,7 @@ export class UserDashboardComponent implements OnInit {
 
   onEdit(cars: CarsInterface){
     const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true
+    dialogConfig.disableClose = true
     dialogConfig.autoFocus = true;
     dialogConfig.width =  "60%";
     this.dialog.open(CardViewComponent,dialogConfig);
@@ -102,8 +102,6 @@ export class UserDashboardComponent implements OnInit {
         return this.foundCar = true;
       }
     }
-
-
   return this.foundCar = false;
   }
 }

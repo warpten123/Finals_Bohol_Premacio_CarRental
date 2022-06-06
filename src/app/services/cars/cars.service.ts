@@ -30,6 +30,17 @@ export class CarsService {
   getPassCarValue(car: CarsInterface){
     this.passCarsValues$.next(car);
   }
+
+  passCarsValuesArray$: Subject<CarsInterface[]> = new Subject();
+  get passCarsValuesArray(): Subject<CarsInterface[]>{
+    return this.passCarsValuesArray$;
+  }
+  set passCarsValuesArray(src: Subject<CarsInterface[]>){
+    this.passCarsValuesArray$ = src;
+  }
+  getPassCarValueArray(car: CarsInterface[]){
+    this.passCarsValuesArray$.next(car);
+  }
   //END PASS CAR DATA
   constructor(private afs: AngularFirestore) {
     this.carsCollection = this.afs.collection<CarsInterface>('cars'); // name sa collection

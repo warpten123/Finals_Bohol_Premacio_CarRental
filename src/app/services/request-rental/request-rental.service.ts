@@ -10,12 +10,24 @@ import {
 } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestRentalService {
-
+//PASS CAR DATA
+passRentalValues$: Subject<RequestRental[]> = new Subject();
+get passRentalValues(): Subject<RequestRental[]>{
+  return this.passRentalValues$;
+}
+set passRentalValues(src: Subject<RequestRental[]>){
+  this.passRentalValues$ = src;
+}
+getPassRentValue(rent: RequestRental[]){
+  this.passRentalValues$.next(rent);
+}
+//END PASS CAR DATA
   private requestCollection!: AngularFirestoreCollection<RequestRental>;
   requests!: Observable<RequestRental[]>;
   search!: Observable<RequestRental[]>;

@@ -74,7 +74,6 @@ export class UserViewRequestComponent implements OnInit {
       for(let i = 0; i < this.rentals.length; i++){
         if(this.rentals[i].userKey == this.curr_User.$key){
           this.finalRentals.push(this.rentals[i]);
-          
         } 
       }
     })
@@ -95,25 +94,19 @@ export class UserViewRequestComponent implements OnInit {
       })
     })
   }
-  onDelete(rents: RequestRental,index: number){
-    if(!this.checkDateForCancel(rents)){
-      this.toast.error("You can't cancel this rental anymore")
-      return;
-    }
-     this.final_Users.rentedVehicles.splice(index,1);
-     this.finalRentals.splice(index,1);
-     this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
-     this.crudRents.deleteRequest(rents.$key);
-     this.populateData();
-     this.toast.success(rents.$key + " cancelled successfully!");
+  onDelete(rents: RequestRental,index: number,cars: CarsInterface){
+    // if(!this.checkDateForCancel(rents)){
+    //   this.toast.error("You can't cancel this rental anymore")
+    //   return;
+    // }
+    // cars.carStatus = "Available";
+    // this.crudCar.modifyCars(cars.$carKey,cars);
+    // this.final_Users.rentedVehicles.splice(index,1);
+    // this.finalRentals.splice(index,1);
+    // this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
+    // this.crudRents.deleteRequest(rents.$key);
+    // this.populateData();
+    // this.toast.success(rents.$key + " cancelled successfully!");
   }
-  checkDateForCancel(rent: RequestRental){
-    const currentDay = moment();
-    const rentalDate = moment(rent.requestDate);
-    const diff = rentalDate.diff(currentDay,'days');
-      if(diff > 7)
-        return this.cont = true;
-      else
-        return this.cont = false;
-    }
+ 
 }

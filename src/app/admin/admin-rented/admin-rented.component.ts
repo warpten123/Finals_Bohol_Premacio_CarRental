@@ -52,14 +52,18 @@ export class AdminRentedComponent implements OnInit {
 
 
   }//end ngoninit
-  rentAccept(rents: RequestRental){
+  rentAccept(rents: RequestRental,cars: CarsInterface,users: UsersInterface){
+    cars.carStatus = "Rented";
     rents.requestStatus = "Accepted";
+    users.money = users.money - cars.carRentPrice;
+    this.crudUsers.modifyUsers(users.$key,users);
     this.crudRentals.editRequest(rents.$key,rents);
-    this.toast.success("Requet Accepted!");
+    this.crudCars.modifyCars(cars.$carKey,cars);
+    this.toast.success("Request Accepted!");
   }
   rentDeny(rents: RequestRental){
     rents.requestStatus = "Denied";
     this.crudRentals.editRequest(rents.$key,rents);
-    this.toast.info("Requet Denied!");
+    this.toast.info("Request Denied!");
   }
 }

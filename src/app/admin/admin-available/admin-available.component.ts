@@ -24,11 +24,6 @@ export class AdminAvailableComponent implements OnInit {
   ngOnInit(): void {
     this.crud.getCars().subscribe((val: CarsInterface[])=>{
       this.cars = val;
-      for(let i = 0; i < this.cars.length; i++){
-        if(this.cars[i].carStatus == "Available"){
-          this.finalCars[i] = this.cars[i]; 
-        }
-      }
     })
   }
   onDelete(carCheck: CarsInterface){
