@@ -67,7 +67,7 @@ export class UserDashboardComponent implements OnInit {
         }else
           this.count++;
     }
-     console.log(this.curr_User);
+    //  console.log(this.curr_User);
     })
     
   }
@@ -78,7 +78,7 @@ export class UserDashboardComponent implements OnInit {
       for(let i = 0; i < cars.length; i++){
         if(cars[i].carLocation.barangay.toLowerCase() == search.toLowerCase()){
           this.cars.push(cars[i]);
-          console.log(this.cars.length);
+          // console.log(this.cars.length);
         }else if(cars[i].carLocation.city.toLowerCase() == search.toLowerCase()){
           this.cars.push(cars[i]);
         }

@@ -22,7 +22,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.crud.getUsers().subscribe((val) => {
       this.users = val;
-      console.log(this.users);
+      // console.log(this.users);
     });
   }
 

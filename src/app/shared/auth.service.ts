@@ -16,10 +16,10 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router
   ) {
-    console.log('I am instance' + `${Date.now()}`);
+    // console.log('I am instance' + `${Date.now()}`);
     this.userObs = this.afAuth.user.subscribe((data: { uid: any; } | null | undefined) => {
-      console.log('data');
-      console.log(data);
+      // console.log('data');
+      // console.log(data);
       if (data == undefined || data == null) return;
       if (!this.authenticated) {
         this.api.get(`/user/${data?.uid}`).then((result) => {
@@ -28,9 +28,9 @@ export class AuthService {
             data: result.data,
           };
           if (output.success === true) {
-            console.log('Subscription');
+            // console.log('Subscription');
             this.user = User.fromJson(output.data.id, output.data);
-            console.log('Successful Login');
+            // console.log('Successful Login');
             this.user?.log();
             this.router.navigate(['home']);
           }
@@ -63,7 +63,7 @@ export class AuthService {
       }
       return output;
     } catch (error) {
-      console.log('Login Error');
+      // console.log('Login Error');
       if (error instanceof Error)
         return { success: false, data: error.message };
       else return { success: false, data: 'unknown login error' };
@@ -89,14 +89,14 @@ export class AuthService {
           payload.password
         );
       } catch (error) {
-        console.log(error);
-        console.log('Register Error');
+        // console.log(error);
+        // console.log('Register Error');
         if (error instanceof Error)
           return { success: false, data: error.message };
         else return { success: false, data: 'unknown register error' };
       }
     }
-    console.log(output);
+    // console.log(output);
 
     return output;
   }

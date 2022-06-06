@@ -89,8 +89,8 @@ export class UserViewRequestComponent implements OnInit {
         }
         this.final_Users = this.curr_User;
         this.final_Cars = this.curr_Cars;
-        console.log("FINAL CARS: ",this.final_Cars);
-        console.log("FINAL RENTALS: ",this.finalRentals);
+        // console.log("FINAL CARS: ",this.final_Cars);
+        // console.log("FINAL RENTALS: ",this.finalRentals);
       })
     })
   }

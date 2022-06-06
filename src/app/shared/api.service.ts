@@ -21,7 +21,7 @@ export class ApiService {
         })
         .toPromise();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return null;
     }
   }
@@ -36,7 +36,7 @@ export class ApiService {
         })
         .toPromise();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return null;
     }
   }
@@ -50,7 +50,7 @@ export class ApiService {
         })
         .toPromise();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return null;
     }
   }
@@ -65,7 +65,7 @@ export class ApiService {
         })
         .toPromise();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       return null;
     }
   }
@@ -77,7 +77,7 @@ export class ApiService {
       console.log(token);
       return `${token}`;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return 'errorGeneratingToken';
     }
   }

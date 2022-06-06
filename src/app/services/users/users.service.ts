@@ -31,7 +31,7 @@ export class UsersService {
     this.passUserValues$ = src;
   }
   getPassUserValue(user: UsersInterface){
-    console.log("from service",user);
+    // console.log("from service",user);
     this.passUserValues$.next(user);
   }
 //END USER PASS DATA

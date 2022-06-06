@@ -49,7 +49,7 @@ export class ViewHistoryComponent implements OnInit {
     this.passCarData = this.crudCars.passCarsValuesArray$;
     this.passCarData.subscribe((cars: CarsInterface[])=>{
       this.cars = cars;
-      console.log("cars:",this.cars);
+      // console.log("cars:",this.cars);
     })
 
   }

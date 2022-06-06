@@ -40,7 +40,7 @@ export class AdminAddComponent implements OnInit {
 
 
   onFileChanged(event) {
-    console.log('triggered');
+    // console.log('triggered');
     const files = event.target.files;
     if (files.length === 0)
       return;
@@ -56,7 +56,7 @@ export class AdminAddComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.url = reader.result;
-      console.log(this.url);
+      // console.log(this.url);
       this.validImage = true;
     }
   }
@@ -68,12 +68,12 @@ export class AdminAddComponent implements OnInit {
     this.adminAddForm.reset();
   }
   onSubmitAdd() {
-    console.log(this.adminAddForm.value.carImage);
+    // console.log(this.adminAddForm.value.carImage);
     if (!this.adminAddForm.valid) {
       this.toast.error("Please Complete All Fields!");
       return;
     }
-    console.log(this.url+"kk");
+    // console.log(this.url+"kk");
     const payload: CarsInterface = {
       $carKey: '',
       carName: this.adminAddForm.value.carName,
@@ -87,7 +87,7 @@ export class AdminAddComponent implements OnInit {
         barangay: this.adminAddForm.value.carBarangay,
       }
     }
-    console.log(payload);
+    // console.log(payload);
     this.crud.addCars(payload);
     this.toast.success(payload.carName + " added successfully!");
     this.adminAddForm.reset();
