@@ -72,17 +72,14 @@ export class UserDashboardComponent implements OnInit {
     
   }
   
-  filterItems(search: string){ //
-    // const search = event.target.search.value;
-    
+  filterItems(search: string){ 
     this.cars.length = 0;
-    
     this.crudCar.getCars().subscribe((cars: CarsInterface[])=>{
       for(let i = 0; i < cars.length; i++){
-        if(cars[i].carLocation.barangay == search){
+        if(cars[i].carLocation.barangay.toLowerCase() == search.toLowerCase()){
           this.cars.push(cars[i]);
           console.log(this.cars.length);
-        }else if(cars[i].carLocation.city == search){
+        }else if(cars[i].carLocation.city.toLowerCase() == search.toLowerCase()){
           this.cars.push(cars[i]);
         }
       }
@@ -113,7 +110,7 @@ export class UserDashboardComponent implements OnInit {
     this.crudCar.getPassCarValue(cars);
     this.crudUser.getPassUserValue(this.curr_User);
   }
-  checkCar(carKey: String){
+  checkCar(carKey: string){
     for(let i = 0; i < this.curr_User.rentedVehicles.length; i++){
       if(carKey == this.curr_User.rentedVehicles[i]){
         return this.foundCar = true;

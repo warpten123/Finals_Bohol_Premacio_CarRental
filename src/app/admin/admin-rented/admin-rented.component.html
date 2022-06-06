@@ -16,7 +16,7 @@
                 <div class="btn" style="background-color: red;"(click)="rentDeny(rents)" *ngIf="rents.requestStatus == 'Pending'">Deny</div>
                 <p class="content" *ngIf="rents.requestStatus == 'Accepted'">REQUEST ACCEPTED!</p>
                 <p class="content" *ngIf="rents.requestStatus == 'Denied'">REQUEST DENIED!</p>
-                <p class="content" *ngIf="rents.requestStatus == 'Cancelled  by User'">REQUEST CANCELLED!</p>
+                <p class="content" *ngIf="rents.requestStatus == 'Cancelled by User'">REQUEST CANCELLED!</p>
             </div>
         </div>
     </div>
