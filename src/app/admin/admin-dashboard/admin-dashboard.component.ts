@@ -12,12 +12,11 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./admin-dashboard.component.css']
 })
 export class AdminDashboardComponent implements OnInit {
-  users!: UsersInterface[];
+  users: UsersInterface[]=[];
   user: any;
-  constructor(private router: Router, 
+  constructor(
     private crud: UsersService,
-    private authService: AuthenticationService,
-    private toast: HotToastService,
+
     ) { }
 
   ngOnInit(): void {
