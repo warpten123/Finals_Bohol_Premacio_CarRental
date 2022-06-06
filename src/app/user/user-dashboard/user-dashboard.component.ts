@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  styleUrls: ['./user-dashboard.component.css']
 })
 export class UserDashboardComponent implements OnInit {
   // user$ = this.authService.currentUser$;
@@ -88,7 +88,7 @@ export class UserDashboardComponent implements OnInit {
 
   onEdit(cars: CarsInterface){
     const dialogConfig = new MatDialogConfig();
-    //dialogConfig.disableClose = true
+    dialogConfig.disableClose = true
     dialogConfig.autoFocus = true;
     dialogConfig.width =  "60%";
     this.dialog.open(CardViewComponent,dialogConfig);
