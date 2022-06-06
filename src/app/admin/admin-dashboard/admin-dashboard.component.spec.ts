@@ -34,4 +34,19 @@ describe('AdminDashboardComponent', () => {
     fixture.detectChanges();
   });
 
+  // should have a list of users
+  it('should have a list of users', () => {
+    expect(component.users).toBeTruthy();
+  });
+
+  // should return a collection of users from the database
+  // it('should return a collection of users from the database', () => {
+  //   const userResponse = [
+  //     {
+  //       id: '1',
+  //       email: 'cris.bacus6@gmail.com',
+  //       password: '123456',
+
+  //   ]
+
 });
