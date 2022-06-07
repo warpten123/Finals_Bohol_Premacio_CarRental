@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserViewRequestComponent } from './../user-view-request/user-view-request.component';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
@@ -34,6 +35,7 @@ export class UserViewProfileComponent implements OnInit {
     private crudUser: UsersService,
     private toast: HotToastService,
     private router: Router,
+    private fire: AngularFireAuth,
   ) { 
     
     
@@ -44,9 +46,8 @@ export class UserViewProfileComponent implements OnInit {
   ngOnInit(): void {
     
     
-       this.afs.currentUser$.subscribe((user: any)=>{
-      this.user$ = user;
-     this.email = this.user$.email;
+    this.fire.authState.subscribe((user: any) => {
+      this.email = user.email;
     })
     this.crudUser.getUsers().subscribe((user: UsersInterface[])=> {
       this.temp_User = user;
@@ -101,7 +102,7 @@ onSubmitUpdate(key: string){
     money: this.curr_User.money,
     rentedVehicles: this.curr_User.rentedVehicles,
   };
-  this.afs.delete();
+  // this.afs.delete();
   this.afs.register(payload.email,payload.password).pipe(
     this.toast.observe({
       success: 'Update Successfully!',

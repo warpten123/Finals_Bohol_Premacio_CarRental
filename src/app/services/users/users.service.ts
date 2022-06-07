@@ -1,4 +1,4 @@
-import { User } from './../../models/user.model';
+
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, Subject } from 'rxjs';
 import { UsersInterface } from './user-interface';

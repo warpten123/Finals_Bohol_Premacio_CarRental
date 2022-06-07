@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { CarsService } from 'src/app/services/cars/cars.service';
@@ -24,6 +25,7 @@ export class UserViewRequestComponent implements OnInit {
     private crudRents: RequestRentalService,
     private crudCar: CarsService,
     private toast: HotToastService,
+    private fire: AngularFireAuth,
     ) { 
     }
   userData!: any;
@@ -56,9 +58,8 @@ export class UserViewRequestComponent implements OnInit {
     this.finalRentals.length = 0;
     this.final_Cars.length = 0;
 
-    this.afs.currentUser$.subscribe((user: any)=>{
-      this.user$ = user;
-     this.email = this.user$.email;
+    this.fire.authState.subscribe((user: any) => {
+      this.email = user.email;
     })
     this.crudUser.getUsers().subscribe((user: UsersInterface[])=> {
       this.temp_User = user;

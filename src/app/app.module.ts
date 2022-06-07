@@ -1,3 +1,4 @@
+import { AuthenticationService } from './services/authentication/authentication.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,11 +8,10 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { SharedModule } from './shared/shared.module';
+
 import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/compat/auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
-import { AuthGuard } from './shared/auth-guard.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -41,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { Auth} from '@angular/fire/auth';
 //
 //
 
@@ -68,7 +69,6 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
@@ -90,7 +90,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     FormsModule,
   ],
-  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }, AuthGuard],
+  providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
