@@ -15,7 +15,6 @@ import { arrayRemove, FieldValue} from 'firebase/firestore';
   providedIn: 'root'
 })
 export class UsersService {
-  
   private usersCollection!: AngularFirestoreCollection<UsersInterface>;
   users!: Observable<UsersInterface[]>;
   search!: Observable<UsersInterface[]>;
