@@ -56,7 +56,7 @@ export class AdminAddComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.url = reader.result;
-      console.log(this.url);
+      console.log("this is url: ",this.url);
       this.validImage = true;
     }
   }
