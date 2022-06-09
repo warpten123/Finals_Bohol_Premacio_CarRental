@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CardViewComponent } from './../card-view/card-view.component';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { RequestRental } from './../../services/request-rental/request-rental-interface';
@@ -41,6 +42,7 @@ export class UserDashboardComponent implements OnInit {
     private toast: HotToastService,
     private crudRental: RequestRentalService,
     private dialog: MatDialog,
+    private fire: AngularFireAuth,
     ) {
      
      }
@@ -54,10 +56,12 @@ export class UserDashboardComponent implements OnInit {
     this.crudCar.getCars().subscribe((val: CarsInterface[]) => {
       this.cars = val;
     });
-    this.authService.currentUser$.subscribe((user: any)=>{
-      this.user$ = user;
-     this.email = this.user$.email;
+   
+    this.fire.authState.subscribe((user: any) => {
+      this.email = user.email;
     })
+   
+
     this.crudUser.getUsers().subscribe((user: UsersInterface[])=> {
       this.temp_User = user;
     while(!this.found){

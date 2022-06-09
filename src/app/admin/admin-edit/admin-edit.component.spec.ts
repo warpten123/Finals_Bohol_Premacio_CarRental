@@ -4,7 +4,7 @@ import { AdminEditComponent } from './admin-edit.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
+import {  MatDialogRef, MatDialog } from '@angular/material/dialog';
 describe('AdminEditComponent', () => {
   let component: AdminEditComponent;
   let fixture: ComponentFixture<AdminEditComponent>;

@@ -15,7 +15,7 @@
         <form class="inputs" [formGroup]="adminAddForm">
             <div class="form-content">
                 <div class="admin-form">
-                    <div class="title">Add Cars</div>
+                    <div class="title" id= "titleAddCars" >Add Cars</div>
                     <div class="input-boxes">
                         <!--INPUT FIELDS START-->
                         <div class="input-box">
@@ -42,12 +42,11 @@
                             <i class="fa fa-key"></i>
                             <input disabled="disabled" type="string" id="carStatus" placeholder="This car is already listed as Available" required>
                         </div>
-                        <!--WE NEED TO ADD MORE-->
                         <div class="cover">
                             <div class="front">
                                 <!-- put the image from FormControl carimage -->
-                                <img src="{{url}}" *ngIf="validImage" alt="car-image" class="car-image">
-                                <img src="assets\Upload-Transparent.png" *ngIf="!validImage" alt="car-image" class="car-image"> </div>
+                                <img src="{{url}}" *ngIf="validImage" alt="car-image" class="car-image" id="carImg">
+                                <img src="assets\Upload-Transparent.png" *ngIf="!validImage" alt="car-image" class="car-image" id="carImg"> </div>
                             <div class="back">
                                 <div class="text">
                                     <!-- Add upload button -->
@@ -55,10 +54,8 @@
                                         <i class="fa fa-upload"></i>
                                         <input type="file" id="carImage" placeholder="Upload Image" (change)="onFileChanged($event)" formControlName="carImage" required>
                                     </div>
-                                    <!-- Add location like city, street,zipcode,country -->
                                     <div class="input-box">
                                         <i class="fa fa-map-marker"></i>
-                                        <!-- inline FIELDS for street, city zipcode and country-->
                                         <input type="text" id="carBarangay" placeholder="Brgy" formControlName="carBarangay" required>
                                         <input type="text" id="carCity" placeholder="City" formControlName="carCity" required>
                                         
@@ -67,12 +64,12 @@
                             </div>
                             <div class="button input-box">
                                 <!-- add a clear button -->
-                                <button type="button" class="clear-button" (click)="clearImage()">Clear</button>
+                                <button type="button" class="clear-button" (click)="clearImage()" id="clearButton">Clear</button>
                             </div>
                         </div>
                         <!--INPUT FIELDS END-->
                         <div class="button input-box">
-                            <input type="submit" value="Add" (click)="onSubmitAdd()">
+                            <input type="submit" value="Add" (click)="onSubmitAdd()"id="submitButton">
                         </div>
 
                     </div>

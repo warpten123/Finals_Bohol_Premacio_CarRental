@@ -1,6 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { AdminServicesService } from '../admin/admin-services.service';
+
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
+import {  MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AdminServicesService', () => {
   let service: AdminServicesService;
@@ -8,7 +14,13 @@ describe('AdminServicesService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+      ],
+      providers: [
+        { provide: MatDialog, useValue: {}},
+        { provide: MatDialogRef, useValue: {}}
       ],
     });
     service = TestBed.inject(AdminServicesService);

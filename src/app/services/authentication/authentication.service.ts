@@ -1,30 +1,37 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, authState, createUserWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
 import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  currentUser$ = authState(this.auth);
-  constructor(private auth: Auth, 
+  currentUser$: any;
+  constructor(
+
+    private firebaseAuth: AngularFireAuth,
     ) { }
 
-  login(email: string, password: string){
-    return from(signInWithEmailAndPassword(this.auth,email,password));
+  // login(email: string, password: string){
+  //   return from(signInWithEmailAndPassword(this.auth,email,password));
+  // }
+   login(email: string, password: string){
+    return  from(this.firebaseAuth.signInWithEmailAndPassword(email,password))
   }
+  
+
   logout(){
-      return from(this.auth.signOut());
+      return from(this.firebaseAuth.signOut());
   }
   register(email: string, password: string){
-    return from(createUserWithEmailAndPassword(this.auth,email,password))
+    return from(this.firebaseAuth.createUserWithEmailAndPassword(email,password))
   }
-  delete(){
-    var user = this.auth.currentUser;
-    user?.delete().then(function() {
-      // User deleted.
-    }).catch(function() {
-      // An error happened.
-    });
-  }
+  // delete(){
+  //   var user = this.firebaseAuth.currentUser;
+  //   user?.delete().then(function() {
+  //     // User deleted.
+  //   }).catch(function() {
+  //     // An error happened.
+  //   });
+  // }
 }

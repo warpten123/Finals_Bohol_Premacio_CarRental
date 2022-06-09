@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RequestRentalService } from './../../services/request-rental/request-rental.service';
 import { Router } from '@angular/router';
 import { UsersService } from './../../services/users/users.service';
@@ -35,12 +36,12 @@ export class UserNavbarComponent implements OnInit {
     private crudRents: RequestRentalService,
     private crudUser: UsersService,
     private crudCar: CarsService,
+    private fire: AngularFireAuth,
   ) { }
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe((user: any)=>{
-      this.user$ = user;
-     this.email = this.user$.email;
+    this.fire.authState.subscribe((user: any) => {
+      this.email = user.email;
     })
 
     this.crudUser.getUsers().subscribe((user: UsersInterface[])=> {

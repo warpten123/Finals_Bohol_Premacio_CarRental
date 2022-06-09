@@ -1,18 +1,21 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
+
+
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.css']
 })
+
 export class AdminLoginComponent implements OnInit {
   isAdmin!: boolean;
   constructor(
     private router: Router,
-    private authService: AuthenticationService,
+   @Inject(AuthenticationService) private authService: AuthenticationService,
     private toast: HotToastService,
     ) { }
 
