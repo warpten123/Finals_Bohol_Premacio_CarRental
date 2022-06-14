@@ -20,9 +20,8 @@ export class AdminDashboardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.crud.getUsers().subscribe((val) => {
+    this.crud.getUsers().subscribe((val: UsersInterface[]) => {
       this.users = val;
-      console.log(this.users);
     });
   }
 

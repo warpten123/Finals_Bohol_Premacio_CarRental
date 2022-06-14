@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <form class="inputs" [formGroup]="adminLoginForm" (ngSubmit)="onSubmitAdmin()">
+            <form class="inputs" [formGroup]="adminLoginForm">
                <div class="form-content">
                 <div class="admin-form">
                     <div class="title">Admin Login</div>
@@ -41,7 +41,7 @@
                         
                         <div class="button input-box">
                         
-                            <input type="submit" value="Let's Go!">
+                            <input type="submit" id="adminGo" value="Let's Go!" (click)="onSubmitAdmin()">
                         </div>
                         <div class="text sign-up-text">Why Am I Here? <a routerLink="/login">Take me back!</a></div>
                     </div>

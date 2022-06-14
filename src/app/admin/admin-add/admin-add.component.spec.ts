@@ -1,5 +1,4 @@
-
-import { CarsInterface } from './../../services/cars/cars-interface';
+import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import { CarsService } from './../../services/cars/cars.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -10,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { By } from '@angular/platform-browser';
 import { HotToastService, HotToastModule } from '@ngneat/hot-toast';
 import { Observable,of,from } from 'rxjs';
+import { Router } from '@angular/router';
 ///MOCK///
 const mockCar: CarsInterface = {
   $carKey: '',
@@ -35,10 +35,11 @@ describe('Admin Add - TS Testing', () => {
   let toastService: jasmine.SpyObj<HotToastService>;
   let testCrudCar: jasmine.SpyObj<CarsService>;;
   let angularFireStore: AngularFirestore;
-
+  let router: jasmine.SpyObj<Router>;
   beforeEach(async () => {
      toastService = jasmine.createSpyObj<HotToastService>('HotToastService',['error','success'])
-     testCrudCar = jasmine.createSpyObj<CarsService>('CarsService',['addCars'])
+     testCrudCar = jasmine.createSpyObj<CarsService>('CarsService',['addCars','getCars','modifyCars'])
+     router = jasmine.createSpyObj<Router>('Router',['navigate'])
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -47,9 +48,8 @@ describe('Admin Add - TS Testing', () => {
         HotToastModule,
       ],
       providers:[
-        CarsService,
-
-        {provide: HotToastService, useValue: toastService },
+        {provide: HotToastService, useValue: toastService},
+        {provide: CarsService, useValue: testCrudCar },
       ],
       declarations: [ AdminAddComponent ]
       
@@ -60,6 +60,7 @@ describe('Admin Add - TS Testing', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminAddComponent);
+    testCrudCar = TestBed.get(CarsService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -122,7 +123,6 @@ describe('Admin Add - TS Testing', () => {
       carColor: "",
       carPrice: "",
       carMileage: "",
-      carImage: "",
       carBarangay: "",
       carCity: "",
     })
@@ -134,7 +134,6 @@ describe('Admin Add - TS Testing', () => {
       carColor: "Red",
       carPrice: "16000",
       carMileage: "150",
-      carImage: "testing.jpg",
       carBarangay: "Buagsong",
       carCity: "Cordova",
     })
@@ -146,7 +145,6 @@ describe('Admin Add - TS Testing', () => {
       carColor: "",
       carPrice: "",
       carMileage: "150",
-      carImage: "testing.jpg",
       carBarangay: "Buagsong",
       carCity: "Cordova",
     })
@@ -154,14 +152,6 @@ describe('Admin Add - TS Testing', () => {
     expect(component.adminAddForm.valid).toEqual(false);
     expect(toastService.error).toHaveBeenCalledWith('Please Complete All Fields!');
   })
-  it('should call addCars from car service and should show pop success',() => {
-  
-    component.onSubmitAdd();
-    testCrudCar.addCars(mockCar);
-    expect(testCrudCar.addCars).toHaveBeenCalled();
-
-  })
- describe('Admin Add - HTML Testing', ()=>{
   it('should contain label: Add Cars',() =>{
     let label = fixture.debugElement.query(By.css('#titleAddCars')).nativeElement;
     fixture.detectChanges()
@@ -192,7 +182,7 @@ describe('Admin Add - TS Testing', () => {
     fixture.detectChanges()
     expect(label?.getAttribute('placeholder')).toEqual("This car is already listed as Available");
   })
- }) 
+ 
  it('should show default image if no image of a car is chosen',() =>{
   component.validImage = false;
   fixture.detectChanges();
@@ -220,4 +210,26 @@ it('Placeholder text should have label: City ',() =>{
   fixture.detectChanges()
   expect(label?.getAttribute('placeholder')).toEqual("City");
 }) 
+
+it('should show toast pop-up sucess if submit button is clicked while form is valid',() => {
+  
+  component.onSubmitAdd();
+  const element = fixture.nativeElement;
+  const input = element.querySelector('#carImage');
+  input.dispatchEvent(new Event('change'));
+  fixture.detectChanges();
+  const payload = {
+    carName: "Toyota",
+    carColor: "Red",
+    carPrice: 1500000,
+    carMileage: 1500,
+    carCity: "Cebu",
+    carBarangay: "Buagsong",   
+  }
+  component.adminAddForm.setValue(payload);
+  expect(component.adminAddForm.valid).toBeTrue();
+  component.onSubmitAdd();
+  fixture.detectChanges();
+})
+
 });//end describe

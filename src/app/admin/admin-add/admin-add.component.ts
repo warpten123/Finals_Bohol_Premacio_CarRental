@@ -13,7 +13,7 @@ export class AdminAddComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public crud: CarsService,
+    private crud: CarsService,
     private toast: HotToastService,
     
   ) { }//end constructor
@@ -26,7 +26,6 @@ export class AdminAddComponent implements OnInit {
     carColor: new FormControl('', Validators.required),
     carPrice: new FormControl('', Validators.required),
     carMileage: new FormControl('', Validators.required),
-    carImage: new FormControl('', Validators.required),
     carBarangay: new FormControl('', Validators.required),
     carCity: new FormControl('', Validators.required),
     
@@ -40,7 +39,6 @@ export class AdminAddComponent implements OnInit {
 
 
   onFileChanged(event) {
-    console.log('triggered');
     const files = event.target.files;
     if (files.length === 0)
       return;
@@ -56,7 +54,6 @@ export class AdminAddComponent implements OnInit {
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.url = reader.result;
-      console.log("this is url: ",this.url);
       this.validImage = true;
     }
   }
@@ -86,7 +83,6 @@ export class AdminAddComponent implements OnInit {
         barangay: this.adminAddForm.value.carBarangay,
       }
     }
-    console.log(payload);
     this.crud.addCars(payload);
     this.toast.success(payload.carName + " added successfully!");
     this.adminAddForm.reset();

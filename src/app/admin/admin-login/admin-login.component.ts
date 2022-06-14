@@ -30,7 +30,6 @@ export class AdminLoginComponent implements OnInit {
     adminPass: new FormControl('', [
       Validators.required,
     ]),
-    // fcPassword2: new FormControl('', Validators.required),
   });
   onSubmitAdmin(){
     if (!this.adminLoginForm.valid) {
