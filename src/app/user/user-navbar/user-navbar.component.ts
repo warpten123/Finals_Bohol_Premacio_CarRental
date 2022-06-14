@@ -76,6 +76,7 @@ export class UserNavbarComponent implements OnInit {
       
         
       })
+      
   }//end ngoninit
    
   

@@ -30,6 +30,14 @@ export class ViewHistoryComponent implements OnInit {
     private crudCars: CarsService,
     private toast: HotToastService,
   ) { 
+   
+
+  }
+
+  ngOnInit(): void {
+  this.getData();
+  }
+  getData(){
     this.passUserData = this.crudUser.passUserValues$;
     this.passUserData.subscribe((users: UsersInterface)=>{
       this.users = users;
@@ -51,10 +59,6 @@ export class ViewHistoryComponent implements OnInit {
       this.cars = cars;
       // console.log("cars:",this.cars);
     })
-
-  }
-
-  ngOnInit(): void {
   }
   cancelRequest(rent: RequestRental,cars: CarsInterface){
     if(!this.checkDateForCancel(rent)){
