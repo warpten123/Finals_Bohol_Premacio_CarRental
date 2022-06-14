@@ -95,19 +95,6 @@ export class UserViewRequestComponent implements OnInit {
       })
     })
   }
-  onDelete(rents: RequestRental,index: number,cars: CarsInterface){
-    // if(!this.checkDateForCancel(rents)){
-    //   this.toast.error("You can't cancel this rental anymore")
-    //   return;
-    // }
-    // cars.carStatus = "Available";
-    // this.crudCar.modifyCars(cars.$carKey,cars);
-    // this.final_Users.rentedVehicles.splice(index,1);
-    // this.finalRentals.splice(index,1);
-    // this.crudUser.modifyUsers(this.final_Users.$key,this.final_Users);
-    // this.crudRents.deleteRequest(rents.$key);
-    // this.populateData();
-    // this.toast.success(rents.$key + " cancelled successfully!");
-  }
+  
  
 }

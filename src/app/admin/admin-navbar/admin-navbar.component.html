@@ -6,7 +6,7 @@
 </head>
 
 
-<nav>
+<!-- <nav>
     <div class="container">
         <h1><a routerLink="/admin-dashboard">Admin Dashboard</a></h1>
         <div class="menu">
@@ -32,5 +32,14 @@
             </ul>
         </div>
     </div>
-</nav>
-<script src="main.js"></script>
+</nav> -->
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span><a routerLink="/admin-dashboard">Admin Dashboard</a></span>
+  <div class="spacer">
+
+  </div>
+  <a mat-button routerLink="/admin-add">Add</a>
+  <a mat-button routerLink="/admin-available">Available</a>
+  <a mat-button routerLink="/admin-rented">Rented</a>
+  <a mat-raised-button color="accent" (click)="logout()" >Logout</a>
+  </mat-toolbar>

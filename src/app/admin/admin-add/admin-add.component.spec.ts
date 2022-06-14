@@ -29,7 +29,7 @@ const mockCar: CarsInterface = {
 ///END MOCK///
 
 
-describe('AdminAddComponent', () => {
+describe('Admin Add - TS Testing', () => {
   let component: AdminAddComponent;
   let fixture: ComponentFixture<AdminAddComponent>;
   let toastService: jasmine.SpyObj<HotToastService>;
@@ -72,63 +72,8 @@ describe('AdminAddComponent', () => {
     component.ngOnInit();
     expect(component.ngOnInit).toHaveBeenCalled();
   })
-  it('should contain label: Add Cars',() =>{
-    let label = fixture.debugElement.query(By.css('#titleAddCars')).nativeElement;
-    fixture.detectChanges()
-    expect(label.textContent).toBe('Add Cars'); 
-  })
-  it('Placeholder text should have label: Car Name ',() =>{
-    let label = document.getElementById('carName');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Car Name");
-  })
-  it('Placeholder text should have label: Color ',() =>{
-    let label = document.getElementById('carColor');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Color");
-  })
-  it('Placeholder text should have label: Rent Price ',() =>{
-    let label = document.getElementById('carPrice');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Rent Price");
-  })
-  it('Placeholder text should have label: Mileage (Kilometers) ',() =>{
-    let label = document.getElementById('carMileage');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Mileage (Kilometers)");
-  })
-  it('Placeholder text should have label: This car is already listed as Available ',() =>{
-    let label = document.getElementById('carStatus');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("This car is already listed as Available");
-  })
-  it('should show default image if no image of a car is chosen',() =>{
-    component.validImage = false;
-    fixture.detectChanges();
-    let resultBlock = fixture.debugElement.query(By.css('#carImg'));
-    expect(resultBlock).not.toBeNull();
-  })
-  it('should show the image of the chosen car',() =>{
-    component.validImage = true;
-    fixture.detectChanges();
-    let resultBlock = fixture.debugElement.query(By.css('#carImg'));
-    expect(resultBlock).not.toBeNull();
-  })
-  it('Placeholder text should have label: Upload Image ',() =>{
-    let label = document.getElementById('carImage');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Upload Image");
-  })
-  it('Placeholder text should have label: Brgy ',() =>{
-    let label = document.getElementById('carBarangay');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("Brgy");
-  })
-  it('Placeholder text should have label: City ',() =>{
-    let label = document.getElementById('carCity');
-    fixture.detectChanges()
-    expect(label?.getAttribute('placeholder')).toEqual("City");
-  })
+  
+  
   it('should call clearImage() when button is clicked',() =>{
     spyOn(component,'clearImage').and.callThrough();
     let click = fixture.debugElement.query(By.css('#clearButton')).nativeElement;
@@ -216,5 +161,63 @@ describe('AdminAddComponent', () => {
     expect(testCrudCar.addCars).toHaveBeenCalled();
 
   })
-  
-});
+ describe('Admin Add - HTML Testing', ()=>{
+  it('should contain label: Add Cars',() =>{
+    let label = fixture.debugElement.query(By.css('#titleAddCars')).nativeElement;
+    fixture.detectChanges()
+    expect(label.textContent).toBe('Add Cars'); 
+  })
+  it('Placeholder text should have label: Car Name ',() =>{
+    let label = document.getElementById('carName');
+    fixture.detectChanges()
+    expect(label?.getAttribute('placeholder')).toEqual("Car Name");
+  })
+  it('Placeholder text should have label: Color ',() =>{
+    let label = document.getElementById('carColor');
+    fixture.detectChanges()
+    expect(label?.getAttribute('placeholder')).toEqual("Color");
+  })
+  it('Placeholder text should have label: Rent Price ',() =>{
+    let label = document.getElementById('carPrice');
+    fixture.detectChanges()
+    expect(label?.getAttribute('placeholder')).toEqual("Rent Price");
+  })
+  it('Placeholder text should have label: Mileage (Kilometers) ',() =>{
+    let label = document.getElementById('carMileage');
+    fixture.detectChanges()
+    expect(label?.getAttribute('placeholder')).toEqual("Mileage (Kilometers)");
+  })
+  it('Placeholder text should have label: This car is already listed as Available ',() =>{
+    let label = document.getElementById('carStatus');
+    fixture.detectChanges()
+    expect(label?.getAttribute('placeholder')).toEqual("This car is already listed as Available");
+  })
+ }) 
+ it('should show default image if no image of a car is chosen',() =>{
+  component.validImage = false;
+  fixture.detectChanges();
+  let resultBlock = fixture.debugElement.query(By.css('#carImg'));
+  expect(resultBlock).not.toBeNull();
+})
+it('should show the image of the chosen car',() =>{
+  component.validImage = true;
+  fixture.detectChanges();
+  let resultBlock = fixture.debugElement.query(By.css('#carImg'));
+  expect(resultBlock).not.toBeNull();
+})
+it('Placeholder text should have label: Upload Image ',() =>{
+  let label = document.getElementById('carImage');
+  fixture.detectChanges()
+  expect(label?.getAttribute('placeholder')).toEqual("Upload Image");
+})
+it('Placeholder text should have label: Brgy ',() =>{
+  let label = document.getElementById('carBarangay');
+  fixture.detectChanges()
+  expect(label?.getAttribute('placeholder')).toEqual("Brgy");
+})
+it('Placeholder text should have label: City ',() =>{
+  let label = document.getElementById('carCity');
+  fixture.detectChanges()
+  expect(label?.getAttribute('placeholder')).toEqual("City");
+}) 
+});//end describe

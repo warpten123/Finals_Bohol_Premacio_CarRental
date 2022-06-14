@@ -1,5 +1,5 @@
 <app-admin-navbar></app-admin-navbar>
-<div *ngIf="cars.length > 0;else noCars" class="container"></div>
+<div *ngIf="cars.length > 0;else noCars" class="container" id="displayCars"></div>
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let car of cars">
@@ -8,7 +8,7 @@
       <mat-card-title><mat-icon> directions_car</mat-icon> {{car.carName}}</mat-card-title>
     </mat-card-header>
     <img mat-card-image src="{{car.carImage}}"class=".img-responsive" width="304" height="236">
-    <mat-card-content >
+    <mat-card-content>
       <p>
           Mileage: {{car.carMileage}} km
       </p>
@@ -18,14 +18,14 @@
         Rental Price: ₱{{car.carRentPrice}}.00
       </p>
     </mat-card-content>
-    <mat-card-content>
+    <mat-card-content >
       <p>
         Status: {{car.carStatus}}
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="onDelete(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>delete</mat-icon>DELETE</button>
-      <button mat-button (click)="onEdit(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>edit</mat-icon>EDIT</button>
+      <button id="delete" mat-button (click)="onDelete(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>delete</mat-icon>DELETE</button>
+      <button id = "edit" mat-button (click)="onEdit(car)" *ngIf="car.carStatus == 'Available'"><mat-icon>edit</mat-icon>EDIT</button>
       <button mat-button (click)="onDelete(car)" *ngIf="car.carStatus == 'Rented'"[disabled]="true"><mat-icon>delete</mat-icon>DELETE</button>
       <button mat-button (click)="onEdit(car)" *ngIf="car.carStatus == 'Rented'"[disabled]="true"><mat-icon>edit</mat-icon>EDIT</button>
     </mat-card-actions>
@@ -35,6 +35,5 @@
 </div>
 <ng-template #noCars>
     <hr>
-    <h5>There are no cars registered!</h5>
-    
+    <h5 id="noCars">There are no cars registered!</h5>
 </ng-template>

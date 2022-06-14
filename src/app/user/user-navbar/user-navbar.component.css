@@ -1,54 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: content-box;
-    font-family: 'Fira Sans', sans-serif;
-    background-color: #5b13b9;
-    display: flex;
-}
 
-.container {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    
-}
 
-nav ul {
-    list-style-type: none;
+.spacer{
+    flex: 1 1 auto;
 }
-
-nav ul li {
-    float: left;
-    margin-right: 0.5em;
-}
-
-nav ul li a {
-    padding: 0.25em;
-    /* pale bluish white */
-    background-color: #5b13b9;
-    justify-content: space-between;
-    /* align it in row form */
-    display: inline-block;
-}
-
-nav ul li a:hover,
-nav ul li a:focus {
-    /* make the font bolder */
-    font-weight: bold;
-    /* make the background color darker */
-    background-color: #7d2ae8;
-}
-
-h1 {
-    color: white;
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    /* display text center */
-    text-align: center;
-    padding: 10px 0;
-}
-

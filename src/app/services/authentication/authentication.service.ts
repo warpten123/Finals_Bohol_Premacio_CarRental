@@ -18,8 +18,6 @@ export class AuthenticationService {
    login(email: string, password: string){
     return  from(this.firebaseAuth.signInWithEmailAndPassword(email,password))
   }
-  
-
   logout(){
       return from(this.firebaseAuth.signOut());
   }

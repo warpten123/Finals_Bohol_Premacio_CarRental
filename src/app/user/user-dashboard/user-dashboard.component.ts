@@ -46,9 +46,8 @@ export class UserDashboardComponent implements OnInit {
     ) {
      
      }
-     searchForm: FormGroup = new FormGroup({
-      search: new FormControl('', Validators.required),
-      
+    searchForm: FormGroup = new FormGroup({
+      search: new FormControl('', Validators.required), 
     });
     
 

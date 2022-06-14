@@ -6,7 +6,7 @@
 </head>
 
 
-<nav>
+<!-- <nav>
     <div class="container">
         <h1><a routerLink="/user-dashboard">View our cars!</a></h1>
         <div class="menu">
@@ -32,4 +32,15 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
+<mat-toolbar color="primary" class="mat-elevation-z8">
+    <span>Rent Cars</span>
+  <div class="spacer">
+
+  </div>
+  <a mat-button routerLink="/user-dashboard">Home</a>
+  <a mat-button routerLink="/user-request">Requests</a>
+  <a mat-button (click)="passToHistory()"routerLink="/user-history">History</a>
+  <a mat-button routerLink="/user-profile">Profile</a>
+  <a mat-raised-button color="accent" (click)="logout()" >Logout</a>
+  </mat-toolbar>
