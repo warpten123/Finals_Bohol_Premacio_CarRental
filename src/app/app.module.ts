@@ -42,6 +42,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { Auth} from '@angular/fire/auth';
+import { OverlayModule } from '@angular/cdk/overlay';
 //
 //
 
@@ -89,6 +90,7 @@ import { Auth} from '@angular/fire/auth';
     MatNativeDateModule,
     MatFormFieldModule,
     FormsModule,
+    OverlayModule,
   ],
   providers: [/*ApiService*/ { provide: PERSISTENCE, useValue: 'session' }],
   bootstrap: [AppComponent]

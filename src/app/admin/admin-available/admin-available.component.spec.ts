@@ -1,6 +1,7 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
-import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, tick, fakeAsync } from '@angular/core/testing';
 import { AdminAvailableComponent } from './admin-available.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
@@ -13,12 +14,19 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { CarsInterface } from 'src/app/services/cars/cars-interface';
 import {MatCardHarness} from '@angular/material/card/testing';
 import { MatCardModule } from '@angular/material/card';
+import { OverlayModule } from '@angular/cdk/overlay';
+import {MatDialogModule} from '@angular/material/dialog';
+import {HarnessLoader} from '@angular/cdk/testing';
+import {TestbedHarnessEnvironment} from '@angular/cdk/testing/testbed';
+import {MatButtonHarness} from '@angular/material/button/testing';
 describe('AdminAvailableComponent', () => {
   let component: AdminAvailableComponent;
   let fixture: ComponentFixture<AdminAvailableComponent>;
   let toastService: jasmine.SpyObj<HotToastService>;
   let mockCarService: any;
   let CARS: any;
+  let dialog: jasmine.SpyObj<MatDialog>;
+  let loader: HarnessLoader;
   CARS = [
     {carKey: '',carName: 'Toyota',carColor: 'Red', carRentPrice: 20000,carMileage: 100,carStatus: 'Available', carLocation: [{carBarangay: 'Cansubing', carCity: 'Cebu'}]},
     {carKey: '',carName: 'Nisan',carColor: 'Blue', carRentPrice: 100000,carMileage: 5444,carStatus: 'Available', carLocation: [{carBarangay: 'Cansubing', carCity: 'Cebu'}]},
@@ -33,13 +41,17 @@ describe('AdminAvailableComponent', () => {
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         MatCardModule,
+        OverlayModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
       ],
       providers: 
       [
         MatCardHarness,
+        MatButtonHarness,
         // { provide: CarsService, useValue: mockCarService },
-        { provide: MatDialog, useValue: {}},
-        { provide: MatDialogRef, useValue: {}}
+        { provide: MatDialogRef, useValue: {}},
+        {provide: MatDialog, useValue: jasmine.createSpyObj<MatDialog>(['open'])}
       ],
       declarations: [ AdminAvailableComponent ]
     })
@@ -49,7 +61,10 @@ describe('AdminAvailableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminAvailableComponent);
     component = fixture.componentInstance;
+    dialog = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
+    loader = TestbedHarnessEnvironment.loader(fixture);
     fixture.detectChanges();
+   
   });
 
   it('it should create', () => {
@@ -73,6 +88,17 @@ describe('AdminAvailableComponent', () => {
     fixture.detectChanges()
     expect(label.textContent).toBe('There are no cars registered!'); 
   })
+  it('should call onDelete method',()=>{
+    spyOn(component,'onDelete').and.callThrough();
+    component.onDelete(CARS);
+    expect(component.onDelete).toHaveBeenCalled();
+  })
+  it('should call onEdit method and open mat dialog',()=>{
+    spyOn(component,'onEdit').and.callThrough();
+    component.onEdit(CARS);
+    expect(dialog.open.calls.count()).toBe(1);
+    expect(component.onEdit).toHaveBeenCalled();
+  })
   // it('should contain the title and content of the car',() =>{
   //   let cardTitle: any, cardContent: any;
   //   let cardTest = Array.from(document.getElementsByTagName('mat-card'));
@@ -85,11 +111,52 @@ describe('AdminAvailableComponent', () => {
   //     content: cardContent,
   //   }));
   // })
-  // it('should show delete button if car is available',()=>{
-  //   spyOn(component,'onDelete').and.callThrough();
-  //   component.cars[0].carStatus = "Available";
-  //   fixture.detectChanges();
-  //   expect(component.onDelete).toHaveBeenCalled();
+  it('button for delete car is enabled if car status is available',async ()=>{
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Available";
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelector('button').disabled).toBeFalse();
+    });
+  it('button for edit car is enabled if car status is available',async ()=>{
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Available";
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelector('button').disabled).toBeFalse();
+    });
+  it('button for delete car is disabled if car status is available',async ()=>{
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Rented";
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelector('button').disabled).toBeTrue();
+    });
+  it('button for edit car is disabled if car status is available',async ()=>{
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Rented";
+    fixture.detectChanges();
+    expect(fixture.debugElement.nativeElement.querySelector('button').disabled).toBeTrue();
+    });
+  it('delete button is clicked', fakeAsync(() => {
+    spyOn(component, 'onDelete').and.callThrough();
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Available";
+    // component.onDelete(CARS);
+    fixture.detectChanges();
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+     button.click();
+    tick();
+    expect(component.onDelete).toHaveBeenCalled();
+    }));
+  it('edit button is clicked', fakeAsync(() => {
+    spyOn(component, 'onDelete').and.callThrough();
+    component.cars[0] = CARS[0];
+    component.cars[0].carStatus = "Available";
+      // component.onDelete(CARS);
+    fixture.detectChanges();
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+    tick();
+    expect(component.onDelete).toHaveBeenCalled();
+    }));
     
-  // })
+
 });
