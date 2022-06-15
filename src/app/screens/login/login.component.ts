@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   count: number = 0;
   found: boolean = false;
   constructor(
-    private router: Router,
+    public router: Router,
     private crud: UsersService,
     private afs: AngularFirestore,
     private authService: AuthenticationService,
