@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
         error: (message) => `${message}`
       })
     ).subscribe(()=>{
-      this.nav('/user-dashboard');
+      this.router.navigate(['/user-dashboard']);
     });
        const payload: UsersInterface = {
         $key: '',
@@ -107,16 +107,14 @@ export class LoginComponent implements OnInit {
           error: 'There was a problem with your login.'
         })
       ).subscribe(()=>{
-        this.nav('user-dashboard');
+      
+        this.router.navigate(['/user-dashboard']);
 
       });
       
      
     
   }//end submit
- 
-  nav(destination: string) {
-    this.router.navigate([destination]);
-  }
+
 }
 

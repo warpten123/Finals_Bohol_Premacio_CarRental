@@ -10,7 +10,11 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 // import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
-
+var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+var string = '';
+for(var ii=0; ii<15; ii++){
+    string += chars[Math.floor(Math.random() * chars.length)];
+}
 describe('AdminLoginComponent', () => {
   let component: AdminLoginComponent;
   let fixture: ComponentFixture<AdminLoginComponent>;
@@ -48,7 +52,7 @@ describe('AdminLoginComponent', () => {
   it('admin form should be valid',()=>{
     const mockAdmin = {
       $key: '',
-      adminEmail: "admin@gmail.com",
+      adminEmail: string + "@gmail.com",
       adminPass: "123456",
     }
     component.adminLoginForm.setValue(mockAdmin);
@@ -73,7 +77,18 @@ describe('AdminLoginComponent', () => {
   it('admin form is valid and admin logs in',()=>{
     const mockAdmin = {
       $key: '',
-      adminEmail: "admin@gmail.com",
+      adminEmail: string + "@gmail.com",
+      adminPass: "123456",
+    }
+    component.adminLoginForm.setValue(mockAdmin);
+    expect(component.adminLoginForm.valid).toBeTrue();
+    component.onSubmitAdmin();
+    fixture.detectChanges();
+  })
+  it('admin form is valid and admin logs in',()=>{
+    const mockAdmin = {
+      $key: '',
+      adminEmail: string + "@gmail.com",
       adminPass: "123456",
     }
     component.adminLoginForm.setValue(mockAdmin);

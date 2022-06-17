@@ -16,7 +16,11 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { RequestRentalService } from 'src/app/services/request-rental/request-rental.service';
 import { By } from '@angular/platform-browser';
 
-
+var chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+var string = '';
+for(var ii=0; ii<15; ii++){
+    string += chars[Math.floor(Math.random() * chars.length)];
+}
 describe('AdminRentedComponent', () => {
   let component: AdminRentedComponent;
   let fixture: ComponentFixture<AdminRentedComponent>;
@@ -29,7 +33,7 @@ describe('AdminRentedComponent', () => {
   USERS = {
     $key: '',
     name: 'john Doe',
-    email: 'testing@gmail.com',
+    email: string + '@gmail.com',
     age: 54,
     password: "123456",
     money: 15000,
@@ -52,9 +56,9 @@ describe('AdminRentedComponent', () => {
   }
 
   RENTALS = {
-    $key: '',
-    userKey: '1',
-    carKey: '1',
+    $key: '0nQqNx0e9gU1sd21t6m6',
+    userKey: '2iDSqI2G348kzyqGg4Ps',
+    carKey: '7FWbp6eyiMtAFtPLelc3',
     requestDate: 'TODAY',
     requestStatus: 'Pending',
   }
@@ -117,6 +121,7 @@ describe('AdminRentedComponent', () => {
     fixture.detectChanges();
     expect(mockCarService.getCars).toHaveBeenCalled();
   });
+  
   
   // it('should get list of rentals from the rental service', () => {
   //   component.ngOnInit();

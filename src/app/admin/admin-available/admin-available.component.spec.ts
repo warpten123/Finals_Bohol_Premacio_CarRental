@@ -134,17 +134,18 @@ describe('AdminAvailableComponent', () => {
     tick();
     expect(component.onDelete).toHaveBeenCalled();
     }));
-  it('edit button is clicked', fakeAsync(() => {
-    spyOn(component, 'onEdit').and.callThrough();
-    component.cars[0] = CARS[0];
-    component.cars[0].carStatus = "Available";
-    component.onEdit(CARS);
-    fixture.detectChanges();
-    let button = fixture.debugElement.nativeElement.querySelector('button');
-    button.click();
-    tick();
-    expect(component.onEdit).toHaveBeenCalled();
-    }));
+    it('edit button is clicked', fakeAsync(() => {
+      spyOn(component, 'onEdit').and.callThrough();
+      component.cars[0] = CARS[0];
+      component.cars[0].carStatus = "Available";
+      component.onEdit(CARS);
+      fixture.detectChanges();
+      let button = fixture.debugElement.nativeElement.querySelector('button');
+      button.click();
+      tick();
+      expect(component.onEdit).toHaveBeenCalled();
+      }));
+    
     
 
 });

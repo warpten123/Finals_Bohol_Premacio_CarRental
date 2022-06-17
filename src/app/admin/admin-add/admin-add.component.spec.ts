@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 ///MOCK///
 const mockCar: CarsInterface = {
   $carKey: '',
-  carName: "Toyota",
+  carName: "FUCKER",
   carColor: "Red",
   carRentPrice: 1500000,
   carMileage: 145,
@@ -27,8 +27,6 @@ const mockCar: CarsInterface = {
 
 
 ///END MOCK///
-
-
 describe('Admin Add - TS Testing', () => {
   let component: AdminAddComponent;
   let fixture: ComponentFixture<AdminAddComponent>;
@@ -68,6 +66,8 @@ describe('Admin Add - TS Testing', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
   it('ngOnInit is called',() =>{
     spyOn(component, 'ngOnInit').and.callThrough();
     component.ngOnInit();
@@ -211,8 +211,7 @@ it('Placeholder text should have label: City ',() =>{
   expect(label?.getAttribute('placeholder')).toEqual("City");
 }) 
 
-it('should show toast pop-up sucess if submit button is clicked while form is valid',() => {
-  
+it('should show toast pop-up sucess if submit button is clicked while form is valid',() => {  
   component.onSubmitAdd();
   const element = fixture.nativeElement;
   const input = element.querySelector('#carImage');

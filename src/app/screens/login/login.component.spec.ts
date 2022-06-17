@@ -39,6 +39,10 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
    it('should click button and call on submit register',()=>{
     spyOn(component,'onSubmitRegister').and.callThrough();
     let click = fixture.debugElement.query(By.css('#register')).nativeElement;
@@ -53,11 +57,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(component.onSubmitLogin).toHaveBeenCalled();
   })
-  it('should call nav to navigate',()=>{
-   spyOn(component,'nav').and.callThrough();
-   component.nav("user-dashboard");
-   expect(component.nav).toHaveBeenCalled();
-  })
+
   it('loginForm should be valid',()=>{
     const payload = {
       emailLogin: "testing@gmail.com",
@@ -99,6 +99,8 @@ describe('LoginComponent', () => {
     component.onSubmitRegister();
     fixture.detectChanges();
    })
+   
+   
   
    
 });
