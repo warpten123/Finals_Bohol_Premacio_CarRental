@@ -66,13 +66,13 @@
                             </div>
                             <div class="button input-box">
                                 <!-- add a clear button -->
-                                <button type="button" class="clear-button" (click)="clearImage()">Clear</button>
-                                <button type="button" class="clear-button" (click)="closeDialog()">Close</button>
+                                <button type="button" id="clearImage" class="clear-button" (click)="clearImage()">Clear</button>
+                                <button type="button" id="closeEdit" class="close-button" (click)="closeDialog()">Close</button>
                             </div>
                         </div>
                         <!--INPUT FIELDS END-->
                         <div class="button input-box">
-                            <input type="submit" value="Edit Car" (click)="onSubmitUpdate()">
+                            <input type="submit" id = "onSubmitUpdate" value="Edit Car" (click)="onSubmitUpdate()">
                         </div>
 
                     </div>

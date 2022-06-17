@@ -21,7 +21,7 @@ validImage: boolean = false;
     private toast: HotToastService,
   ) { }
   onFileChanged(event) {
-    // console.log('triggered');
+    
     const files = event.target.files;
     if (files.length === 0)
       return;
@@ -37,19 +37,24 @@ validImage: boolean = false;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.url = reader.result;
-      // console.log(this.url);
+      
       this.validImage = true;
     }
   }
   ngOnInit(): void {
     this.url = this.crud.editCarForm.value.carImage;
-    // console.log(this.url);
   }
   onSubmitUpdate(){
-    this.crud.editCarForm.value.carImage = this.url;
-    this.crud.modifyCars(this.crud.editCarForm.value.$carKey,this.crud.editCarForm.value);
-    this.dialog.closeAll();
-    this.toast.success("Successfully Updated!");
+    if(!this.crud.editCarForm.valid){
+      this.toast.error("Error");
+      return;
+    }else{
+      this.crud.editCarForm.value.carImage = this.url;
+      this.crud.modifyCars(this.crud.editCarForm.value.$carKey,this.crud.editCarForm.value);
+      this.dialog.closeAll();
+      this.toast.success("Successfully Updated!");
+    }
+      
   }
   closeDialog(){
     this.dialog.closeAll();

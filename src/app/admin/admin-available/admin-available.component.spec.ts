@@ -75,7 +75,7 @@ describe('AdminAvailableComponent', () => {
   it('should get list of cars from the car service', () => {
     mockCarService.getCars.and.returnValue(of(CARS));
     fixture.detectChanges();
-    expect(fixture.componentInstance.cars.length).toBe(0);
+    expect(component.cars.length).toBe(0);
   });
   // it('should show list of cars if car.length > 0',() =>{
   //   component.cars.length = 1;
@@ -99,18 +99,6 @@ describe('AdminAvailableComponent', () => {
     expect(dialog.open.calls.count()).toBe(1);
     expect(component.onEdit).toHaveBeenCalled();
   })
-  // it('should contain the title and content of the car',() =>{
-  //   let cardTitle: any, cardContent: any;
-  //   let cardTest = Array.from(document.getElementsByTagName('mat-card'));
-  //   cardTest.forEach(card =>{
-  //      cardTitle = card.getElementsByTagName('mat-card-title')[0].textContent;
-  //      cardContent = card.getElementsByTagName('mat-card-content')[0].textContent;
-  //   })
-  //   expect(testData).toContain(jasmine.objectContaining({
-  //     title: cardTitle,
-  //     content: cardContent,
-  //   }));
-  // })
   it('button for delete car is enabled if car status is available',async ()=>{
     component.cars[0] = CARS[0];
     component.cars[0].carStatus = "Available";
@@ -147,15 +135,15 @@ describe('AdminAvailableComponent', () => {
     expect(component.onDelete).toHaveBeenCalled();
     }));
   it('edit button is clicked', fakeAsync(() => {
-    spyOn(component, 'onDelete').and.callThrough();
+    spyOn(component, 'onEdit').and.callThrough();
     component.cars[0] = CARS[0];
     component.cars[0].carStatus = "Available";
-      // component.onDelete(CARS);
+    component.onEdit(CARS);
     fixture.detectChanges();
     let button = fixture.debugElement.nativeElement.querySelector('button');
     button.click();
     tick();
-    expect(component.onDelete).toHaveBeenCalled();
+    expect(component.onEdit).toHaveBeenCalled();
     }));
     
 

@@ -12,8 +12,8 @@
                 <p class="content">Requested by: {{final_Users[i].name}}</p>
                 <p class="content">Request Date: {{rents.requestDate}}</p>
                 <p class="content">Pick-up Location: {{final_Cars[i].carLocation.barangay}}, {{final_Cars[i].carLocation.city}}</p>
-                <div class="btn" style="background-color: #4abd3e;" (click)="rentAccept(rents,final_Cars[i],final_Users[i])" *ngIf="rents.requestStatus == 'Pending'">Accept</div>
-                <div class="btn" style="background-color: red;"(click)="rentDeny(rents)" *ngIf="rents.requestStatus == 'Pending'">Deny</div>
+                <div id="rentAccept"class="btn" style="background-color: #4abd3e;" (click)="rentAccept(rents,final_Cars[i],final_Users[i])" *ngIf="rents.requestStatus == 'Pending'">Accept</div>
+                <div id="rentDeny"class="btn" style="background-color: red;"(click)="rentDeny(rents)" *ngIf="rents.requestStatus == 'Pending'">Deny</div>
                 <p class="content" *ngIf="rents.requestStatus == 'Accepted'">REQUEST ACCEPTED!</p>
                 <p class="content" *ngIf="rents.requestStatus == 'Denied'">REQUEST DENIED!</p>
                 <p class="content" *ngIf="rents.requestStatus == 'Cancelled by User'">REQUEST CANCELLED!</p>
