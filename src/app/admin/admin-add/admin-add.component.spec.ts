@@ -29,7 +29,7 @@ const mockCar: CarsInterface = {
 ///END MOCK///
 
 
-describe('Admin Add - TS Testing', () => {
+xdescribe('Admin Add - TS Testing', () => {
   let component: AdminAddComponent;
   let fixture: ComponentFixture<AdminAddComponent>;
   let toastService: jasmine.SpyObj<HotToastService>;
