@@ -30,3 +30,7 @@ mat-toolbar {
     padding: 5%;
     
   }
+  .noRequests{
+    text-align: center;
+    font-size: larger;
+  }

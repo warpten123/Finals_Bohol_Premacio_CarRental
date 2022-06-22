@@ -29,7 +29,7 @@
       <p *ngIf="rent.requestStatus == 'Accepted' && days[i] >= 0">
         {{days[i]}} day(s) from now
       </p>
-     <p *ngIf="!(rent.requestStatus == 'Accepted') || days[i] <= 0">
+     <p *ngIf="!(rent.requestStatus == 'Accepted') && days[i] <= 0">
         0 days from now 
       </p>
       <p *ngIf="rent.requestStatus == 'Accepted' && checkDateForCancel(rent)">
@@ -56,6 +56,6 @@
 </div>  
   <ng-template #noRequests>
     <hr>
-    <h5>There are no requests listed!</h5>
+    <h5 class = "noRequests">You have no processed request yet</h5>
     
 </ng-template>

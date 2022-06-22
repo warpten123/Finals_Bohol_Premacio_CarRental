@@ -50,9 +50,7 @@ describe('AdminDashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+
   
   it('ngOnInit is called', () => {
     spyOn(component,'ngOnInit').and.callThrough();
