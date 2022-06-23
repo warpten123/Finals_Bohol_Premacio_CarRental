@@ -51,6 +51,8 @@ describe('AdminDashboardComponent', () => {
   it('should have a list of users', () => {
     expect(component.users).toBeTruthy();
   });
+
+  
   it('ngOnInit is called', () => {
     spyOn(component,'ngOnInit').and.callThrough();
     component.ngOnInit();

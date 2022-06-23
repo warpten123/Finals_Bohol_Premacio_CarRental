@@ -10,8 +10,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let spy: jasmine.Spy;
-
+  let USERS: any;
+  USERS = {
+    $key: '',
+    name: 'john Doe',
+    email: 'testing@gmail.com',
+    age: 54,
+    password: "123456",
+    money: 15000,
+    rentedVehicles: [
+      "Okay",
+    ],
+  }
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -28,23 +38,37 @@ describe('UsersService', () => {
     service = TestBed.inject(UsersService);
   });
 
-  // should return a passUserValues$ observable 
-
-  // should get one users from firebase
-  // it('should get one users from firebase', () => {
-  //   const userResponse = [
-  //     {
-  //       email: 'bohol@gmail.com',
-  //       password: '123456',
-  //       $key: '',
-  //       name: '',
-  //       age: 0,
-  //       money: 0,
-  //       rentedVehicles: []
-  //     }
-  //   ];
-  //   UsersService.getUsers().subscribe((val) => {
-  //     expect(val).toEqual(userResponse);
-  //   });
-  // });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+  it('should call getPassUserValue', () => {
+    spyOn(service, 'getPassUserValue').and.callThrough();
+    service.getPassUserValue(USERS);
+    expect(service.getPassUserValue).toHaveBeenCalled();
+  });
+  it('should call addUsers', () => {
+    spyOn(service, 'addUsers').and.callThrough();
+    service.addUsers(USERS);
+    expect(service.addUsers).toHaveBeenCalled();
+  });
+  it('should call getUsers', () => {
+    spyOn(service, 'getUsers').and.callThrough();
+    service.getUsers();
+    expect(service.getUsers).toHaveBeenCalled();
+  });
+  it('should call modifyUsers', () => {
+    spyOn(service, 'modifyUsers').and.callThrough();
+    service.modifyUsers("0yIvB88YKwZ16iYaD9dd",USERS);
+    expect(service.modifyUsers).toHaveBeenCalled();
+  });
+  it('should call removeUsers', () => {
+    spyOn(service, 'removeUsers').and.callThrough();
+    service.removeUsers("userKey");
+    expect(service.removeUsers).toHaveBeenCalled();
+  });
+  it('should call getOneUsers', () => {
+    spyOn(service, 'getOneUsers').and.callThrough();
+    service.getOneUsers("paul@gmail.com");
+    expect(service.getOneUsers).toHaveBeenCalled();
+  });
 });

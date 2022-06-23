@@ -39,6 +39,8 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
    it('should click button and call on submit register',()=>{
     spyOn(component,'onSubmitRegister').and.callThrough();
     let click = fixture.debugElement.query(By.css('#register')).nativeElement;
@@ -53,52 +55,50 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
     expect(component.onSubmitLogin).toHaveBeenCalled();
   })
-  // it('should call nav to navigate',()=>{
-  //  spyOn(component,'nav').and.callThrough();
-  //  component.nav("user-dashboard");
-  //  expect(component.nav).toHaveBeenCalled();
-  // })
-  it('loginForm should be valid',()=>{
-    const payload = {
-      emailLogin: "testing@gmail.com",
-      passLogin: "123456",
-    }
-    component.loginForm.setValue(payload);
-    expect(component.loginForm.valid).toBeTrue();
-   })
-   it('loginForm should be invalid',()=>{
-    const payload = {
-      emailLogin: "testing@gmail.com",
-      passLogin: "",
-    }
-    component.loginForm.setValue(payload);
-    expect(component.loginForm.valid).toBeFalse();
-   })
-   it('should logged in when form is valid',()=>{
-    component.onSubmitLogin();
-    const payload = {
-      emailLogin: "testing@gmail.com",
-      passLogin: "123456",
-    }
-    component.loginForm.setValue(payload);
-    expect(component.loginForm.valid).toBeTrue();
-    component.onSubmitLogin();
-    fixture.detectChanges();
-   })
-   it('should register users when form is valid',()=>{
-    component.onSubmitRegister();
-    const payload = {
-      $key: '',
-      name: 'Premacio',
-      email: 'paul@gmail.com',
-      age: 19,
-      password: '123456',
-    }
-    component.registerForm.setValue(payload);
-    expect(component.registerForm.valid).toBeTrue();
-    component.onSubmitRegister();
-    fixture.detectChanges();
-   })
+
+  // it('loginForm should be valid',()=>{
+  //   const payload = {
+  //     emailLogin: "testing@gmail.com",
+  //     passLogin: "123456",
+  //   }
+  //   component.loginForm.setValue(payload);
+  //   expect(component.loginForm.valid).toBeTrue();
+  //  })
+  //  it('loginForm should be invalid',()=>{
+  //   const payload = {
+  //     emailLogin: "testing@gmail.com",
+  //     passLogin: "",
+  //   }
+  //   component.loginForm.setValue(payload);
+  //   expect(component.loginForm.valid).toBeFalse();
+  //  })
+  //  it('should logged in when form is valid',()=>{
+  //   component.onSubmitLogin();
+  //   const payload = {
+  //     emailLogin: "testing@gmail.com",
+  //     passLogin: "123456",
+  //   }
+  //   component.loginForm.setValue(payload);
+  //   expect(component.loginForm.valid).toBeTrue();
+  //   component.onSubmitLogin();
+  //   fixture.detectChanges();
+  //  })
+  //  it('should register users when form is valid',()=>{
+  //   component.onSubmitRegister();
+  //   const payload = {
+  //     $key: '',
+  //     name: 'Premacio',
+  //     email: 'paul@gmail.com',
+  //     age: 19,
+  //     password: '123456',
+  //   }
+  //   component.registerForm.setValue(payload);
+  //   expect(component.registerForm.valid).toBeTrue();
+  //   component.onSubmitRegister();
+  //   fixture.detectChanges();
+  //  })
+   
+   
   
    
 });

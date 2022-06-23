@@ -60,10 +60,6 @@ export class UsersService {
   modifyUsers(userId: string, userChanges: UsersInterface) {
     this.usersCollection.doc(userId).update(userChanges);
   }
-  updateUsers(user: UsersInterface){
-    this.usersCollection.doc(`users/renred`).update(user);
-    
-  }
   removeUsers(userId: string) {
     this.usersCollection.doc(userId).delete();
   }

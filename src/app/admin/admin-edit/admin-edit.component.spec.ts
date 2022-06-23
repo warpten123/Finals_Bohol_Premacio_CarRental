@@ -124,7 +124,6 @@ describe('AdminEditComponent', () => {
     expect(component.crud.editCarForm.valid).toEqual(false);
   })
   it('if form is valid, call edit cars and close dialog',()=>{
-    
     const element = fixture.nativeElement;
     const input = element.querySelector('#carImage');
     input.dispatchEvent(new Event('change'));
